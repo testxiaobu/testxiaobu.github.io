@@ -1,200 +1,678 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<title>特殊使用级抗菌药物全流程演示</title>
-<style>
-body {
-    font-family: "Microsoft YaHei", Arial;
-    background: #f4f6f9;
-    margin: 0;
-    padding: 20px;
-}
-.container {
-    width: 900px;
-    margin: auto;
-    background: #fff;
-    padding: 20px;
-    border-radius: 6px;
-}
-h2 {
-    border-left: 4px solid #1890ff;
-    padding-left: 10px;
-}
-.step {
-    margin-bottom: 30px;
-}
-label {
-    display: block;
-    margin-top: 10px;
-}
-input, select, textarea {
-    width: 100%;
-    padding: 6px;
-    margin-top: 4px;
-}
-button {
-    margin-top: 12px;
-    padding: 8px 16px;
-    background: #1890ff;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-}
-button:hover {
-    background: #40a9ff;
-}
-.status {
-    padding: 10px;
-    background: #f0f0f0;
-    margin-top: 10px;
-    border-left: 4px solid #52c41a;
-}
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 10px;
-}
-td, th {
-    border: 1px solid #ddd;
-    padding: 8px;
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SPD医院耗材管理系统</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <!-- QRCode.js -->
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3b82f6', secondary: '#10b981', warning: '#f59e0b', danger: '#ef4444',
+                        info: '#06b6d4', purple: '#8b5cf6', orange: '#f97316',
+                        dark: { 100: '#4b5563', 200: '#374151', 300: '#1f2937', 400: '#111827', 500: '#0f172a', 600: '#0d1117' }
+                    },
+                    fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .input-field { @apply w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary; }
+            .btn { @apply px-4 py-2 rounded-md font-medium transition-all focus:outline-none focus:ring-2 focus:ring-offset-2; }
+            .btn-sm { @apply px-2 py-1 text-sm; }
+            .btn-primary { @apply bg-primary text-white hover:bg-blue-700 focus:ring-blue-500; }
+            .btn-secondary { @apply bg-secondary text-white hover:bg-green-700 focus:ring-green-500; }
+            .btn-warning { @apply bg-warning text-white hover:bg-yellow-600 focus:ring-yellow-500; }
+            .btn-danger { @apply bg-danger text-white hover:bg-red-600 focus:ring-red-500; }
+            .btn-info { @apply bg-info text-white hover:bg-cyan-600 focus:ring-cyan-500; }
+            .btn-outline { @apply border border-gray-300 text-gray-700 bg-white hover:bg-gray-50 focus:ring-gray-500; }
+            .badge { @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium; }
+            .badge-success { @apply bg-green-100 text-green-800; }
+            .badge-warning { @apply bg-yellow-100 text-yellow-800; }
+            .badge-danger { @apply bg-red-100 text-red-800; }
+            .badge-info { @apply bg-blue-100 text-blue-800; }
+            .badge-gray { @apply bg-gray-100 text-gray-800; }
+            .card { @apply bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden; }
+            .card-header { @apply px-6 py-4 border-b border-gray-200 bg-gray-50; }
+            .card-body { @apply px-6 py-4; }
+            .form-label { @apply block text-sm font-medium text-gray-700 mb-1; }
+            .table-row-hover { @apply hover:bg-gray-50 transition-colors; }
+            .sidebar-link { @apply flex items-center py-2 text-gray-400 hover:text-white hover:bg-dark-300 rounded-r-lg transition-colors; }
+            .sidebar-link.active { @apply bg-blue-600 text-white; }
+        }
+    </style>
 </head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- 顶部导航栏 -->
+    <nav class="bg-dark-500 border-b border-dark-300">
+        <div class="flex items-center justify-between px-6 py-3">
+            <div class="flex items-center">
+                <button class="text-gray-300 hover:text-white mr-4 lg:hidden" onclick="toggleSidebar()">
+                    <i class="fa fa-bars text-xl"></i>
+                </button>
+                <h1 class="text-xl font-bold text-white flex items-center">
+                    <i class="fa fa-cubes mr-2"></i>
+                    SPD医院耗材管理系统
+                    <span class="ml-2 text-xs bg-blue-600 px-2 py-1 rounded">V3.4.0</span>
+                </h1>
+            </div>
+            <div class="flex items-center space-x-4">
+                <button class="text-gray-300 hover:text-white relative">
+                    <i class="fa fa-bell"></i>
+                    <span class="absolute -top-1 -right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+                </button>
+                <div class="flex items-center cursor-pointer group">
+                    <span class="text-gray-300 mr-2 hidden sm:inline">系统管理员</span>
+                    <img src="https://ui-avatars.com/api/?name=Admin&background=3b82f6&color=fff" class="w-8 h-8 rounded-full border-2 border-transparent group-hover:border-primary transition-colors">
+                </div>
+            </div>
+        </div>
+    </nav>
 
-<body>
+    <div class="flex">
+        <!-- 左侧菜单栏 -->
+        <aside id="sidebar" class="w-64 bg-dark-500 h-[calc(100vh-64px)] overflow-y-auto border-r border-dark-300 fixed lg:relative z-40 transform -translate-x-full lg:translate-x-0 transition-transform duration-300">
+            <div class="py-4">
+                <!-- 二级库业务 -->
+                <div class="menu-group">
+                    <div class="flex items-center px-4 py-2.5 text-white bg-blue-600">
+                        <i class="fa fa-shopping-cart w-5 h-5 mr-3"></i>
+                        <span>二级库业务</span>
+                    </div>
+                    <div class="pl-10 py-2">
+                        <a href="javascript:switchPage('packageMaintain')" class="sidebar-link active" data-page="packageMaintain">
+                            <i class="fa fa-cube text-xs mr-2"></i><span>套包维护</span>
+                        </a>
+                    </div>
+                </div>
+                <!-- 产品维护 -->
+                <div class="menu-group mt-4">
+                    <div class="flex items-center px-4 py-2.5 text-white bg-gray-700">
+                        <i class="fa fa-cubes w-5 h-5 mr-3"></i>
+                        <span>产品维护</span>
+                    </div>
+                    <div class="pl-10 py-2">
+                        <a href="javascript:switchPage('productManage')" class="sidebar-link" data-page="productManage">
+                            <i class="fa fa-list-alt text-xs mr-2"></i><span>产品管理</span>
+                        </a>
+                    </div>
+                </div>
+                <!-- 系统管理 -->
+                <div class="menu-group mt-4">
+                    <div class="flex items-center px-4 py-2.5 text-white bg-gray-700">
+                        <i class="fa fa-cog w-5 h-5 mr-3"></i>
+                        <span>系统管理</span>
+                    </div>
+                    <div class="pl-10 py-2">
+                        <a href="javascript:switchPage('deptManage')" class="sidebar-link" data-page="deptManage">
+                            <i class="fa fa-hospital-o text-xs mr-2"></i><span>专科类型管理</span>
+                        </a>
+                        <a href="javascript:switchPage('diseaseManage')" class="sidebar-link" data-page="diseaseManage">
+                            <i class="fa fa-stethoscope text-xs mr-2"></i><span>病种类型管理</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </aside>
+        <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 z-30 hidden lg:hidden" onclick="toggleSidebar()"></div>
 
-<div class="container">
+        <!-- 主内容区 -->
+        <main class="flex-1 p-6 overflow-y-auto h-[calc(100vh-64px)]">
+            <div class="flex items-center text-sm text-gray-600 mb-6">
+                <a href="#" class="hover:text-primary flex items-center"><i class="fa fa-home mr-1"></i>首页</a>
+                <i class="fa fa-angle-right mx-2 text-gray-400"></i>
+                <span class="text-gray-900 font-medium" id="pageTitle">套包维护</span>
+            </div>
 
-<h2>特殊使用级抗菌药物（特抗）全流程演示</h2>
+            <!-- 套包维护页面 -->
+            <section id="pagePackageMaintain" class="page-content">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
+                    <h2 class="text-2xl font-bold text-gray-900 flex items-center"><i class="fa fa-cube mr-2 text-purple-500"></i>套包维护管理</h2>
+                    <div class="flex space-x-3">
+                        <button onclick="printPackageLabel()" class="btn btn-info"><i class="fa fa-qrcode mr-2"></i>打印套包</button>
+                        <button onclick="printChargeBill()" class="btn btn-warning"><i class="fa fa-file-text-o mr-2"></i>打印收费单</button>
+                        <button id="addNewPackageBtn" class="btn btn-primary"><i class="fa fa-plus mr-2"></i>新增套包</button>
+                        <button class="btn btn-outline" onclick="refreshPackageList()"><i class="fa fa-refresh mr-2"></i>刷新</button>
+                    </div>
+                </div>
+                <div class="card mb-6">
+                    <div class="card-header flex justify-between items-center">
+                        <h3 class="font-semibold flex items-center"><i class="fa fa-list mr-2 text-gray-500"></i>套餐包列表</h3>
+                        <div class="text-sm text-gray-500">共 <span id="packageCount" class="text-primary font-medium">3</span> 个套包</div>
+                    </div>
+                    <div class="card-body overflow-x-auto">
+                        <table class="w-full text-sm">
+                            <thead>
+                                <tr class="border-b bg-gray-50">
+                                    <th class="px-3 py-3 text-left font-medium text-gray-700">选择</th>
+                                    <th class="px-3 py-3 text-left font-medium text-gray-700">套包编码</th>
+                                    <th class="px-3 py-3 text-left font-medium text-gray-700">套餐名称</th>
+                                    <th class="px-3 py-3 text-left font-medium text-gray-700">套包类型</th>
+                                    <th class="px-3 py-3 text-left font-medium text-gray-700">适用专科</th>
+                                    <th class="px-3 py-3 text-left font-medium text-gray-700">适用病种</th>
+                                    <th class="px-3 py-3 text-left font-medium text-gray-700">金额</th>
+                                    <th class="px-3 py-3 text-left font-medium text-gray-700">创建时间</th>
+                                    <th class="px-3 py-3 text-left font-medium text-gray-700">操作</th>
+                                </tr>
+                            </thead>
+                            <tbody id="packageTableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
 
-<!-- Step 1 -->
-<div class="step">
-    <h3>① 开立医嘱（触发特抗拦截）</h3>
-    <label>药品名称</label>
-    <input value="注射用美罗培南 1g iv q8h" disabled>
+            <!-- 产品管理页面 -->
+            <section id="pageProductManage" class="page-content hidden">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
+                    <h2 class="text-2xl font-bold text-gray-900 flex items-center"><i class="fa fa-list-alt mr-2 text-indigo-500"></i>产品管理</h2>
+                    <div class="flex space-x-3">
+                        <button onclick="batchEnableProducts()" class="btn btn-success"><i class="fa fa-check-circle mr-2"></i>批量启用</button>
+                        <button onclick="batchDisableProducts()" class="btn btn-danger"><i class="fa fa-ban mr-2"></i>批量停用</button>
+                        <button id="addNewProductBtn" class="btn btn-primary"><i class="fa fa-plus mr-2"></i>新增产品</button>
+                    </div>
+                </div>
+                <div class="card mb-6">
+                    <div class="card-header flex justify-between items-center">
+                        <h3 class="font-semibold flex items-center"><i class="fa fa-list mr-2 text-gray-500"></i>产品列表</h3>
+                        <div class="text-sm text-gray-500">共 <span id="productCount" class="text-primary font-medium">0</span> 条记录</div>
+                    </div>
+                    <div class="card-body overflow-x-auto">
+                        <table class="w-full text-sm">
+                            <thead>
+                                <tr class="border-b bg-gray-50">
+                                    <th class="px-3 py-3 text-left font-medium text-gray-700"><input type="checkbox" id="selectAllProducts"></th>
+                                    <th class="px-3 py-3 text-left font-medium text-gray-700">编码</th>
+                                    <th class="px-3 py-3 text-left font-medium text-gray-700">产品名称</th>
+                                    <th class="px-3 py-3 text-left font-medium text-gray-700">规格</th>
+                                    <th class="px-3 py-3 text-left font-medium text-gray-700">型号</th>
+                                    <th class="px-3 py-3 text-left font-medium text-gray-700">单位</th>
+                                    <th class="px-3 py-3 text-left font-medium text-gray-700">进货价</th>
+                                    <th class="px-3 py-3 text-left font-medium text-gray-700">注册证号</th>
+                                    <th class="px-3 py-3 text-left font-medium text-gray-700">生产商</th>
+                                    <th class="px-3 py-3 text-left font-medium text-gray-700">供应商</th>
+                                    <th class="px-3 py-3 text-left font-medium text-gray-700">分类</th>
+                                    <th class="px-3 py-3 text-left font-medium text-gray-700">状态</th>
+                                    <th class="px-3 py-3 text-left font-medium text-gray-700">操作</th>
+                                </tr>
+                            </thead>
+                            <tbody id="productTableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
 
-    <label>医生职称</label>
-    <select id="doctorLevel">
-        <option value="住院医师">住院医师</option>
-        <option value="主治医师">主治医师</option>
-        <option value="主任医师">主任医师</option>
-    </select>
+            <!-- 专科管理页面 -->
+            <section id="pageDeptManage" class="page-content hidden">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
+                    <h2 class="text-2xl font-bold text-gray-900 flex items-center"><i class="fa fa-hospital-o mr-2 text-blue-500"></i>专科类型管理</h2>
+                    <button id="addNewDeptBtn" class="btn btn-primary"><i class="fa fa-plus mr-2"></i>新增专科</button>
+                </div>
+                <div class="card">
+                    <div class="card-header flex justify-between items-center">
+                        <h3 class="font-semibold flex items-center"><i class="fa fa-list mr-2 text-gray-500"></i>专科类型列表</h3>
+                        <div class="text-sm text-gray-500">共 <span id="deptCount" class="text-primary font-medium">5</span> 条记录</div>
+                    </div>
+                    <div class="card-body overflow-x-auto">
+                        <table class="w-full text-sm">
+                            <thead>
+                                <tr class="border-b bg-gray-50">
+                                    <th class="px-3 py-3 text-left font-medium text-gray-700">序号</th>
+                                    <th class="px-3 py-3 text-left font-medium text-gray-700">专科名称</th>
+                                    <th class="px-3 py-3 text-left font-medium text-gray-700">创建时间</th>
+                                    <th class="px-3 py-3 text-left font-medium text-gray-700">操作</th>
+                                </tr>
+                            </thead>
+                            <tbody id="deptTableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
 
-    <button onclick="triggerApply()">提交医嘱</button>
-
-    <div id="interceptMsg" class="status" style="display:none;">
-        ⚠ 该药品为【特殊使用级抗菌药物】，需发起电子申请审批。
+            <!-- 病种管理页面 -->
+            <section id="pageDiseaseManage" class="page-content hidden">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
+                    <h2 class="text-2xl font-bold text-gray-900 flex items-center"><i class="fa fa-stethoscope mr-2 text-green-500"></i>病种类型管理</h2>
+                    <button id="addNewDiseaseBtn" class="btn btn-primary"><i class="fa fa-plus mr-2"></i>新增病种</button>
+                </div>
+                <div class="card">
+                    <div class="card-header flex justify-between items-center">
+                        <h3 class="font-semibold flex items-center"><i class="fa fa-list mr-2 text-gray-500"></i>病种类型列表</h3>
+                        <div class="text-sm text-gray-500">共 <span id="diseaseCount" class="text-primary font-medium">9</span> 条记录</div>
+                    </div>
+                    <div class="card-body overflow-x-auto">
+                        <table class="w-full text-sm">
+                            <thead>
+                                <tr class="border-b bg-gray-50">
+                                    <th class="px-3 py-3 text-left font-medium text-gray-700">序号</th>
+                                    <th class="px-3 py-3 text-left font-medium text-gray-700">病种名称</th>
+                                    <th class="px-3 py-3 text-left font-medium text-gray-700">创建时间</th>
+                                    <th class="px-3 py-3 text-left font-medium text-gray-700">操作</th>
+                                </tr>
+                            </thead>
+                            <tbody id="diseaseTableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </main>
     </div>
-</div>
 
-<!-- Step 2 -->
-<div class="step" id="applyPanel" style="display:none;">
-    <h3>② 特抗使用电子申请单</h3>
+    <!-- 套包模态框 -->
+    <div id="packageModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50 p-4">
+        <div class="bg-white w-full max-w-4xl rounded-lg shadow-lg p-6 max-h-[95vh] overflow-y-auto">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-lg font-bold flex items-center" id="modalTitle"><i class="fa fa-cube mr-2 text-purple-500"></i>新增耗材套餐包</h3>
+                <button onclick="closePackageModal()" class="text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-full w-8 h-8 flex items-center justify-center transition-colors"><i class="fa fa-times"></i></button>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <div><label class="form-label">套餐名称 <span class="text-danger">*</span></label><input type="text" id="packageName" class="input-field" placeholder="请输入套餐包名称"></div>
+                <div><label class="form-label">套包类型 <span class="text-danger">*</span></label><select id="packageType" class="input-field"><option value="1">可收费套餐包</option><option value="2">不可收费套餐包</option></select></div>
+                <div><label class="form-label">专科类型 <span class="text-danger">*</span></label><select id="packageDept" class="input-field"><option value="">请选择专科</option></select></div>
+                <div><label class="form-label">病种类型 <span class="text-danger">*</span></label><select id="packageDisease" class="input-field"><option value="">请选择病种</option></select></div>
+            </div>
+            
+            <!-- 耗材明细区域 -->
+            <div class="mb-4">
+                <label class="form-label">套餐包含耗材明细</label>
+                <div class="border rounded p-3 bg-gray-50">
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm">
+                            <thead>
+                                <tr class="border-b bg-gray-100">
+                                    <th class="px-2 py-2 text-left">产品名称</th>
+                                    <th class="px-2 py-2 text-left">规格</th>
+                                    <th class="px-2 py-2 text-left">单位</th>
+                                    <th class="px-2 py-2 text-left">数量</th>
+                                    <th class="px-2 py-2 text-left">单价</th>
+                                    <th class="px-2 py-2 text-left">金额</th>
+                                    <th class="px-2 py-2 text-left">操作</th>
+                                </tr>
+                            </thead>
+                            <tbody id="packageDetailsTableBody"></tbody>
+                            <tfoot>
+                                <tr class="border-t-2 border-gray-300 font-bold">
+                                    <td colspan="5" class="px-2 py-2 text-right">合计金额：</td>
+                                    <td class="px-2 py-2 text-lg text-primary" id="packageTotalAmount">¥ 0.00</td>
+                                    <td></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <button id="addProductToPackageBtn" class="mt-3 text-primary text-sm flex items-center"><i class="fa fa-plus-circle mr-1"></i>添加耗材</button>
+                </div>
+            </div>
 
-    <label>患者姓名</label>
-    <input value="张三" disabled>
-
-    <label>诊断</label>
-    <input value="重症肺炎" disabled>
-
-    <label>申请理由</label>
-    <textarea rows="3">患者高热、呼吸困难，经验性抗感染治疗。</textarea>
-
-    <label>是否紧急情况</label>
-    <select>
-        <option>否</option>
-        <option>是（事后补审批）</option>
-    </select>
-
-    <button onclick="submitApply()">提交申请</button>
-</div>
-
-<!-- Step 3 -->
-<div class="step" id="approvePanel" style="display:none;">
-    <h3>③ 审批工作台（模拟专家端）</h3>
-
-    <table>
-        <tr>
-            <th>申请人</th><td>住院医师 李四</td>
-        </tr>
-        <tr>
-            <th>药品</th><td>美罗培南</td>
-        </tr>
-        <tr>
-            <th>申请理由</th><td>重症肺炎经验治疗</td>
-        </tr>
-    </table>
-
-    <label>审批意见</label>
-    <textarea id="opinion">同意使用，注意监测肾功能。</textarea>
-
-    <button onclick="approve()">同意</button>
-    <button onclick="reject()" style="background:#f5222d;">拒绝</button>
-</div>
-
-<!-- Step 4 -->
-<div class="step" id="recordPanel" style="display:none;">
-    <h3>④ 自动生成特抗会诊记录</h3>
-
-    <div class="status">
-        ✅ 审批已完成，系统已自动生成《特殊使用级抗菌药物会诊记录》并归档至电子病历。
+            <div class="mb-4">
+                <label class="form-label">系统生成唯一套包编码</label>
+                <div class="flex items-center">
+                    <input type="text" id="packageCode" class="input-field bg-gray-100" readonly placeholder="自动生成">
+                    <button onclick="genPackageCode()" class="btn btn-primary ml-2 whitespace-nowrap">生成编码</button>
+                </div>
+            </div>
+            <div class="flex justify-end space-x-3 pt-4 border-t">
+                <button onclick="closePackageModal()" class="btn btn-outline">取消</button>
+                <button id="savePackageBtn" class="btn btn-primary">保存套包</button>
+            </div>
+        </div>
     </div>
 
-    <table>
-        <tr>
-            <th>审批结论</th><td>同意</td>
-        </tr>
-        <tr>
-            <th>审批人</th><td>感染科 王主任</td>
-        </tr>
-        <tr>
-            <th>审批时间</th><td id="approveTime"></td>
-        </tr>
-        <tr>
-            <th>意见</th><td id="finalOpinion"></td>
-        </tr>
-    </table>
-</div>
-
-<!-- Step 5 -->
-<div class="step" id="orderPanel" style="display:none;">
-    <h3>⑤ 医嘱闭环管控</h3>
-
-    <div class="status" style="border-color:#52c41a;">
-        ✅ 特抗审批通过，医嘱已解锁，可正常发送至药房。
+    <!-- 选择产品模态框 -->
+    <div id="selectProductModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50 p-4">
+        <div class="bg-white w-full max-w-3xl rounded-lg shadow-lg p-6 max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-lg font-bold flex items-center"><i class="fa fa-search mr-2 text-blue-500"></i>选择产品</h3>
+                <button onclick="closeSelectProductModal()" class="text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-full w-8 h-8 flex items-center justify-center transition-colors"><i class="fa fa-times"></i></button>
+            </div>
+            <div class="mb-4">
+                <input type="text" id="productSearchInput" class="input-field" placeholder="输入产品名称或编码搜索..." onkeyup="renderProductSelectionTable()">
+            </div>
+            <div class="overflow-x-auto border rounded">
+                <table class="w-full text-sm">
+                    <thead>
+                        <tr class="border-b bg-gray-50">
+                            <th class="px-3 py-2 text-left">选择</th>
+                            <th class="px-3 py-2 text-left">编码</th>
+                            <th class="px-3 py-2 text-left">产品名称</th>
+                            <th class="px-3 py-2 text-left">规格</th>
+                            <th class="px-3 py-2 text-left">进货价</th>
+                        </tr>
+                    </thead>
+                    <tbody id="productSelectionTableBody"></tbody>
+                </table>
+            </div>
+            <div class="flex justify-end space-x-3 mt-4 pt-4 border-t">
+                <button onclick="closeSelectProductModal()" class="btn btn-outline">取消</button>
+                <button onclick="confirmAddProductToPackage()" class="btn btn-primary">确认添加</button>
+            </div>
+        </div>
     </div>
 
-    <button onclick="alert('医嘱已发送至药房')">发送医嘱</button>
-</div>
+    <script>
+        // ====================== 全局通用函数 ======================
+        function switchPage(page) {
+            document.querySelectorAll('.page-content').forEach(p => p.classList.add('hidden'));
+            document.getElementById(`page${page.charAt(0).toUpperCase() + page.slice(1)}`).classList.remove('hidden');
+            
+            document.querySelectorAll('.sidebar-link').forEach(link => link.classList.remove('active', 'text-white', 'bg-blue-600'));
+            const activeLink = document.querySelector(`.sidebar-link[data-page="${page}"]`);
+            if (activeLink) activeLink.classList.add('active', 'text-white', 'bg-blue-600');
+            
+            document.getElementById('pageTitle').innerText = { 
+                packageMaintain: '套包维护', 
+                productManage: '产品管理',
+                deptManage: '专科类型管理', 
+                diseaseManage: '病种类型管理' 
+            }[page];
+        }
 
-</div>
+        function showToast(msg, success = true) {
+            const toast = document.createElement('div');
+            toast.className = `fixed top-4 right-4 px-4 py-3 rounded-lg shadow-lg z-50 text-white flex items-center ${success ? 'bg-green-500' : 'bg-red-500'}`;
+            toast.innerHTML = `<i class="fa ${success ? 'fa-check-circle' : 'fa-exclamation-circle'} mr-2"></i>${msg}`;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 2500);
+        }
 
-<script>
-function triggerApply() {
-    document.getElementById("interceptMsg").style.display = "block";
-    document.getElementById("applyPanel").style.display = "block";
-}
+        function toggleSidebar(show) {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+            sidebar.classList.toggle('-translate-x-full', show === undefined ? undefined : !show);
+            overlay.classList.toggle('hidden', show === undefined ? undefined : !show);
+        }
 
-function submitApply() {
-    alert("申请已提交，等待审批");
-    document.getElementById("approvePanel").style.display = "block";
-}
+        // ====================== 系统管理 - 基础数据 ======================
+        let deptList = [
+            { id: 1, name: '北峰上肢科', time: '2026-01-22 10:00' },
+            { id: 2, name: '北峰下肢二科', time: '2026-01-22 10:00' },
+            { id: 3, name: '北峰关节科', time: '2026-01-22 10:00' },
+            { id: 4, name: '北峰脊柱一科', time: '2026-01-22 10:00' },
+            { id: 5, name: '北峰运动医学科', time: '2026-01-22 10:00' }
+        ];
+        let diseaseList = [
+            { id: 1, name: '骨折内固定物取出术', time: '2026-01-22 10:05' },
+            { id: 2, name: '桡尺骨/桡骨远端骨折', time: '2026-01-22 10:05' },
+            { id: 3, name: 'PFNA', time: '2026-01-22 10:05' },
+            { id: 4, name: '股骨干髓内钉', time: '2026-01-22 10:05' },
+            { id: 5, name: '股骨髁间', time: '2026-01-22 10:05' },
+            { id: 6, name: '胫骨平台', time: '2026-01-22 10:05' },
+            { id: 7, name: '踝关节', time: '2026-01-22 10:05' },
+            { id: 8, name: '胫骨干', time: '2026-01-22 10:05' },
+            { id: 9, name: '锁骨闭合克氏针\\TEN套餐包', time: '2026-05-13 10:00' }
+        ];
 
-function approve() {
-    const time = new Date().toLocaleString();
-    document.getElementById("approveTime").innerText = time;
-    document.getElementById("finalOpinion").innerText =
-        document.getElementById("opinion").value;
+        function renderDeptTable() { /* ... 省略，与之前相同 ... */ }
+        function renderDiseaseTable() { /* ... 省略，与之前相同 ... */ }
+        function delDept(id) { if(confirm('确定删除该专科？')){ deptList = deptList.filter(d => d.id !== id); renderDeptTable(); } }
+        function delDisease(id) { if(confirm('确定删除该病种？')){ diseaseList = diseaseList.filter(d => d.id !== id); renderDiseaseTable(); } }
 
-    document.getElementById("recordPanel").style.display = "block";
-    document.getElementById("orderPanel").style.display = "block";
-}
+        // ====================== 产品维护 - 产品管理 ======================
+        let productList = [
+            { id: '04715635440010', name: '可吸收合成医用缝合线·1线1针', spec: '1#', model: '', unit: '根', price: 44.85, regNo: '国械注许20163040413', manufacturer: '中央医疗器材股份有限公司', supplier: '福建省云康贸易有限公司', category: '低值耗材', status: 'enabled', time: '2026-01-22' },
+            { id: '04715635440003', name: '可吸收合成医用缝合线', spec: '3/0/SXMD2B406', model: '', unit: '根', price: 371, regNo: '国械注许20163040413', manufacturer: '中央医疗器材股份有限公司', supplier: '福建省云康贸易有限公司', category: '低值耗材', status: 'enabled', time: '2026-01-22' },
+            { id: '04715635440041', name: '可吸收合成医用缝合线', spec: '1#', model: '', unit: '根', price: 371, regNo: '国械注许20163040413', manufacturer: '中央医疗器材股份有限公司', supplier: '福建省云康贸易有限公司', category: '低值耗材', status: 'disabled', time: '2026-01-22' },
+            { id: '04715635440027', name: '硅胶负压引流球', spec: '200ml', model: '', unit: '只', price: 28, regNo: '国械注许20163040413', manufacturer: '中央医疗器材股份有限公司', supplier: '福建省云康贸易有限公司', category: '低值耗材', status: 'pending', time: '2026-01-22' },
+            { id: '04715635440119', name: '海藻生物胶', spec: '30ml', model: '', unit: '袋', price: 338, regNo: '国械注许20163040413', manufacturer: '中央医疗器材股份有限公司', supplier: '福建省云康贸易有限公司', category: '低值耗材', status: 'enabled', time: '2026-01-22' },
+            { id: '04715635440720', name: '医用粘合剂', spec: '0.35ml', model: '', unit: '支', price: 682, regNo: '国械注许20163040413', manufacturer: '中央医疗器材股份有限公司', supplier: '福建省云康贸易有限公司', category: '高值耗材', status: 'enabled', time: '2026-01-22' },
+        ];
+        
+        let filteredProducts = [...productList];
 
-function reject() {
-    alert("审批拒绝，医嘱将被系统自动作废");
-}
-</script>
+        function getStatusBadge(status) { /* ... 省略，与之前相同 ... */ }
+        function renderProductTable() { /* ... 省略，与之前相同 ... */ }
+        function renderProductSelectionTable() { /* ... 省略，与之前相同 ... */ }
+        function batchEnableProducts() { /* ... 省略，与之前相同 ... */ }
+        function batchDisableProducts() { /* ... 省略，与之前相同 ... */ }
+        function deleteProduct(index) { /* ... 省略，与之前相同 ... */ }
 
+        // ====================== 套包维护 (v3.4.0 核心改进) ======================
+        let packageList = [
+            {code:'PKG20260501001',name:'骨科基础手术包',type:1,typeText:'可收费套餐包', dept:'北峰关节科', disease:'PFNA', time:'2026-05-01 10:20', details: []},
+            {code:'PKG20260501002',name:'护理常规耗材包',type:2,typeText:'不可收费套餐包', dept:'北峰上肢科', disease:'桡尺骨/桡骨远端骨折', time:'2026-05-01 11:10', details: []},
+            {
+                code: 'PKG20260513001',
+                name: '锁骨闭合克氏针\\TEN套餐包',
+                type: 1,
+                typeText: '可收费套餐包',
+                dept: '北峰上肢科',
+                disease: '锁骨闭合克氏针\\TEN套餐包',
+                time: '2026-05-13 10:00',
+                details: [
+                    { productId: '04715635440119', name: '海藻生物胶', spec: '30ml', unit: '袋', quantity: 1, price: 338.00, amount: 338.00 },
+                    { productId: '04715635440010', name: '可吸收合成医用缝合线·1线1针', spec: '1#', unit: '根', quantity: 2, price: 44.85, amount: 89.70 },
+                ]
+            }
+        ];
+        
+        let currentEditingPackageIndex = -1; // -1 表示新增模式
+        let currentPackageDetails = [];
+
+        function calculatePackageTotal() {
+            let total = 0;
+            document.querySelectorAll('#packageDetailsTableBody tr').forEach(row => {
+                const qty = parseFloat(row.querySelector('.detail-qty').value) || 0;
+                const price = parseFloat(row.querySelector('.detail-price').value) || 0;
+                row.querySelector('.detail-amount').innerText = `¥ ${(qty * price).toFixed(2)}`;
+                total += qty * price;
+            });
+            document.getElementById('packageTotalAmount').innerText = `¥ ${total.toFixed(2)}`;
+            return total;
+        }
+
+        function renderPackageDetailsTable(details) {
+            const tb = document.getElementById('packageDetailsTableBody');
+            tb.innerHTML = details.map((item, index) => `
+                <tr class="border-b table-row-hover">
+                    <td class="px-2 py-2">${item.name}</td>
+                    <td class="px-2 py-2">${item.spec}</td>
+                    <td class="px-2 py-2">${item.unit}</td>
+                    <td class="px-2 py-2"><input type="number" value="${item.quantity}" class="detail-qty w-16 input-field p-1" onchange="calculatePackageTotal()"></td>
+                    <td class="px-2 py-2"><input type="number" value="${item.price}" class="detail-price w-20 input-field p-1" onchange="calculatePackageTotal()"></td>
+                    <td class="px-2 py-2 detail-amount">¥ ${(item.quantity * item.price).toFixed(2)}</td>
+                    <td class="px-2 py-2"><button onclick="removePackageDetail(${index})" class="text-danger text-xs"><i class="fa fa-trash"></i> 删除</button></td>
+                </tr>
+            `).join('');
+            calculatePackageTotal();
+        }
+        
+        function removePackageDetail(index) {
+            currentPackageDetails.splice(index, 1);
+            renderPackageDetailsTable(currentPackageDetails);
+        }
+
+        function openSelectProductModal() {
+            filteredProducts = [...productList];
+            renderProductSelectionTable();
+            document.getElementById('selectProductModal').classList.remove('hidden');
+        }
+        function closeSelectProductModal() { document.getElementById('selectProductModal').classList.add('hidden'); }
+        
+        function confirmAddProductToPackage() {
+            const selectedRadio = document.querySelector('input[name="productSelect"]:checked');
+            if (!selectedRadio) { showToast('请选择一个产品', false); return; }
+            const product = filteredProducts[selectedRadio.value];
+            currentPackageDetails.push({
+                productId: product.id,
+                name: product.name,
+                spec: product.spec,
+                unit: product.unit,
+                quantity: 1,
+                price: product.price,
+                amount: product.price
+            });
+            renderPackageDetailsTable(currentPackageDetails);
+            closeSelectProductModal();
+        }
+
+        document.getElementById('addProductToPackageBtn').onclick = openSelectProductModal;
+
+        function renderPackageTable() {
+            const tb = document.getElementById('packageTableBody');
+            document.getElementById('packageCount').innerText = packageList.length;
+            tb.innerHTML = packageList.map((item, index) => {
+                let typeBadge = item.type === 1 ? 'badge-success' : 'badge-info';
+                const totalAmount = item.details ? item.details.reduce((sum, d) => sum + (d.price * d.quantity), 0) : 0;
+                return `
+                <tr class="border-b table-row-hover">
+                    <td class="px-3 py-4"><input type="radio" name="packageSelect" value="${index}" class="package-radio"></td>
+                    <td class="px-3 py-4 font-mono text-sm">${item.code}</td>
+                    <td class="px-3 py-4 font-medium">${item.name}</td>
+                    <td class="px-3 py-4"><span class="badge ${typeBadge}">${item.typeText}</span></td>
+                    <td class="px-3 py-4">${item.dept}</td>
+                    <td class="px-3 py-4">${item.disease}</td>
+                    <td class="px-3 py-4 font-semibold text-primary">¥ ${totalAmount.toFixed(2)}</td>
+                    <td class="px-3 py-4 text-gray-500">${item.time}</td>
+                    <td class="px-3 py-4">
+                        <button class="text-primary mr-3 hover:underline" onclick="editPackage(${index})">编辑</button>
+                        <button onclick="delPackage(${index})" class="text-danger hover:underline">删除</button>
+                    </td>
+                </tr>`;
+            }).join('');
+        }
+        
+        function loadPackageFormOptions() {
+            const deptSelect = document.getElementById('packageDept');
+            const diseaseSelect = document.getElementById('packageDisease');
+            deptSelect.innerHTML = '<option value="">请选择专科</option>' + deptList.map(d => `<option value="${d.name}">${d.name}</option>`).join('');
+            diseaseSelect.innerHTML = '<option value="">请选择病种</option>' + diseaseList.map(d => `<option value="${d.name}">${d.name}</option>`).join('');
+        }
+
+        function editPackage(index) {
+            currentEditingPackageIndex = index;
+            const pkg = packageList[index];
+            
+            document.getElementById('modalTitle').innerText = '编辑耗材套餐包';
+            document.getElementById('packageName').value = pkg.name;
+            document.getElementById('packageType').value = pkg.type;
+            document.getElementById('packageCode').value = pkg.code;
+            
+            loadPackageFormOptions();
+            document.getElementById('packageDept').value = pkg.dept;
+            document.getElementById('packageDisease').value = pkg.disease;
+            
+            currentPackageDetails = JSON.parse(JSON.stringify(pkg.details || []));
+            renderPackageDetailsTable(currentPackageDetails);
+            
+            document.getElementById('packageModal').classList.remove('hidden');
+        }
+
+        document.getElementById('addNewPackageBtn').onclick = function(){
+            currentEditingPackageIndex = -1;
+            document.getElementById('modalTitle').innerText = '新增耗材套餐包';
+            document.getElementById('packageName').value = '';
+            document.getElementById('packageType').value = '1';
+            document.getElementById('packageCode').value = '';
+            currentPackageDetails = [];
+            renderPackageDetailsTable(currentPackageDetails);
+            loadPackageFormOptions();
+            document.getElementById('packageModal').classList.remove('hidden');
+        };
+
+        function closePackageModal(){ document.getElementById('packageModal').classList.add('hidden'); }
+        function genPackageCode(){
+            let now = new Date();
+            let code = `PKG${now.getFullYear()}${String(now.getMonth()+1).padStart(2,'0')}${String(now.getDate()).padStart(2,'0')}${Math.floor(Math.random()*1000).toString().padStart(3,'0')}`;
+            document.getElementById('packageCode').value = code;
+            showToast('套包编码已自动生成');
+        }
+        function savePackageInfo(){
+            let name = document.getElementById('packageName').value.trim();
+            let type = document.getElementById('packageType').value;
+            let code = document.getElementById('packageCode').value;
+            let dept = document.getElementById('packageDept').value; 
+            let disease = document.getElementById('packageDisease').value;
+
+            if(!name || !code || !dept || !disease){ showToast('请填写完整信息', false); return; }
+            if(currentPackageDetails.length === 0) { showToast('请至少添加一个耗材明细', false); return; }
+
+            const packageData = {
+                code, name, type: parseInt(type), typeText: type==='1'?'可收费套餐包':'不可收费套餐包',
+                dept, disease, time: new Date().toLocaleString().replace(/\//g,'-'),
+                details: JSON.parse(JSON.stringify(currentPackageDetails))
+            };
+            
+            if (currentEditingPackageIndex > -1) {
+                packageData.time = packageList[currentEditingPackageIndex].time; // 保留原始创建时间
+                packageList[currentEditingPackageIndex] = packageData;
+                showToast('套餐包更新成功');
+            } else {
+                packageList.push(packageData);
+                showToast('套餐包保存成功');
+            }
+            
+            renderPackageTable();
+            closePackageModal();
+        }
+        function delPackage(idx){ if(confirm('确定删除该套餐包？')){ packageList.splice(idx,1); renderPackageTable(); } }
+        function refreshPackageList(){ renderPackageTable(); showToast('列表已刷新'); }
+
+        // ====================== 打印功能 ======================
+        function printPackageLabel() { /* ... 省略，与之前相同 ... */ }
+        function printChargeBill() { /* ... 省略，与之前相同 ... */ }
+
+        // ====================== 初始化 ======================
+        document.getElementById('savePackageBtn').onclick = savePackageInfo;
+        document.getElementById('addNewDeptBtn').onclick = () => { const name = prompt('请输入专科名称'); if(name) { deptList.push({id:Date.now(), name, time: new Date().toLocaleString()}); renderDeptTable(); } };
+        document.getElementById('addNewDiseaseBtn').onclick = () => { const name = prompt('请输入病种名称'); if(name) { diseaseList.push({id:Date.now(), name, time: new Date().toLocaleString()}); renderDiseaseTable(); } };
+        
+        // 重复的函数定义在这里统一实现一次
+        function getStatusBadge(status) {
+            if (status === 'enabled') return '<span class="badge badge-success">启用</span>';
+            if (status === 'disabled') return '<span class="badge badge-danger">关闭</span>';
+            return '<span class="badge badge-gray">待启用</span>';
+        }
+        function renderDeptTable() {
+            const tb = document.getElementById('deptTableBody');
+            document.getElementById('deptCount').innerText = deptList.length;
+            tb.innerHTML = deptList.map((item, idx) => `<tr class="border-b table-row-hover"><td class="px-3 py-3">${idx + 1}</td><td class="px-3 py-3 font-medium">${item.name}</td><td class="px-3 py-3 text-gray-500">${item.time}</td><td class="px-3 py-3"><button class="text-primary mr-3 hover:underline">编辑</button><button onclick="delDept(${item.id})" class="text-danger hover:underline">删除</button></td></tr>`).join('');
+        }
+        function renderDiseaseTable() {
+            const tb = document.getElementById('diseaseTableBody');
+            document.getElementById('diseaseCount').innerText = diseaseList.length;
+            tb.innerHTML = diseaseList.map((item, idx) => `<tr class="border-b table-row-hover"><td class="px-3 py-3">${idx + 1}</td><td class="px-3 py-3 font-medium">${item.name}</td><td class="px-3 py-3 text-gray-500">${item.time}</td><td class="px-3 py-3"><button class="text-primary mr-3 hover:underline">编辑</button><button onclick="delDisease(${item.id})" class="text-danger hover:underline">删除</button></td></tr>`).join('');
+        }
+        function renderProductTable() {
+            const tb = document.getElementById('productTableBody');
+            document.getElementById('productCount').innerText = productList.length;
+            tb.innerHTML = productList.map((item, index) => `<tr class="border-b table-row-hover"><td class="px-3 py-3"><input type="checkbox" class="product-checkbox" data-index="${index}"></td><td class="px-3 py-3 font-mono text-sm">${item.id}</td><td class="px-3 py-3 font-medium">${item.name}</td><td class="px-3 py-3">${item.spec}</td><td class="px-3 py-3">${item.model}</td><td class="px-3 py-3">${item.unit}</td><td class="px-3 py-3">¥ ${item.price.toFixed(2)}</td><td class="px-3 py-3 text-xs">${item.regNo}</td><td class="px-3 py-3">${item.manufacturer}</td><td class="px-3 py-3">${item.supplier}</td><td class="px-3 py-3">${item.category}</td><td class="px-3 py-3">${getStatusBadge(item.status)}</td><td class="px-3 py-3"><button class="text-primary mr-3 hover:underline">编辑</button><button onclick="deleteProduct(${index})" class="text-danger hover:underline">删除</button></td></tr>`).join('');
+        }
+        function renderProductSelectionTable() {
+            const keyword = document.getElementById('productSearchInput').value.toLowerCase();
+            filteredProducts = productList.filter(p => p.name.toLowerCase().includes(keyword) || p.id.toLowerCase().includes(keyword));
+            const tb = document.getElementById('productSelectionTableBody');
+            tb.innerHTML = filteredProducts.map((item, index) => `<tr class="border-b table-row-hover"><td class="px-3 py-2"><input type="radio" name="productSelect" value="${index}"></td><td class="px-3 py-2 font-mono text-xs">${item.id}</td><td class="px-3 py-2">${item.name}</td><td class="px-3 py-2">${item.spec}</td><td class="px-3 py-2">¥ ${item.price.toFixed(2)}</td></tr>`).join('');
+        }
+        function batchEnableProducts() { const cbs=document.querySelectorAll('.product-checkbox:checked');if(!cbs.length){showToast('请选择',false);return;}cbs.forEach(cb=>productList[cb.dataset.index].status='enabled');renderProductTable();showToast('启用成功'); }
+        function batchDisableProducts() { const cbs=document.querySelectorAll('.product-checkbox:checked');if(!cbs.length){showToast('请选择',false);return;}cbs.forEach(cb=>productList[cb.dataset.index].status='disabled');renderProductTable();showToast('停用成功'); }
+        function deleteProduct(index) { if(confirm('确定删除该产品？')) { productList.splice(index, 1); renderProductTable(); } }
+        function printPackageLabel() {
+            const sr = document.querySelector('input[name="packageSelect"]:checked'); if (!sr) { showToast('请选择套包', false); return; }
+            const pkg = packageList[parseInt(sr.value)]; const pw = window.open('', '_blank');
+            QRCode.toDataURL(pkg.code, { width: 300, margin: 1 }).then(url => { pw.document.write(`<!DOCTYPE html><html><head><title>套包标签</title><style>body{text-align:center;padding-top:20px;}.qr-image{width:220px;height:220px;}</style></head><body><div style="border:1px solid #ddd;padding:20px;display:inline-block;"><div style="font-size:18px;font-weight:bold;">${pkg.name}</div><div style="font-size:12px;color:#666;margin-bottom:15px;">${pkg.code}</div><img src="${url}" class="qr-image"></div></body></html>`); pw.document.close(); setTimeout(() => pw.print(), 200); });
+        }
+        function printChargeBill() {
+            const sr = document.querySelector('input[name="packageSelect"]:checked'); if (!sr) { showToast('请选择套包', false); return; }
+            const pkg = packageList[parseInt(sr.value)]; const total = pkg.details ? pkg.details.reduce((s, d) => s + (d.price * d.quantity), 0).toFixed(2) : '0.00';
+            let html = `<div class="p-4 border rounded bg-white"><h2 class="text-xl font-bold mb-2 text-center">收费单 - ${pkg.name}</h2><hr class="mb-4">`;
+            if(pkg.details) { html += `<table class="w-full border text-sm"><thead class="bg-gray-50"><tr><th class="border px-2 py-1">项目名称</th><th class="border px-2 py-1">规格</th><th class="border px-2 py-1">单价</th><th class="border px-2 py-1">数量</th><th class="border px-2 py-1">金额</th></tr></thead><tbody>`; pkg.details.forEach(d => { html += `<tr><td class="border px-2 py-1">${d.name}</td><td class="border px-2 py-1">${d.spec}</td><td class="border px-2 py-1">${d.price.toFixed(2)}</td><td class="border px-2 py-1">${d.quantity}</td><td class="border px-2 py-1">${(d.price * d.quantity).toFixed(2)}</td></tr>`; }); html += `</tbody></table>`; }
+            html += `<div class="text-right mt-4 font-bold text-lg">合计金额：¥ ${total}</div></div>`;
+            const pw = window.open('', '_blank'); pw.document.write(`<html><head><title>打印收费单</title></head><body>${html}</body></html>`); pw.document.close(); setTimeout(() => pw.print(), 100);
+        }
+
+        renderDeptTable();
+        renderDiseaseTable();
+        renderProductTable();
+        renderPackageTable();
+        switchPage('packageMaintain');
+    </script>
 </body>
 </html>
