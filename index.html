@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>特殊使用级抗菌药物全流程演示</title>
+<style>
+body {
+    font-family: "Microsoft YaHei", Arial;
+    background: #f4f6f9;
+    margin: 0;
+    padding: 20px;
+}
+.container {
+    width: 900px;
+    margin: auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 6px;
+}
+h2 {
+    border-left: 4px solid #1890ff;
+    padding-left: 10px;
+}
+.step {
+    margin-bottom: 30px;
+}
+label {
+    display: block;
+    margin-top: 10px;
+}
+input, select, textarea {
+    width: 100%;
+    padding: 6px;
+    margin-top: 4px;
+}
+button {
+    margin-top: 12px;
+    padding: 8px 16px;
+    background: #1890ff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+button:hover {
+    background: #40a9ff;
+}
+.status {
+    padding: 10px;
+    background: #f0f0f0;
+    margin-top: 10px;
+    border-left: 4px solid #52c41a;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+td, th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>特殊使用级抗菌药物（特抗）全流程演示</h2>
+
+<!-- Step 1 -->
+<div class="step">
+    <h3>① 开立医嘱（触发特抗拦截）</h3>
+    <label>药品名称</label>
+    <input value="注射用美罗培南 1g iv q8h" disabled>
+
+    <label>医生职称</label>
+    <select id="doctorLevel">
+        <option value="住院医师">住院医师</option>
+        <option value="主治医师">主治医师</option>
+        <option value="主任医师">主任医师</option>
+    </select>
+
+    <button onclick="triggerApply()">提交医嘱</button>
+
+    <div id="interceptMsg" class="status" style="display:none;">
+        ⚠ 该药品为【特殊使用级抗菌药物】，需发起电子申请审批。
+    </div>
+</div>
+
+<!-- Step 2 -->
+<div class="step" id="applyPanel" style="display:none;">
+    <h3>② 特抗使用电子申请单</h3>
+
+    <label>患者姓名</label>
+    <input value="张三" disabled>
+
+    <label>诊断</label>
+    <input value="重症肺炎" disabled>
+
+    <label>申请理由</label>
+    <textarea rows="3">患者高热、呼吸困难，经验性抗感染治疗。</textarea>
+
+    <label>是否紧急情况</label>
+    <select>
+        <option>否</option>
+        <option>是（事后补审批）</option>
+    </select>
+
+    <button onclick="submitApply()">提交申请</button>
+</div>
+
+<!-- Step 3 -->
+<div class="step" id="approvePanel" style="display:none;">
+    <h3>③ 审批工作台（模拟专家端）</h3>
+
+    <table>
+        <tr>
+            <th>申请人</th><td>住院医师 李四</td>
+        </tr>
+        <tr>
+            <th>药品</th><td>美罗培南</td>
+        </tr>
+        <tr>
+            <th>申请理由</th><td>重症肺炎经验治疗</td>
+        </tr>
+    </table>
+
+    <label>审批意见</label>
+    <textarea id="opinion">同意使用，注意监测肾功能。</textarea>
+
+    <button onclick="approve()">同意</button>
+    <button onclick="reject()" style="background:#f5222d;">拒绝</button>
+</div>
+
+<!-- Step 4 -->
+<div class="step" id="recordPanel" style="display:none;">
+    <h3>④ 自动生成特抗会诊记录</h3>
+
+    <div class="status">
+        ✅ 审批已完成，系统已自动生成《特殊使用级抗菌药物会诊记录》并归档至电子病历。
+    </div>
+
+    <table>
+        <tr>
+            <th>审批结论</th><td>同意</td>
+        </tr>
+        <tr>
+            <th>审批人</th><td>感染科 王主任</td>
+        </tr>
+        <tr>
+            <th>审批时间</th><td id="approveTime"></td>
+        </tr>
+        <tr>
+            <th>意见</th><td id="finalOpinion"></td>
+        </tr>
+    </table>
+</div>
+
+<!-- Step 5 -->
+<div class="step" id="orderPanel" style="display:none;">
+    <h3>⑤ 医嘱闭环管控</h3>
+
+    <div class="status" style="border-color:#52c41a;">
+        ✅ 特抗审批通过，医嘱已解锁，可正常发送至药房。
+    </div>
+
+    <button onclick="alert('医嘱已发送至药房')">发送医嘱</button>
+</div>
+
+</div>
+
+<script>
+function triggerApply() {
+    document.getElementById("interceptMsg").style.display = "block";
+    document.getElementById("applyPanel").style.display = "block";
+}
+
+function submitApply() {
+    alert("申请已提交，等待审批");
+    document.getElementById("approvePanel").style.display = "block";
+}
+
+function approve() {
+    const time = new Date().toLocaleString();
+    document.getElementById("approveTime").innerText = time;
+    document.getElementById("finalOpinion").innerText =
+        document.getElementById("opinion").value;
+
+    document.getElementById("recordPanel").style.display = "block";
+    document.getElementById("orderPanel").style.display = "block";
+}
+
+function reject() {
+    alert("审批拒绝，医嘱将被系统自动作废");
+}
+</script>
+
+</body>
+</html>
