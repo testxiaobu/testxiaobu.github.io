@@ -1,678 +1,843 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SPD医院耗材管理系统</title>
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Font Awesome -->
-    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <!-- QRCode.js -->
-    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js"></script>
-    
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#3b82f6', secondary: '#10b981', warning: '#f59e0b', danger: '#ef4444',
-                        info: '#06b6d4', purple: '#8b5cf6', orange: '#f97316',
-                        dark: { 100: '#4b5563', 200: '#374151', 300: '#1f2937', 400: '#111827', 500: '#0f172a', 600: '#0d1117' }
-                    },
-                    fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] }
-                }
-            }
-        }
-    </script>
-    <style type="text/tailwindcss">
-        @layer utilities {
-            .input-field { @apply w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary; }
-            .btn { @apply px-4 py-2 rounded-md font-medium transition-all focus:outline-none focus:ring-2 focus:ring-offset-2; }
-            .btn-sm { @apply px-2 py-1 text-sm; }
-            .btn-primary { @apply bg-primary text-white hover:bg-blue-700 focus:ring-blue-500; }
-            .btn-secondary { @apply bg-secondary text-white hover:bg-green-700 focus:ring-green-500; }
-            .btn-warning { @apply bg-warning text-white hover:bg-yellow-600 focus:ring-yellow-500; }
-            .btn-danger { @apply bg-danger text-white hover:bg-red-600 focus:ring-red-500; }
-            .btn-info { @apply bg-info text-white hover:bg-cyan-600 focus:ring-cyan-500; }
-            .btn-outline { @apply border border-gray-300 text-gray-700 bg-white hover:bg-gray-50 focus:ring-gray-500; }
-            .badge { @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium; }
-            .badge-success { @apply bg-green-100 text-green-800; }
-            .badge-warning { @apply bg-yellow-100 text-yellow-800; }
-            .badge-danger { @apply bg-red-100 text-red-800; }
-            .badge-info { @apply bg-blue-100 text-blue-800; }
-            .badge-gray { @apply bg-gray-100 text-gray-800; }
-            .card { @apply bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden; }
-            .card-header { @apply px-6 py-4 border-b border-gray-200 bg-gray-50; }
-            .card-body { @apply px-6 py-4; }
-            .form-label { @apply block text-sm font-medium text-gray-700 mb-1; }
-            .table-row-hover { @apply hover:bg-gray-50 transition-colors; }
-            .sidebar-link { @apply flex items-center py-2 text-gray-400 hover:text-white hover:bg-dark-300 rounded-r-lg transition-colors; }
-            .sidebar-link.active { @apply bg-blue-600 text-white; }
-        }
-    </style>
+<html lang="zh-CN" data-page-node-id="DXx7tGEIzKGz3WixRycOaT">
+<head data-page-node-id="dziLsXEk4poufEuUmehFjD">
+<meta charset="UTF-8" data-page-node-id="Zwio2ak6z2OGA4xoCaptA9">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" data-page-node-id="RCYzFI85f1ZIdjr37PuQVx">
+<title>CSSD 不良事件管理台账 — 泉州市正骨医院</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --blue:#2379e0; --blue-d:#1657b0; --bg:#eef1f5; --card:#fff;
+  --line:#e4e9f1; --text:#2b3445; --muted:#8a94a6; --sub:#5b6577;
+  --red:#e8453c; --orange:#f59f1a; --green:#22b573; --purple:#7b5cf0; --cyan:#12b8c9;
+}
+html,body{height:100%}
+body{font-family:"Microsoft YaHei","PingFang SC","Hiragino Sans GB",sans-serif;background:var(--bg);color:var(--text);font-size:13px;-webkit-font-smoothing:antialiased}
+.app{display:flex;flex-direction:column;height:100vh;overflow:hidden}
+
+/* ============ 顶栏 ============ */
+.titlebar{height:48px;flex-shrink:0;display:flex;align-items:center;
+  background:linear-gradient(90deg,#12509f 0%,#1a6ac8 45%,#2a86e8 100%);
+  color:#fff;box-shadow:0 1px 6px rgba(10,50,110,.28);z-index:40;position:relative}
+.brand{width:168px;flex-shrink:0;display:flex;align-items:center;gap:8px;padding-left:14px}
+.brand-logo{width:24px;height:24px;border-radius:50%;background:rgba(255,255,255,.16);
+  display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,.35)}
+.brand-name{font-size:13px;letter-spacing:.5px;opacity:.95}
+.title-center{flex:1;text-align:center;font-size:15px;letter-spacing:1px;font-weight:600;
+  text-shadow:0 1px 2px rgba(0,0,0,.18)}
+.title-center .ver{font-weight:400;font-size:12px;opacity:.85;margin-left:4px}
+.title-right{display:flex;align-items:center;gap:12px;padding-right:12px;font-size:12px;opacity:.95}
+.win-btns{display:flex;gap:10px;font-size:13px;opacity:.8;margin-left:4px}
+
+/* ============ 主体 ============ */
+.body{flex:1;display:flex;min-height:0}
+
+/* 左侧导航 */
+.sidebar{width:168px;flex-shrink:0;background:#fff;border-right:1px solid var(--line);
+  display:flex;flex-direction:column;overflow-y:auto;overflow-x:hidden}
+.sidebar::-webkit-scrollbar{width:5px}
+.sidebar::-webkit-scrollbar-thumb{background:#d5dbe5;border-radius:3px}
+.tab-strip{display:flex;background:#f4f6fa;border-bottom:1px solid var(--line);height:34px;flex-shrink:0}
+.tab-strip .stab{flex:1;display:flex;align-items:center;justify-content:center;gap:5px;font-size:12px;
+  color:var(--sub);position:relative;cursor:default}
+.tab-strip .stab.active{background:#fff;color:var(--blue);font-weight:600;
+  box-shadow:inset 0 -2px 0 var(--blue)}
+.tab-strip .stab .x{color:#b9c1cd;font-size:11px}
+nav{padding:8px 0 20px}
+.menu-item{display:flex;align-items:center;gap:9px;height:38px;padding:0 12px;color:#4a5468;
+  cursor:pointer;font-size:13px;position:relative;user-select:none;transition:background .15s}
+.menu-item:hover{background:#f3f7fd}
+.menu-item.active{background:linear-gradient(90deg,#eaf3ff,#f7fbff);color:var(--blue);font-weight:600}
+.menu-item.active::before{content:"";position:absolute;left:0;top:8px;bottom:8px;width:3px;
+  background:var(--blue);border-radius:0 3px 3px 0}
+.ico{width:20px;height:20px;border-radius:6px;flex-shrink:0;display:flex;align-items:center;
+  justify-content:center;box-shadow:0 1px 3px rgba(30,60,120,.18)}
+.ico svg{width:12px;height:12px;fill:#fff}
+.caret{margin-left:auto;font-size:9px;color:#a9b3c2;transition:transform .2s}
+.menu-item.open .caret{transform:rotate(90deg)}
+.sub{overflow:hidden;max-height:0;transition:max-height .25s ease}
+.menu-item.open + .sub{max-height:260px}
+.sub-item{display:flex;align-items:center;height:32px;padding-left:40px;font-size:12.5px;
+  color:#6b7688;cursor:pointer;position:relative}
+.sub-item::before{content:"";position:absolute;left:29px;top:50%;width:4px;height:4px;border-radius:50%;
+  background:#c6cedb;transform:translateY(-50%)}
+.sub-item:hover{color:var(--blue);background:#f5f9ff}
+.sub-item.active{color:var(--blue);font-weight:600;background:#eef6ff}
+.sub-item.active::before{background:var(--blue);box-shadow:0 0 0 3px rgba(35,121,224,.15)}
+.dot-new{background:var(--red);color:#fff;font-size:10px;border-radius:8px;padding:0 5px;
+  margin-left:auto;margin-right:10px;line-height:14px;height:14px}
+
+/* 右侧主区 */
+.main{flex:1;min-width:0;display:flex;flex-direction:column;background:var(--bg)}
+.tabs{height:34px;flex-shrink:0;display:flex;align-items:flex-end;background:#e7ecf3;
+  border-bottom:1px solid #d7dee9;padding-left:8px;gap:3px;overflow-x:auto}
+.tabs::-webkit-scrollbar{height:0}
+.tab{height:30px;display:flex;align-items:center;gap:6px;padding:0 14px;font-size:12.5px;
+  color:#5b6577;background:#eff3f8;border:1px solid #dfe5ee;border-bottom:none;
+  border-radius:6px 6px 0 0;cursor:pointer;white-space:nowrap;transition:.15s}
+.tab:hover{background:#f6f9fd}
+.tab.active{background:#fff;color:var(--blue);font-weight:600;border-color:#d7dee9;
+  box-shadow:0 -2px 0 var(--blue) inset}
+.scroll{flex:1;overflow-y:auto;padding:16px}
+.scroll::-webkit-scrollbar{width:9px}
+.scroll::-webkit-scrollbar-thumb{background:#ccd4e0;border-radius:5px;border:2px solid var(--bg)}
+
+.view{display:none;animation:fade .22s ease}
+.view.active{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+
+/* ============ 卡片首页 ============ */
+.card-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;max-width:900px}
+.fcard{position:relative;height:132px;border-radius:12px;overflow:hidden;cursor:pointer;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;
+  color:#fff;box-shadow:0 3px 10px rgba(40,70,130,.16);transition:transform .18s,box-shadow .18s}
+.fcard:hover{transform:translateY(-3px);box-shadow:0 9px 20px rgba(40,70,130,.24)}
+.fcard .cn{font-size:19px;font-weight:700;letter-spacing:2px;text-shadow:0 1px 4px rgba(0,0,0,.16);z-index:2}
+.fcard .cd{font-size:11.5px;opacity:.9;letter-spacing:.5px;z-index:2}
+.fcard .gic{opacity:.9;z-index:2}
+.fcard::after{content:"";position:absolute;right:-38px;top:-38px;width:120px;height:120px;
+  border-radius:50%;background:rgba(255,255,255,.13)}
+.fcard::before{content:"";position:absolute;left:-30px;bottom:-46px;width:100px;height:100px;
+  border-radius:50%;background:rgba(255,255,255,.10)}
+.g-red{background:linear-gradient(135deg,#ff7a6b,#ef4b3f)}
+.g-orange{background:linear-gradient(135deg,#ffb648,#f5891a)}
+.g-blue{background:linear-gradient(135deg,#4ea6f7,#1f6fd6)}
+.g-green{background:linear-gradient(135deg,#48d69a,#16a86a)}
+.g-purple{background:linear-gradient(135deg,#9b86f7,#6d4fe8)}
+.g-cyan{background:linear-gradient(135deg,#4fd4e0,#0fa4bd)}
+
+/* ============ 通用面板 ============ */
+.panel{background:var(--card);border:1px solid var(--line);border-radius:10px;
+  box-shadow:0 1px 3px rgba(30,50,90,.05);margin-bottom:14px}
+.panel-hd{height:44px;display:flex;align-items:center;gap:8px;padding:0 14px;
+  border-bottom:1px solid var(--line)}
+.panel-hd h3{font-size:14px;font-weight:600;color:#26303f;display:flex;align-items:center;gap:8px}
+.panel-hd h3::before{content:"";width:3px;height:14px;border-radius:2px;background:var(--blue)}
+.panel-hd .hd-tip{font-size:11.5px;color:var(--muted);margin-left:6px;font-weight:400}
+.panel-hd .right{margin-left:auto;display:flex;gap:8px;align-items:center}
+.panel-bd{padding:14px}
+
+/* 统计条 */
+.stat-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:14px}
+.stat{background:#fff;border:1px solid var(--line);border-radius:10px;padding:13px 15px;
+  display:flex;align-items:center;gap:12px;box-shadow:0 1px 3px rgba(30,50,90,.05)}
+.stat .sico{width:38px;height:38px;border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.stat .sico svg{width:18px;height:18px;fill:#fff}
+.stat .sv{font-size:21px;font-weight:700;line-height:1.15;font-family:"DIN Alternate",Arial,sans-serif}
+.stat .sl{font-size:11.5px;color:var(--muted);margin-top:2px}
+.stat .sd{font-size:10.5px;margin-left:auto;padding:2px 6px;border-radius:8px;background:#f2f5f9;color:#7a8598}
+.sd.down{background:#e8f7f0;color:#16a86a}
+.sd.up{background:#fdeceb;color:#e8453c}
+
+/* 工具条 */
+.toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:11px 14px;
+  border-bottom:1px solid var(--line);background:#fbfcfe;border-radius:10px 10px 0 0}
+.field{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--sub)}
+select,input[type=text],input[type=date],input[type=datetime-local],textarea{
+  font-family:inherit;font-size:12.5px;color:var(--text);background:#fff;border:1px solid #d8dee8;
+  border-radius:6px;padding:5px 8px;outline:none;transition:.15s}
+select:focus,input:focus,textarea:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(35,121,224,.12)}
+select{cursor:pointer;padding-right:22px}
+.btn{display:inline-flex;align-items:center;gap:5px;height:28px;padding:0 12px;border-radius:6px;
+  font-size:12.5px;cursor:pointer;border:1px solid transparent;transition:.15s;font-family:inherit}
+.btn-primary{background:var(--blue);color:#fff;box-shadow:0 1px 4px rgba(35,121,224,.32)}
+.btn-primary:hover{background:#1a6bd0}
+.btn-ghost{background:#fff;border-color:#d8dee8;color:#4a5468}
+.btn-ghost:hover{border-color:var(--blue);color:var(--blue)}
+.btn-danger{background:#fff;border-color:#f2c4c0;color:var(--red)}
+.btn-danger:hover{background:#fdf3f2}
+
+/* ============ 表格 ============ */
+.table-wrap{overflow-x:auto;border-radius:0 0 10px 10px}
+table{width:100%;border-collapse:collapse;font-size:12.5px;min-width:1500px}
+thead th{background:#f4f7fb;color:#4a5468;font-weight:600;text-align:left;
+  padding:10px 11px;border-bottom:1px solid var(--line);white-space:nowrap;position:sticky;top:0;z-index:2}
+tbody td{padding:10px 11px;border-bottom:1px solid #eef1f6;vertical-align:top;line-height:1.55;color:#3b4557}
+tbody tr:hover{background:#f7faff}
+tbody tr:last-child td{border-bottom:none}
+.code{font-family:Consolas,"Courier New",monospace;font-size:12px;color:#1657b0;font-weight:600;white-space:nowrap}
+.batch{font-family:Consolas,"Courier New",monospace;font-size:12px;color:#2b3445}
+.mr{font-family:Consolas,"Courier New",monospace;font-size:12px;color:#5b6577}
+.cell-strong{font-weight:600;color:#26303f}
+.muted{color:#9aa4b4}
+.tag{display:inline-block;padding:1px 7px;border-radius:9px;font-size:11px;line-height:17px;
+  white-space:nowrap;border:1px solid transparent}
+.t-red{background:#fdecea;color:#d8362c;border-color:#f8d4d0}
+.t-orange{background:#fff5e4;color:#c77700;border-color:#ffe2b8}
+.t-blue{background:#eaf3ff;color:#1a6bd0;border-color:#cfe4ff}
+.t-green{background:#e9f8f1;color:#12905a;border-color:#c7eeda}
+.t-purple{background:#f1edfe;color:#6242d8;border-color:#ded4fb}
+.t-grey{background:#f2f5f9;color:#6b7688;border-color:#e3e8f0}
+.t-cyan{background:#e6f8fa;color:#0b8fa4;border-color:#c7eef3}
+.measure{font-size:12px;color:#4a5468;max-width:260px}
+.measure b{color:#26303f}
+.empty{padding:40px;text-align:center;color:var(--muted);font-size:13px}
+
+/* ============ 表单 ============ */
+.form-sec{margin-bottom:18px;border:1px solid var(--line);border-radius:9px;overflow:hidden}
+.form-sec>h4{background:#f6f9fd;font-size:13px;font-weight:600;color:#26303f;
+  padding:9px 14px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:8px}
+.form-sec>h4 .no{width:18px;height:18px;border-radius:5px;background:var(--blue);color:#fff;
+  font-size:11px;display:flex;align-items:center;justify-content:center;font-weight:700}
+.form-sec>h4 .hint{font-weight:400;font-size:11.5px;color:var(--muted);margin-left:auto}
+.fgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px 16px;padding:14px}
+.fgrid .sp2{grid-column:span 2}
+.fgrid .sp3{grid-column:span 3}
+.fm label{display:block;font-size:12px;color:#5b6577;margin-bottom:5px;font-weight:500}
+.fm label .req{color:var(--red);margin-left:2px}
+.fm label .unit{color:#a9b3c2;font-weight:400;font-size:11px}
+.fm input,.fm select,.fm textarea{width:100%}
+.fm textarea{resize:vertical;min-height:56px;line-height:1.6}
+.chk-group{display:flex;flex-wrap:wrap;gap:8px 16px;padding-top:2px}
+.chk{display:flex;align-items:center;gap:6px;font-size:12.5px;color:#4a5468;cursor:pointer}
+.chk input{width:14px;height:14px;accent-color:var(--blue);cursor:pointer}
+.hintline{font-size:11.5px;color:#a0aabb;margin-top:5px}
+.actions{display:flex;gap:10px;justify-content:flex-end;padding:4px 0 20px}
+
+/* ============ 指标看板 ============ */
+.bars{display:flex;flex-direction:column;gap:11px;padding:4px 2px}
+.bar-row{display:flex;align-items:center;gap:10px;font-size:12.5px}
+.bar-label{width:150px;flex-shrink:0;color:#4a5468;text-align:right}
+.bar-track{flex:1;height:16px;background:#f1f4f9;border-radius:8px;overflow:hidden}
+.bar-fill{height:100%;border-radius:8px;transition:width .6s ease}
+.bar-val{width:52px;text-align:right;color:#26303f;font-weight:600;font-family:Consolas,monospace}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.kpi-list{display:flex;flex-direction:column;gap:10px}
+.kpi{display:flex;align-items:center;gap:10px;padding:9px 12px;background:#fafbfd;
+  border:1px solid var(--line);border-radius:8px;font-size:12.5px}
+.kpi .kdot{width:8px;height:8px;border-radius:50%}
+.kpi .kv{margin-left:auto;font-weight:700;font-family:Consolas,monospace;color:#26303f}
+.pdca{display:flex;gap:10px}
+.pdca .step{flex:1;background:#fafbfd;border:1px solid var(--line);border-radius:8px;padding:11px 12px}
+.pdca .step b{display:block;font-size:13px;margin-bottom:6px;color:#26303f}
+.pdca .step p{font-size:11.5px;color:#6b7688;line-height:1.7}
+
+/* toast */
+#toast{position:fixed;right:26px;bottom:26px;background:rgba(32,44,62,.94);color:#fff;
+  font-size:13px;padding:11px 18px;border-radius:8px;box-shadow:0 8px 22px rgba(0,0,0,.24);
+  opacity:0;transform:translateY(12px);transition:.28s;pointer-events:none;z-index:99}
+#toast.show{opacity:1;transform:none}
+
+@media print{
+  .titlebar,.sidebar,.tabs,.toolbar,.actions,.panel-hd .right,#toast{display:none!important}
+  body,.scroll{background:#fff!important;overflow:visible!important;height:auto!important}
+  .panel{border:none;box-shadow:none;margin:0}
+  .table-wrap{overflow:visible}
+  table{min-width:0;font-size:10px}
+  thead th{background:#eee!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .tag{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+@media (max-width:1100px){
+  .card-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .fgrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .stat-row{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+</style>
 </head>
-<body class="bg-gray-50 min-h-screen">
-    <!-- 顶部导航栏 -->
-    <nav class="bg-dark-500 border-b border-dark-300">
-        <div class="flex items-center justify-between px-6 py-3">
-            <div class="flex items-center">
-                <button class="text-gray-300 hover:text-white mr-4 lg:hidden" onclick="toggleSidebar()">
-                    <i class="fa fa-bars text-xl"></i>
-                </button>
-                <h1 class="text-xl font-bold text-white flex items-center">
-                    <i class="fa fa-cubes mr-2"></i>
-                    SPD医院耗材管理系统
-                    <span class="ml-2 text-xs bg-blue-600 px-2 py-1 rounded">V3.4.0</span>
-                </h1>
-            </div>
-            <div class="flex items-center space-x-4">
-                <button class="text-gray-300 hover:text-white relative">
-                    <i class="fa fa-bell"></i>
-                    <span class="absolute -top-1 -right-1 w-2 h-2 bg-red-500 rounded-full"></span>
-                </button>
-                <div class="flex items-center cursor-pointer group">
-                    <span class="text-gray-300 mr-2 hidden sm:inline">系统管理员</span>
-                    <img src="https://ui-avatars.com/api/?name=Admin&background=3b82f6&color=fff" class="w-8 h-8 rounded-full border-2 border-transparent group-hover:border-primary transition-colors">
-                </div>
-            </div>
-        </div>
-    </nav>
+<body data-page-node-id="Omn0l2OpXwHins2tgcM6pB">
+<div class="app" data-page-node-id="qbUuegHisHNez9m5rF4jLM">
 
-    <div class="flex">
-        <!-- 左侧菜单栏 -->
-        <aside id="sidebar" class="w-64 bg-dark-500 h-[calc(100vh-64px)] overflow-y-auto border-r border-dark-300 fixed lg:relative z-40 transform -translate-x-full lg:translate-x-0 transition-transform duration-300">
-            <div class="py-4">
-                <!-- 二级库业务 -->
-                <div class="menu-group">
-                    <div class="flex items-center px-4 py-2.5 text-white bg-blue-600">
-                        <i class="fa fa-shopping-cart w-5 h-5 mr-3"></i>
-                        <span>二级库业务</span>
-                    </div>
-                    <div class="pl-10 py-2">
-                        <a href="javascript:switchPage('packageMaintain')" class="sidebar-link active" data-page="packageMaintain">
-                            <i class="fa fa-cube text-xs mr-2"></i><span>套包维护</span>
-                        </a>
-                    </div>
-                </div>
-                <!-- 产品维护 -->
-                <div class="menu-group mt-4">
-                    <div class="flex items-center px-4 py-2.5 text-white bg-gray-700">
-                        <i class="fa fa-cubes w-5 h-5 mr-3"></i>
-                        <span>产品维护</span>
-                    </div>
-                    <div class="pl-10 py-2">
-                        <a href="javascript:switchPage('productManage')" class="sidebar-link" data-page="productManage">
-                            <i class="fa fa-list-alt text-xs mr-2"></i><span>产品管理</span>
-                        </a>
-                    </div>
-                </div>
-                <!-- 系统管理 -->
-                <div class="menu-group mt-4">
-                    <div class="flex items-center px-4 py-2.5 text-white bg-gray-700">
-                        <i class="fa fa-cog w-5 h-5 mr-3"></i>
-                        <span>系统管理</span>
-                    </div>
-                    <div class="pl-10 py-2">
-                        <a href="javascript:switchPage('deptManage')" class="sidebar-link" data-page="deptManage">
-                            <i class="fa fa-hospital-o text-xs mr-2"></i><span>专科类型管理</span>
-                        </a>
-                        <a href="javascript:switchPage('diseaseManage')" class="sidebar-link" data-page="diseaseManage">
-                            <i class="fa fa-stethoscope text-xs mr-2"></i><span>病种类型管理</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </aside>
-        <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 z-30 hidden lg:hidden" onclick="toggleSidebar()"></div>
-
-        <!-- 主内容区 -->
-        <main class="flex-1 p-6 overflow-y-auto h-[calc(100vh-64px)]">
-            <div class="flex items-center text-sm text-gray-600 mb-6">
-                <a href="#" class="hover:text-primary flex items-center"><i class="fa fa-home mr-1"></i>首页</a>
-                <i class="fa fa-angle-right mx-2 text-gray-400"></i>
-                <span class="text-gray-900 font-medium" id="pageTitle">套包维护</span>
-            </div>
-
-            <!-- 套包维护页面 -->
-            <section id="pagePackageMaintain" class="page-content">
-                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
-                    <h2 class="text-2xl font-bold text-gray-900 flex items-center"><i class="fa fa-cube mr-2 text-purple-500"></i>套包维护管理</h2>
-                    <div class="flex space-x-3">
-                        <button onclick="printPackageLabel()" class="btn btn-info"><i class="fa fa-qrcode mr-2"></i>打印套包</button>
-                        <button onclick="printChargeBill()" class="btn btn-warning"><i class="fa fa-file-text-o mr-2"></i>打印收费单</button>
-                        <button id="addNewPackageBtn" class="btn btn-primary"><i class="fa fa-plus mr-2"></i>新增套包</button>
-                        <button class="btn btn-outline" onclick="refreshPackageList()"><i class="fa fa-refresh mr-2"></i>刷新</button>
-                    </div>
-                </div>
-                <div class="card mb-6">
-                    <div class="card-header flex justify-between items-center">
-                        <h3 class="font-semibold flex items-center"><i class="fa fa-list mr-2 text-gray-500"></i>套餐包列表</h3>
-                        <div class="text-sm text-gray-500">共 <span id="packageCount" class="text-primary font-medium">3</span> 个套包</div>
-                    </div>
-                    <div class="card-body overflow-x-auto">
-                        <table class="w-full text-sm">
-                            <thead>
-                                <tr class="border-b bg-gray-50">
-                                    <th class="px-3 py-3 text-left font-medium text-gray-700">选择</th>
-                                    <th class="px-3 py-3 text-left font-medium text-gray-700">套包编码</th>
-                                    <th class="px-3 py-3 text-left font-medium text-gray-700">套餐名称</th>
-                                    <th class="px-3 py-3 text-left font-medium text-gray-700">套包类型</th>
-                                    <th class="px-3 py-3 text-left font-medium text-gray-700">适用专科</th>
-                                    <th class="px-3 py-3 text-left font-medium text-gray-700">适用病种</th>
-                                    <th class="px-3 py-3 text-left font-medium text-gray-700">金额</th>
-                                    <th class="px-3 py-3 text-left font-medium text-gray-700">创建时间</th>
-                                    <th class="px-3 py-3 text-left font-medium text-gray-700">操作</th>
-                                </tr>
-                            </thead>
-                            <tbody id="packageTableBody"></tbody>
-                        </table>
-                    </div>
-                </div>
-            </section>
-
-            <!-- 产品管理页面 -->
-            <section id="pageProductManage" class="page-content hidden">
-                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
-                    <h2 class="text-2xl font-bold text-gray-900 flex items-center"><i class="fa fa-list-alt mr-2 text-indigo-500"></i>产品管理</h2>
-                    <div class="flex space-x-3">
-                        <button onclick="batchEnableProducts()" class="btn btn-success"><i class="fa fa-check-circle mr-2"></i>批量启用</button>
-                        <button onclick="batchDisableProducts()" class="btn btn-danger"><i class="fa fa-ban mr-2"></i>批量停用</button>
-                        <button id="addNewProductBtn" class="btn btn-primary"><i class="fa fa-plus mr-2"></i>新增产品</button>
-                    </div>
-                </div>
-                <div class="card mb-6">
-                    <div class="card-header flex justify-between items-center">
-                        <h3 class="font-semibold flex items-center"><i class="fa fa-list mr-2 text-gray-500"></i>产品列表</h3>
-                        <div class="text-sm text-gray-500">共 <span id="productCount" class="text-primary font-medium">0</span> 条记录</div>
-                    </div>
-                    <div class="card-body overflow-x-auto">
-                        <table class="w-full text-sm">
-                            <thead>
-                                <tr class="border-b bg-gray-50">
-                                    <th class="px-3 py-3 text-left font-medium text-gray-700"><input type="checkbox" id="selectAllProducts"></th>
-                                    <th class="px-3 py-3 text-left font-medium text-gray-700">编码</th>
-                                    <th class="px-3 py-3 text-left font-medium text-gray-700">产品名称</th>
-                                    <th class="px-3 py-3 text-left font-medium text-gray-700">规格</th>
-                                    <th class="px-3 py-3 text-left font-medium text-gray-700">型号</th>
-                                    <th class="px-3 py-3 text-left font-medium text-gray-700">单位</th>
-                                    <th class="px-3 py-3 text-left font-medium text-gray-700">进货价</th>
-                                    <th class="px-3 py-3 text-left font-medium text-gray-700">注册证号</th>
-                                    <th class="px-3 py-3 text-left font-medium text-gray-700">生产商</th>
-                                    <th class="px-3 py-3 text-left font-medium text-gray-700">供应商</th>
-                                    <th class="px-3 py-3 text-left font-medium text-gray-700">分类</th>
-                                    <th class="px-3 py-3 text-left font-medium text-gray-700">状态</th>
-                                    <th class="px-3 py-3 text-left font-medium text-gray-700">操作</th>
-                                </tr>
-                            </thead>
-                            <tbody id="productTableBody"></tbody>
-                        </table>
-                    </div>
-                </div>
-            </section>
-
-            <!-- 专科管理页面 -->
-            <section id="pageDeptManage" class="page-content hidden">
-                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
-                    <h2 class="text-2xl font-bold text-gray-900 flex items-center"><i class="fa fa-hospital-o mr-2 text-blue-500"></i>专科类型管理</h2>
-                    <button id="addNewDeptBtn" class="btn btn-primary"><i class="fa fa-plus mr-2"></i>新增专科</button>
-                </div>
-                <div class="card">
-                    <div class="card-header flex justify-between items-center">
-                        <h3 class="font-semibold flex items-center"><i class="fa fa-list mr-2 text-gray-500"></i>专科类型列表</h3>
-                        <div class="text-sm text-gray-500">共 <span id="deptCount" class="text-primary font-medium">5</span> 条记录</div>
-                    </div>
-                    <div class="card-body overflow-x-auto">
-                        <table class="w-full text-sm">
-                            <thead>
-                                <tr class="border-b bg-gray-50">
-                                    <th class="px-3 py-3 text-left font-medium text-gray-700">序号</th>
-                                    <th class="px-3 py-3 text-left font-medium text-gray-700">专科名称</th>
-                                    <th class="px-3 py-3 text-left font-medium text-gray-700">创建时间</th>
-                                    <th class="px-3 py-3 text-left font-medium text-gray-700">操作</th>
-                                </tr>
-                            </thead>
-                            <tbody id="deptTableBody"></tbody>
-                        </table>
-                    </div>
-                </div>
-            </section>
-
-            <!-- 病种管理页面 -->
-            <section id="pageDiseaseManage" class="page-content hidden">
-                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
-                    <h2 class="text-2xl font-bold text-gray-900 flex items-center"><i class="fa fa-stethoscope mr-2 text-green-500"></i>病种类型管理</h2>
-                    <button id="addNewDiseaseBtn" class="btn btn-primary"><i class="fa fa-plus mr-2"></i>新增病种</button>
-                </div>
-                <div class="card">
-                    <div class="card-header flex justify-between items-center">
-                        <h3 class="font-semibold flex items-center"><i class="fa fa-list mr-2 text-gray-500"></i>病种类型列表</h3>
-                        <div class="text-sm text-gray-500">共 <span id="diseaseCount" class="text-primary font-medium">9</span> 条记录</div>
-                    </div>
-                    <div class="card-body overflow-x-auto">
-                        <table class="w-full text-sm">
-                            <thead>
-                                <tr class="border-b bg-gray-50">
-                                    <th class="px-3 py-3 text-left font-medium text-gray-700">序号</th>
-                                    <th class="px-3 py-3 text-left font-medium text-gray-700">病种名称</th>
-                                    <th class="px-3 py-3 text-left font-medium text-gray-700">创建时间</th>
-                                    <th class="px-3 py-3 text-left font-medium text-gray-700">操作</th>
-                                </tr>
-                            </thead>
-                            <tbody id="diseaseTableBody"></tbody>
-                        </table>
-                    </div>
-                </div>
-            </section>
-        </main>
+  <!-- ================= 顶栏 ================= -->
+  <header class="titlebar" data-page-node-id="6OCp7tVK1GOMOu4qOJ4JVi">
+    <div class="brand" data-page-node-id="ra7XFWRw1kRPQSnNBs8Emv">
+      <span class="brand-logo" data-page-node-id="mjX4ksrFVG2rEAVJbg6Reb">
+        <svg viewBox="0 0 24 24" width="13" height="13" fill="#fff" data-page-node-id="rySi1CEvJXC0FAasICUwgM"><path d="M12 2 3 5v6c0 5 3.8 9.7 9 11 5.2-1.3 9-6 9-11V5l-9-3zm-1 13-3-3 1.4-1.4L11 12.2l4.6-4.6L17 9l-6 6z" data-page-node-id="RnirtX4JkUbGcJXnJQuT4e"/></svg>
+      </span>
+      <span class="brand-name" data-page-node-id="IYzWP6iWuvU2sc2hNqPv49">CSSD 消毒供应中心</span>
     </div>
+    <div class="title-center" data-page-node-id="pVfcpwtBnzHd5hMuiBw1ZH">泉州市正骨医院CSSD信息管理系统<span class="ver" data-page-node-id="PjcvRHBFcW5jNFGV73BRNn">v2.0.177</span></div>
+    <div class="title-right" data-page-node-id="OB4ikTABNmSkBUPBx5Odpg">
+      <span id="clock" data-page-node-id="KxDHjzcpUQNpcp62Btaf30">2026-09-14 星期一</span>
+      <span data-page-node-id="jkKiIprBKBdcLHyjwE4tAE">质控员 · 管理员</span>
+      <span class="win-btns" data-page-node-id="S3BCijFlfHggD0SPfnaIlb"><span data-page-node-id="5hCcqjLqR5CbfxFRTqfm1m">—</span><span data-page-node-id="YG2WTfEnj3pKBcCfO9Kwar">▢</span><span data-page-node-id="IVy4oQ2SysowpHqLy0fgWA">✕</span></span>
+    </div>
+  </header>
 
-    <!-- 套包模态框 -->
-    <div id="packageModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50 p-4">
-        <div class="bg-white w-full max-w-4xl rounded-lg shadow-lg p-6 max-h-[95vh] overflow-y-auto">
-            <div class="flex justify-between items-center mb-4">
-                <h3 class="text-lg font-bold flex items-center" id="modalTitle"><i class="fa fa-cube mr-2 text-purple-500"></i>新增耗材套餐包</h3>
-                <button onclick="closePackageModal()" class="text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-full w-8 h-8 flex items-center justify-center transition-colors"><i class="fa fa-times"></i></button>
+  <div class="body" data-page-node-id="eGezi7chOf6azPz1plmHl5">
+    <!-- ================= 左侧导航 ================= -->
+    <aside class="sidebar" data-page-node-id="ibceTk9e84NlGx3J3GKy5M">
+      <div class="tab-strip" data-page-node-id="vzS0FDnxz6h5tMETykLkTl">
+        <div class="stab active" data-page-node-id="o2llrY737eVdJCImAdqyp1">质量控制 <span class="x" data-page-node-id="cyvsHHvtMTgTSgKRLEndLc">✕</span></div>
+      </div>
+      <nav data-page-node-id="ZDcbwDggM9ebFoTijWxpa4">
+        <div class="menu-item" data-nav="qc-home" data-page-node-id="1DyfkzPVeLagTr0zUvhHFo">
+          <span class="ico" style="background:linear-gradient(135deg,#4ea6f7,#1f6fd6)" data-page-node-id="g4ebcO3FcGIyX0OL4tAvzU">
+            <svg viewBox="0 0 24 24" data-page-node-id="SpoExNnTgJzk42yBBy97WO"><path d="M12 3 3 10v11h6v-6h6v6h6V10z" data-page-node-id="2xQSbpsgdghakphBCI2iCA"/></svg></span>
+          首页
+        </div>
+
+        <!-- 新增：质量控制 -->
+        <div class="menu-item open active-parent" data-toggle="1" data-page-node-id="PD92Dm9M53TjM8T3s3a2I5">
+          <span class="ico" style="background:linear-gradient(135deg,#ff7a6b,#e8453c)" data-page-node-id="uRInWpOQA10pGoukXC8a9N">
+            <svg viewBox="0 0 24 24" data-page-node-id="o8KtSxdvUUA45RDHrGCXCH"><path d="M12 2 3 5v6c0 5 3.8 9.7 9 11 5.2-1.3 9-6 9-11V5l-9-3zm-1 13-3-3 1.4-1.4L11 12.2l4.6-4.6L17 9l-6 6z" data-page-node-id="HEj8Q81BPtWbvueV4oz9NN"/></svg></span>
+          质量控制<span class="caret" data-page-node-id="VvzhJT6r6nCGYgzWDFxF7D">▶</span>
+        </div>
+        <div class="sub" data-page-node-id="JG2NwU43at0JDQzOhmscQW">
+          <div class="sub-item active" data-nav="ledger" data-page-node-id="4eyrzV8gU8MaX8Pfi4lFHd">不良事件管理台账<span class="dot-new" data-page-node-id="IuWFqouc0NKC9hSx3oUeOU">新</span></div>
+          <div class="sub-item" data-nav="new" data-page-node-id="pywAB7QUySEHwTDXUY7BAE">不良事件上报登记</div>
+          <div class="sub-item" data-nav="defect" data-page-node-id="xxDWEuNavXnNIPAvtj6lWT">质量缺陷登记</div>
+          <div class="sub-item" data-nav="recall" data-page-node-id="Qdi9XIuHBKI9PJHH05HYBC">召回与追溯管理</div>
+          <div class="sub-item" data-nav="board" data-page-node-id="vn1WhrCwWcw9yB1XPiGwKt">质控指标看板</div>
+        </div>
+
+        <div class="menu-item" data-nav="none" data-page-node-id="bFinypDb4rj1eSY4sMfe4X">
+          <span class="ico" style="background:linear-gradient(135deg,#ff8a8a,#e8453c)" data-page-node-id="odATminmW09RjiUgE3vqFu">
+            <svg viewBox="0 0 24 24" data-page-node-id="By7HUX00GIFScTuHGGZeva"><path d="M4 3h13l3 3v15H4zm3 8h10v2H7zm0-4h7v2H7zm0 8h10v2H7z" data-page-node-id="E6BuPsD8qsQrVs2ydWU2zR"/></svg></span>
+          信息录入<span class="caret" data-page-node-id="bNdecC3hCXdgMHyGmcd5w1">▶</span>
+        </div>
+        <div class="menu-item" data-nav="none" data-page-node-id="QEilcGoGvkI2rfMs3mvfcA">
+          <span class="ico" style="background:linear-gradient(135deg,#ffcf5c,#f59f1a)" data-page-node-id="nhh3bWkgL7Gjo4Q55GwlZx">
+            <svg viewBox="0 0 24 24" data-page-node-id="9HHAPaALKnLo9Z7tjnSqqc"><path d="M10 2h4v20h-4zM2 10h20v4H2z" data-page-node-id="zK0SuDIT9DKdF7ow8CJwxB"/></svg></span>
+          业务查询及打印<span class="caret" data-page-node-id="KcHaZP4DUZjSfsuSy35GzI">▶</span>
+        </div>
+        <div class="menu-item" data-nav="none" data-page-node-id="OuWvTWafq2LaC1my0T1zuS">
+          <span class="ico" style="background:linear-gradient(135deg,#ff9d7a,#e8632c)" data-page-node-id="lzNu9iAj6vjXrB0gGPakCy">
+            <svg viewBox="0 0 24 24" data-page-node-id="Cg4U2X2QsSCZEcbCbJxHV5"><path d="M7 2h10v3H7zm-2 5h14v15H5zm3 3v2h8v-2z" data-page-node-id="CYd5uF6IuBheTBxJQIlZ4F"/></svg></span>
+          手术申请
+        </div>
+        <div class="menu-item" data-nav="none" data-page-node-id="LDgfoOC6zcGZGj93Fsnn7X">
+          <span class="ico" style="background:linear-gradient(135deg,#57d69a,#16a86a)" data-page-node-id="WQnTjxOgidl3LR2VGfnWTq">
+            <svg viewBox="0 0 24 24" data-page-node-id="az0qrIqXZiVXb9OHaSpgoD"><path d="M4 20V10h4v10zm6 0V4h4v16zm6 0v-7h4v7z" data-page-node-id="RwOXLJs9k1fNN8zTRG3r0i"/></svg></span>
+          业务统计<span class="caret" data-page-node-id="aG0DOIqHCGg7XYknNjB4EZ">▶</span>
+        </div>
+        <div class="menu-item" data-nav="none" data-page-node-id="UnHedrbi5It1jY3j4u2QKf">
+          <span class="ico" style="background:linear-gradient(135deg,#5aa9f0,#1657b0)" data-page-node-id="0vuPva81xsiYXpnScRaBiN">
+            <svg viewBox="0 0 24 24" data-page-node-id="93TKwYAQJIcKrrKeVXD6Vs"><path d="M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8zm9.4 4-2-1.2.3-2.3-2.2-.7-1-2.1-2.3.5L12 2.6l-2.2 1.6-2.3-.5-1 2.1-2.2.7.3 2.3L2.6 12l2 1.2-.3 2.3 2.2.7 1 2.1 2.3-.5L12 21.4l2.2-1.6 2.3.5 1-2.1 2.2-.7-.3-2.3z" data-page-node-id="DbFgbN02ZrfjGAxeNUN1DA"/></svg></span>
+          系统管理<span class="caret" data-page-node-id="7H9H1uKaU9ksd3QtqJg63B">▶</span>
+        </div>
+      </nav>
+    </aside>
+
+    <!-- ================= 右侧主区 ================= -->
+    <div class="main" data-page-node-id="52pmbPs07oCiaZ6JKgkIU8">
+      <div class="tabs" id="tabs" data-page-node-id="fPqwD2pt4chtypWc83SAAl">
+        <div class="tab active" data-nav="ledger" data-page-node-id="0HpvzPVrA1veNF1SJ0haUr">不良事件管理台账</div>
+        <div class="tab" data-nav="qc-home" data-page-node-id="T7SApMqTJczaimBOFHZJ3I">质量控制首页</div>
+        <div class="tab" data-nav="new" data-page-node-id="XqJCcfjHuj7crQyDQFN7Wz">不良事件上报登记</div>
+        <div class="tab" data-nav="board" data-page-node-id="wTd6M7WdBMZMmdZ6zzorrY">质控指标看板</div>
+      </div>
+
+      <div class="scroll" data-page-node-id="MNlpFlmsXQXVklC5YF8Tgu">
+
+        <!-- ---------- 视图1：质量控制首页（卡片） ---------- -->
+        <section class="view" data-view="qc-home" data-page-node-id="jVs6yRqWbNk3FFyIhJfpGg">
+          <div class="card-grid" data-page-node-id="6s8e4xr0axBk56a7zjUGQ8">
+            <div class="fcard g-red" data-nav="new" data-page-node-id="YHeEME8xKiDITFXDyAaw8c">
+              <div class="gic" data-page-node-id="oEjsYLzsHHRVexsRX9RAGj"><svg viewBox="0 0 24 24" width="30" height="30" fill="#fff" data-page-node-id="lS3V2qbKUAwxWy6ku0Cp0h"><path d="M12 2 3 5v6c0 5 3.8 9.7 9 11 5.2-1.3 9-6 9-11V5l-9-3zm1 14h-2v-2h2zm0-4h-2V7h2z" data-page-node-id="tc27K6CbvARhjTuklsFcAD"/></svg></div>
+              <div class="cn" data-page-node-id="Wiv6baNHA4fh1aK7dN3gA1">不良事件上报</div>
+              <div class="cd" data-page-node-id="CAX9ewjDkM03FNQ9IWIH9m">事件登记 · 一键上报</div>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                <div><label class="form-label">套餐名称 <span class="text-danger">*</span></label><input type="text" id="packageName" class="input-field" placeholder="请输入套餐包名称"></div>
-                <div><label class="form-label">套包类型 <span class="text-danger">*</span></label><select id="packageType" class="input-field"><option value="1">可收费套餐包</option><option value="2">不可收费套餐包</option></select></div>
-                <div><label class="form-label">专科类型 <span class="text-danger">*</span></label><select id="packageDept" class="input-field"><option value="">请选择专科</option></select></div>
-                <div><label class="form-label">病种类型 <span class="text-danger">*</span></label><select id="packageDisease" class="input-field"><option value="">请选择病种</option></select></div>
+            <div class="fcard g-blue" data-nav="ledger" data-page-node-id="B1KgXcioWAXA1TkNA0UvhY">
+              <div class="gic" data-page-node-id="lNolF4NbUvuHE58k0RgIij"><svg viewBox="0 0 24 24" width="30" height="30" fill="#fff" data-page-node-id="ZeuegmTEVvaCaZ6ACjrPJd"><path d="M4 3h13l3 3v15H4zm3 8h10v2H7zm0-4h7v2H7zm0 8h10v2H7z" data-page-node-id="eSnP3XU821IigdRIGUZV6H"/></svg></div>
+              <div class="cn" data-page-node-id="dm2JDTgou9jCWz3XmcuSV4">不良事件台账</div>
+              <div class="cd" data-page-node-id="0fcoROVH6qDGY3UvsDN70v">全量查询 · 导出归档</div>
             </div>
-            
-            <!-- 耗材明细区域 -->
-            <div class="mb-4">
-                <label class="form-label">套餐包含耗材明细</label>
-                <div class="border rounded p-3 bg-gray-50">
-                    <div class="overflow-x-auto">
-                        <table class="w-full text-sm">
-                            <thead>
-                                <tr class="border-b bg-gray-100">
-                                    <th class="px-2 py-2 text-left">产品名称</th>
-                                    <th class="px-2 py-2 text-left">规格</th>
-                                    <th class="px-2 py-2 text-left">单位</th>
-                                    <th class="px-2 py-2 text-left">数量</th>
-                                    <th class="px-2 py-2 text-left">单价</th>
-                                    <th class="px-2 py-2 text-left">金额</th>
-                                    <th class="px-2 py-2 text-left">操作</th>
-                                </tr>
-                            </thead>
-                            <tbody id="packageDetailsTableBody"></tbody>
-                            <tfoot>
-                                <tr class="border-t-2 border-gray-300 font-bold">
-                                    <td colspan="5" class="px-2 py-2 text-right">合计金额：</td>
-                                    <td class="px-2 py-2 text-lg text-primary" id="packageTotalAmount">¥ 0.00</td>
-                                    <td></td>
-                                </tr>
-                            </tfoot>
-                        </table>
+            <div class="fcard g-orange" data-nav="defect" data-page-node-id="UnWBFCxHlHKQ3KhkldE3Hs">
+              <div class="gic" data-page-node-id="ucmFvtumXKfG79a44pQVQZ"><svg viewBox="0 0 24 24" width="30" height="30" fill="#fff" data-page-node-id="DHcLHXIxHquAKUUEfcwElB"><path d="M12 2 1 21h22zm1 15h-2v2h2zm0-7h-2v5h2z" data-page-node-id="lCftFJHCtv38yFRb7wLo6Q"/></svg></div>
+              <div class="cn" data-page-node-id="5EPHuQSeyBE6QnXJh8GyON">质量缺陷登记</div>
+              <div class="cd" data-page-node-id="0aIzNCtmmfPRg9YDFwwyFm">清洗 · 包装 · 灭菌</div>
+            </div>
+            <div class="fcard g-purple" data-nav="recall" data-page-node-id="LfjDemdwJ2xJmuZmhBKNsE">
+              <div class="gic" data-page-node-id="kD0nlfEuJY920ZiksE5QkZ"><svg viewBox="0 0 24 24" width="30" height="30" fill="#fff" data-page-node-id="mKY8ek6blrysLBIHJUiKnK"><path d="M12 4V1L8 5l4 4V6a6 6 0 1 1-6 6H4a8 8 0 1 0 8-8z" data-page-node-id="sGcVXN1hq1KCHeDY2u7oEr"/></svg></div>
+              <div class="cn" data-page-node-id="oCquUJe5Mvf53WhjXKekiB">召回与追溯</div>
+              <div class="cd" data-page-node-id="hPAQOhn3BCEJgl1wTdL2Xq">批次追溯 · 定向召回</div>
+            </div>
+            <div class="fcard g-green" data-nav="board" data-page-node-id="xMU7U2vpqcwAFtqS69qxga">
+              <div class="gic" data-page-node-id="AJl6XrkMJqqGLdWHeQLYkW"><svg viewBox="0 0 24 24" width="30" height="30" fill="#fff" data-page-node-id="lqrKjIChHiraQm8S3sKjqF"><path d="M4 20V10h4v10zm6 0V4h4v16zm6 0v-7h4v7z" data-page-node-id="KnC3Y0W4ucs7sPIMVKsefg"/></svg></div>
+              <div class="cn" data-page-node-id="P7duc68o2ujkgLAgOFKPym">质控指标看板</div>
+              <div class="cd" data-page-node-id="nRHfYkupxhNWv6CGwcjFmq">闭环率 · 类型分布</div>
+            </div>
+            <div class="fcard g-cyan" data-nav="board" data-page-node-id="BAy5sS5BFE7N8IZEYtUEDM">
+              <div class="gic" data-page-node-id="IN5L9RXxuCEIDPvIFgwUrB"><svg viewBox="0 0 24 24" width="30" height="30" fill="#fff" data-page-node-id="vbjeXhP4XTvwgQMzowGWUB"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm1 15h-2v-2h2zm0-4h-2V7h2z" data-page-node-id="FIUk0rQRl0nhktSxsp2dtQ"/></svg></div>
+              <div class="cn" data-page-node-id="JfJZi7fE2CZVmuCmYzl0eZ">整改跟踪 / RCA</div>
+              <div class="cd" data-page-node-id="CC54jO9Wb3NBApZAmvlCi3">PDCA · 原因分析</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ---------- 视图2：不良事件管理台账 ---------- -->
+        <section class="view active" data-view="ledger" data-page-node-id="zVSxcpSMbg3El6wFiEVV6G">
+          <div class="stat-row" data-page-node-id="OIg9XnwZZw6uLB98IoEwAU">
+            <div class="stat" data-page-node-id="nI8pvpdUaAAtcTDwYwdeQq">
+              <div class="sico" style="background:linear-gradient(135deg,#ff7a6b,#e8453c)" data-page-node-id="D63Xop6g2XwpWYl888tD51">
+                <svg viewBox="0 0 24 24" data-page-node-id="7iUW5yaRO2dIsWeshEn9Pw"><path d="M12 2 3 5v6c0 5 3.8 9.7 9 11 5.2-1.3 9-6 9-11V5l-9-3zm1 14h-2v-2h2zm0-4h-2V7h2z" data-page-node-id="8E8FNYPh9Bw7Oqri4cE2TR"/></svg></div>
+              <div data-page-node-id="ftT5tYXCUCEYoBBqov3y75"><div class="sv" data-page-node-id="zQL4ygpLRJypDJMMBfJ4Pm">12 <span style="font-size:12px;font-weight:400" data-page-node-id="dzbacVQpqkvW239by2y3XA">件</span></div><div class="sl" data-page-node-id="G7NFCDAnQRUPGIaVmNB6XN">本季度不良事件总数</div></div>
+              <div class="sd down" data-page-node-id="IDnUjWEJAfFeIXF7W0BdOA">↓ 3 件</div>
+            </div>
+            <div class="stat" data-page-node-id="ZHU9CxcDJIFZRd8bxuj95W">
+              <div class="sico" style="background:linear-gradient(135deg,#48d69a,#16a86a)" data-page-node-id="anZAAqNMbVT4hPFSdbkJFW">
+                <svg viewBox="0 0 24 24" data-page-node-id="BdzrSoe2IEDXPwjHGvDa6G"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z" data-page-node-id="xLin8TIotWOA250QawGvoq"/></svg></div>
+              <div data-page-node-id="aL1i5y0q9pQoMgxes96DpR"><div class="sv" data-page-node-id="42eh33Xf4XiBK4YGXBZZvF">83.3<span style="font-size:12px;font-weight:400" data-page-node-id="Bk4wz1GRMku1JrJi40Vt79">%</span></div><div class="sl" data-page-node-id="wP1Eq4jWyjhLqANQB2z7Os">事件闭环率</div></div>
+              <div class="sd down" data-page-node-id="cbVywQk0JHRlA1riS28fFH">↑ 8.3%</div>
+            </div>
+            <div class="stat" data-page-node-id="Jknv3WAfJrm7EsS1sA0VwQ">
+              <div class="sico" style="background:linear-gradient(135deg,#4ea6f7,#1f6fd6)" data-page-node-id="1FRH0piLkp8GxSJp4GAYpV">
+                <svg viewBox="0 0 24 24" data-page-node-id="ZSkHYXR7vcsJ1WY1rsE85V"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm1 11h-5v-2h3V6h2z" data-page-node-id="rNi1lOZLA8s5iuhZx2DbYM"/></svg></div>
+              <div data-page-node-id="36qHkNUWX4DlHkMxt4pxxm"><div class="sv" data-page-node-id="y1MYjGPEIFNGuDlqitKp6U">4.2 <span style="font-size:12px;font-weight:400" data-page-node-id="jJCfNajYCNoq6L2Pc5Fwf7">天</span></div><div class="sl" data-page-node-id="fvBTg7XcnLek6nu39D80TQ">平均闭环时长</div></div>
+              <div class="sd" data-page-node-id="XwQDBaAh4wOQJT2ShlwVHt">持平</div>
+            </div>
+            <div class="stat" data-page-node-id="7S11BS51qvbJwtdOWYvCRH">
+              <div class="sico" style="background:linear-gradient(135deg,#9b86f7,#6d4fe8)" data-page-node-id="qI0bIjbxqDGKdcDyQVS3qP">
+                <svg viewBox="0 0 24 24" data-page-node-id="3ULXJla5m7Ac9vExhIEJsD"><path d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5zm0 2c-4 0-8 2-8 4.5V21h16v-2.5C20 16 16 14 12 14z" data-page-node-id="CFSWvcFFRqtXHskTTWBj2T"/></svg></div>
+              <div data-page-node-id="AdWtw64yScpRK7NwQECpZP"><div class="sv" data-page-node-id="AzVf5GMBH3uCCgrQBBhEKA">1 <span style="font-size:12px;font-weight:400" data-page-node-id="qXMn06iCxNz4vNDMtvLWyT">例</span></div><div class="sl" data-page-node-id="BH96DJ5SfutYDLqeapONV0">已用于患者的召回事件</div></div>
+              <div class="sd up" data-page-node-id="FwwQp6CgsKQ87AlUa5E9h1">需随访</div>
+            </div>
+          </div>
+
+          <div class="panel" data-page-node-id="44hsNcAHfSzJKQRrTJMDEg">
+            <div class="toolbar" data-page-node-id="7tR6ARM5wQYhoGTdETSH9H">
+              <div class="field" data-page-node-id="hcuLG7lBJYowF1E3wERgwT"><label data-page-node-id="mB5pUnzfify9JkIuCEgCOQ">事件类型</label>
+                <select id="fType" data-page-node-id="ZjPMrGv4YD2vCFB934ScGd">
+                  <option value="" data-page-node-id="wdkVKQDRTa4SifrfvFNxdX">全部</option>
+                  <option data-page-node-id="whxJboHFJA1ZC1GlbWCg6f">湿包</option>
+                  <option data-page-node-id="2EB9iHHZ1S9A18BGHRORcQ">灭菌监测不合格</option>
+                  <option data-page-node-id="wjSAkY0M58HQFVmL0pVjJq">包装缺陷</option>
+                  <option data-page-node-id="TDfhNleH4taM54hUc5Cbnx">器械功能不良/缺失</option>
+                  <option data-page-node-id="uvkxs7h1oEGGSQaprK8zR9">发放错误</option>
+                  <option data-page-node-id="P0rs5bbH9OrcDq4EF0958o">标识追溯信息错误</option>
+                  <option data-page-node-id="LFiUQ2RXYG3BwTlJ1Cn1Px">职业暴露</option>
+                </select>
+              </div>
+              <div class="field" data-page-node-id="YCFgkHAS9VFnpdtWdCuu3j"><label data-page-node-id="WPaHfTCdQEwUAARmyy065f">使用科室</label>
+                <select id="fDept" data-page-node-id="TpmzzwcAM5G2ibYyoCTtHR">
+                  <option value="" data-page-node-id="j4dbSGj3TKkhKJYAAdtQu0">全部</option>
+                  <option data-page-node-id="aeBKrlp72ogOt0dcLpZ0Ig">手术室</option><option data-page-node-id="8QFiLplRihgHqOdDd8rnXm">产科</option><option data-page-node-id="8S3z0fVJfK1HCa38AmJui4">骨三科</option>
+                  <option data-page-node-id="hkrpAnntREJDwVdc3mIYp7">眼科</option><option data-page-node-id="R7KcznXoLEceoa318tgfiU">门诊换药室</option>
+                </select>
+              </div>
+              <div class="field" data-page-node-id="BaDFDue7erPt9yxB2o48KR"><label data-page-node-id="GWu55YbNQAnW1URB8od2RF">结局归档</label>
+                <select id="fStatus" data-page-node-id="0nzOcSHsajORAmV9F1I2WT">
+                  <option value="" data-page-node-id="BdXJ5u75lNquOkk30XB28Q">全部</option>
+                  <option data-page-node-id="UzFtUIJA1tEk7PIbVzdmQK">已闭环</option><option data-page-node-id="jgJtLCKCuCH2czWwalmeJn">整改中</option><option data-page-node-id="qitE7OpYP6IAhDmtDsTKKn">已上报</option><option data-page-node-id="xh1QMtXvoVnNviA1iDTJOB">待审核</option>
+                </select>
+              </div>
+              <div class="field" data-page-node-id="FZNW4QZgtefFw6XnonYois"><label data-page-node-id="JNXJzl20JHIpR9F5cVynJw">关键词</label>
+                <input type="text" id="fKey" placeholder="编号 / 批号 / 器械包 / 病历号" style="width:210px" data-page-node-id="CBJjDgEp8deZF9cc2Ukn9t">
+              </div>
+              <button class="btn btn-ghost" onclick="resetFilter()" data-page-node-id="Ak2yu5ZzpxyBwDYaLdGE76">重置</button>
+              <div class="right" style="margin-left:auto;display:flex;gap:8px" data-page-node-id="WhOKGR1WUu5hebMKdjuHUU">
+                <button class="btn btn-ghost" onclick="exportCSV()" data-page-node-id="IOgmUlBDpXQxlL3LFVtQ6J">
+                  <svg viewBox="0 0 24 24" width="13" height="13" fill="#5b6577" data-page-node-id="Ks85zhPKESX0wPBKAmBOWu"><path d="M12 16 7 11h3V4h4v7h3zM5 18h14v2H5z" data-page-node-id="NdOYcOeTD57ckQka01IO8g"/></svg>导出Excel</button>
+                <button class="btn btn-ghost" onclick="window.print()" data-page-node-id="56ZOVEFhRse1FDUppfLZg2">
+                  <svg viewBox="0 0 24 24" width="13" height="13" fill="#5b6577" data-page-node-id="3AbCDM65LYRWghko4UmSQ7"><path d="M6 9V2h12v7zm12 5h-2V8H8v6H6v-5h12zM6 19h12v-4H6zm-2 2h16v-5H4z" data-page-node-id="xRwRh9C6FK809b1qQwiFnG"/></svg>打印台账</button>
+                <button class="btn btn-primary" data-nav="new" data-page-node-id="FMzLglqkFkILis8FD9w9lu">+ 新增不良事件</button>
+              </div>
+            </div>
+
+            <div class="panel-hd" style="border-radius:0" data-page-node-id="isaXKBu6Yiik3kkWdufP6n">
+              <h3 data-page-node-id="8e87piMMcBoFtQav6wLaBk">CSSD 不良事件管理台账<span class="hd-tip" data-page-node-id="Hmq12OXTNuuBnPbsiqVwrU">统计周期：2026-07-01 ~ 2026-09-14 ／ 共 <span id="rowCount" data-page-node-id="2b9AThCR4JtCUPLagSaz3H">6</span> 条</span></h3>
+            </div>
+
+            <div class="table-wrap" data-page-node-id="IyaFFETHiyG9fGN2NVJqHG">
+              <table id="ledgerTable" data-page-node-id="RJvQlGTDjJZmiBsQyOQsGM">
+                <thead data-page-node-id="PcpKfzHhm62wcXOFAlo3EL">
+                  <tr data-page-node-id="Zf348RpZ40PxGzd8t0kgai">
+                    <th style="width:44px" data-page-node-id="hdJdYkICjjes3DYGHneSiH">序号</th>
+                    <th style="width:132px" data-page-node-id="XPhms5TOgYwO2VPbvh7Xq0">事件编号</th>
+                    <th style="width:132px" data-page-node-id="WTizPo1DoxMYglRz7zzt5T">事件类型</th>
+                    <th style="width:126px" data-page-node-id="GZ8Gquay0zHg1nKavDYjUe">发生时间</th>
+                    <th style="width:124px" data-page-node-id="QZLgnJq19kAcbBDMLGV1lp">灭菌批号</th>
+                    <th style="width:150px" data-page-node-id="dosCor5XxxEyjQ8SRU8FcK">涉及器械包</th>
+                    <th style="width:96px" data-page-node-id="ggQ5rSpECMfae2Hcypnp0Z">使用科室</th>
+                    <th style="width:126px" data-page-node-id="Tjy2wrmIGZ7vreUY516iZl">患者病历号</th>
+                    <th style="width:290px" data-page-node-id="LK8MshUOwJObLpbXwe5Pi5">处理措施</th>
+                    <th style="width:170px" data-page-node-id="zcii1KglvnzEU96BKDkM8o">结局归档</th>
+                    <th style="width:130px" data-page-node-id="wnC6iI1NrHiOxFHvyxYD3t">上报人 / 责任人</th>
+                  </tr>
+                </thead>
+                <tbody data-page-node-id="AHKJKjKwVSM7SpnLlt8M4C">
+                  <tr data-page-node-id="5fEG3R0WWUiUPpOX3218om">
+                    <td data-page-node-id="QcMfDZzPPBrq6a5No2nwUt">1</td>
+                    <td class="code" data-page-node-id="q7QjNR8ASmcaDFl69ZsVqG">CSSD-AE-2026-042</td>
+                    <td data-page-node-id="nU93MHpryR0Cqs3Cv0CI1Z"><span class="tag t-orange" data-page-node-id="9L6gjECrw6YV3KyYy46bWI">湿包</span></td>
+                    <td data-page-node-id="PplDLldPOWQ4M1fmpXWI7Y">2026-09-12<br data-page-node-id="lbiInunuhEnRYGJUmiKFho"><span class="muted" data-page-node-id="J6vojzNPswX11kBPC3GFmG">09:15</span></td>
+                    <td class="batch" data-page-node-id="jOLLFnDBG9AS0kTrF1P2UB">M20260911-03</td>
+                    <td data-page-node-id="KdqJYpSf4BtaLS6ZxYHNHN">剖宫产器械包 <b data-page-node-id="AXLVOmFVjwewhuJdBtmTF5">×2</b><br data-page-node-id="LYNYsGzZTfWXplZQG5gZRG"><span class="muted" data-page-node-id="JjcilyMiGZ278hvT0pEi6D">纸塑包装</span></td>
+                    <td data-page-node-id="teHpWAOFNsPcNDZwchqq0K">产科</td>
+                    <td class="mr" data-page-node-id="AySFMOpQAQKoRPV8muthld">未使用</td>
+                    <td class="measure" data-page-node-id="tAN7lFGXiRMFfAwA3UOeLi"><b data-page-node-id="Ekg7EDGVi8Pr5EoyGLjneT">①</b> 该批次同炉次包全部拦截封存；<b data-page-node-id="Mw0osZVMeznVDHgASSXRFm">②</b> 器械包重新清洗、干燥后二次灭菌；<b data-page-node-id="4u3WzrJ4VTF4k61bWbDpzj">③</b> 排查灭菌器疏水阀及干燥程序，更换疏水阀；<b data-page-node-id="2ObtoWfm7McmbDFGwIhJWQ">④</b> 连续 3 炉次监测合格后放行。</td>
+                    <td data-page-node-id="7RHjUMPebVZWyWveeHBhWH"><span class="tag t-green" data-page-node-id="UHmylDCHP5h1SpJ7YVwbSa">已闭环</span><br data-page-node-id="JMz0o5zg48LFJOgLEjzuqF"><span class="muted" style="font-size:11.5px" data-page-node-id="aACcHgV0bA2thlqq2Ax8PN">闭环 2026-09-13 ／ 归档人 陈</span></td>
+                    <td data-page-node-id="rHP3MIL5odCO0SGE09ad3z">林 / 陈</td>
+                  </tr>
+                  <tr data-page-node-id="lidRQmc6poKDH9mVfg2vIe">
+                    <td data-page-node-id="SLn18MS590HsxMaszxct7B">2</td>
+                    <td class="code" data-page-node-id="C9bBJKVOwIzjFFj7AdOebD">CSSD-AE-2026-041</td>
+                    <td data-page-node-id="SK82GkFJs4xdmsPDHShAgw"><span class="tag t-red" data-page-node-id="XYtmdIatAusGajsjBRqjQ9">灭菌监测不合格</span></td>
+                    <td data-page-node-id="MRd9gx0z0J7o0CgSucBiBU">2026-09-10<br data-page-node-id="V4sTgzrDKllLgcqSa1nhuc"><span class="muted" data-page-node-id="il9b6i8mTdN3M3RcSc6UKk">16:40</span></td>
+                    <td class="batch" data-page-node-id="CPuSb2dT4gD8Qj8p26wPeN">M20260910-01</td>
+                    <td data-page-node-id="MOXwJBnK6aTobdq6Z1i26Q">骨科动力器械包 <b data-page-node-id="b6lCAFszCgQGgBEszRst69">×1</b><br data-page-node-id="onycnxXZdz5qjB4OKdMLht"><span class="muted" data-page-node-id="2ZMeGLNLHAHFSMXpIDpQHR">含动力钻、铣刀</span></td>
+                    <td data-page-node-id="luzV4IVSQAyYv5WtGUKAC7">手术室</td>
+                    <td class="mr" data-page-node-id="9PjArh1nbIRiX5sFXlEVMk">ZY2026013456<br data-page-node-id="ULRz9RBe9ylNKhVcbh6X1j"><span class="muted" data-page-node-id="gfEWieghuiUNr5gEylVoQh">（已脱敏）</span></td>
+                    <td class="measure" data-page-node-id="cKgiVSy1s9rCV1SiHZzy0Y"><b data-page-node-id="Na4UNHq7VuhCyl1w4tMW7X">①</b> 立即停用该灭菌器（编号 M-02）并挂"禁用"标识；<b data-page-node-id="oUusv90fRNOgPR8HIvQoEi">②</b> 召回已发放同批次全部器械包，追溯已使用器械并通知手术室暂停；<b data-page-node-id="2rwkrfAn6TpGKYEtHDjWkJ">③</b> 复做生物监测 + BD 试验，检修灭菌器并联系厂家校验；<b data-page-node-id="ADEYgmvi8E7ABa1HludMWe">④</b> 已上报院感科与护理部，患者术后随访无异常。</td>
+                    <td data-page-node-id="pkaHK1Nu9lZrarpCHaw1nG"><span class="tag t-purple" data-page-node-id="1cnr8SnOeWnscmhDQd1le8">已上报</span> <span class="tag t-blue" data-page-node-id="oOhFzoYoWoIaaA2Z16NfmH">整改中</span><br data-page-node-id="AZvrn131WLjUaSrIJ8v3QL"><span class="muted" style="font-size:11.5px" data-page-node-id="VrZMNcBvSgi8O0Ptsahldm">转院感科 ／ 期限 09-20</span></td>
+                    <td data-page-node-id="pdnEfGeDJIxAXZg2pr9w8l">吴 / 郑</td>
+                  </tr>
+                  <tr data-page-node-id="Ke7yDzGzNmscMVXvNxp6fB">
+                    <td data-page-node-id="qN6isuZNqTSTeiSkuZFvum">3</td>
+                    <td class="code" data-page-node-id="wevMTbUKFAxFhXENBKgEAG">CSSD-AE-2026-040</td>
+                    <td data-page-node-id="gTwucfrfFVIDgOQFM4nvAX"><span class="tag t-orange" data-page-node-id="7ysCJNml9VWkrCs8NeO2FA">包装缺陷</span></td>
+                    <td data-page-node-id="9efFTAaxhHxpcauD98kfmt">2026-09-08<br data-page-node-id="7uiZpPB2U87cV7cIDk8Gdv"><span class="muted" data-page-node-id="lNwELi1DW9V0IXzE4FQInj">14:05</span></td>
+                    <td class="batch" data-page-node-id="Ayj3M74DHylZU4gdCHKmMI">M20260908-02</td>
+                    <td data-page-node-id="5GbMlfXwFRyElVoKYAVpGE">腹腔镜器械包 <b data-page-node-id="oOkCBFIMIPFbViJndAXOqN">×1</b></td>
+                    <td data-page-node-id="4At58jn4XRloEgEkHkvEXB">手术室</td>
+                    <td class="mr" data-page-node-id="KtYZ6CBBwBuVxarX2a2bWt">未使用</td>
+                    <td class="measure" data-page-node-id="0jms9fchKxPPsoKxm9xefj"><b data-page-node-id="CpUQP0HnDEK9qNZEwtpwfr">①</b> 封口开裂包现场退回包装区；<b data-page-node-id="RFWbkqRy9ZfuooBzTkgPdy">②</b> 封口机温度/压力参数校准并记录；<b data-page-node-id="P679bqFcL4KqLJJA3Eis9Z">③</b> 同班次封口产品全部复检剥离强度；<b data-page-node-id="4FC83uDtOIRkeU5sBKreyv">④</b> 组织包装岗位再培训并考核。</td>
+                    <td data-page-node-id="lSBklkbCxi5ZbfCEWJQdcx"><span class="tag t-green" data-page-node-id="TJ6RTLsKXEqqgKHK2xAdHb">已闭环</span><br data-page-node-id="qLwEbz9W4aKKQGWuwg9QDa"><span class="muted" style="font-size:11.5px" data-page-node-id="ZjsNGd8SF0o6tdriiohVuY">闭环 2026-09-09 ／ 归档人 陈</span></td>
+                    <td data-page-node-id="jUPBbNTitWWPYR4DlBAFC0">黄 / 陈</td>
+                  </tr>
+                  <tr data-page-node-id="mxUTmdBdYYc6IitYbVqpdA">
+                    <td data-page-node-id="EDRtCMoSUd5XdMNHCtFKKj">4</td>
+                    <td class="code" data-page-node-id="Mr2ccdwwdEwD7ZuTAsX8Bc">CSSD-AE-2026-039</td>
+                    <td data-page-node-id="MromKHfLuQUBTzCwCDHLu4"><span class="tag t-red" data-page-node-id="751fbnHolcFXGi438FR5a6">器械功能不良/缺失</span></td>
+                    <td data-page-node-id="vQ9wOv3mQ1Tn0C2c7MiTUs">2026-09-05<br data-page-node-id="XXZAzAc3inOIOpL2bI2EHR"><span class="muted" data-page-node-id="0EPxFxtF9s0TW5NV5GC0Z5">10:20</span></td>
+                    <td class="batch" data-page-node-id="pIi7Nnx1zxhLKYgh0HdNGC">M20260905-04</td>
+                    <td data-page-node-id="ZTMeY9cHP5rm0RnuKWnULS">椎间孔镜器械包 <b data-page-node-id="MIrYcwBAemiI8ozF35PaoH">×1</b><br data-page-node-id="IX89bkSfG62ALQTEa4lvdn"><span class="muted" data-page-node-id="Yfx1iADNyVukit2dP1uxla">咬骨钳 ×2</span></td>
+                    <td data-page-node-id="QyDvH9Yrag6IwPQfeGyYvU">骨三科</td>
+                    <td class="mr" data-page-node-id="xocb1OdNNg4nxnBsTiEOD0">ZY2026013921</td>
+                    <td class="measure" data-page-node-id="T1Q6AO3JeBvdH8Th9nlqrH"><b data-page-node-id="rRLqGg5cAEDkV0EQGNqgSM">①</b> 术中更换备用器械，未影响手术进程；<b data-page-node-id="DGa5nIGGkODW94fDK3hswj">②</b> 不良器械隔离送修，建立单件器械寿命台账；<b data-page-node-id="eCfQoUQYqHmcIpaP3oeXin">③</b> 清洗包装环节增设关节灵活度检查点并双人核对包内清单。</td>
+                    <td data-page-node-id="GejFyxIorfTV3FlrQWkkNT"><span class="tag t-green" data-page-node-id="yZM8iWmnhTLLNkT380dsUQ">已闭环</span><br data-page-node-id="a29BNscZFa9RDBC80JBUQH"><span class="muted" style="font-size:11.5px" data-page-node-id="H1PfXzXBYD7v35sRgD8WoN">闭环 2026-09-07 ／ 归档人 林</span></td>
+                    <td data-page-node-id="8pUFH8FQaLLzDcgHAEjqBa">林 / 吴</td>
+                  </tr>
+                  <tr data-page-node-id="eEcsQBK2jNHVsMH5QK6pbz">
+                    <td data-page-node-id="kV5ZwO8krCHfrOkAY9m4EH">5</td>
+                    <td class="code" data-page-node-id="ympFUwv3s4YQRcLHwnsKlk">CSSD-AE-2026-038</td>
+                    <td data-page-node-id="4uGMlnuOvvf6PFxF6OVaRG"><span class="tag t-cyan" data-page-node-id="lu1l0fhWQIMC779dF4J4LL">发放错误</span></td>
+                    <td data-page-node-id="rXCtgygSSjHPeBBTgl79BV">2026-09-03<br data-page-node-id="B2WZ3dz3Y3RyIF42mhgfsM"><span class="muted" data-page-node-id="DH3juTiyHwNafNAfs40Whu">08:35</span></td>
+                    <td class="batch" data-page-node-id="u9hOJzuKH6BQPBSV7y8moq">M20260902-06</td>
+                    <td data-page-node-id="hlKzt39y4fSGx5vu1nP0mg">基础敷料包 <b data-page-node-id="sWc0VTH5srzlgVpKWj0ymm">×6</b></td>
+                    <td data-page-node-id="nkf0RumQY7c5niaHQt5cls">门诊换药室</td>
+                    <td class="mr" data-page-node-id="2xMZI1luKRe2IYYE4QTyEk">未使用</td>
+                    <td class="measure" data-page-node-id="o013AiOgacQN7Mq6Wj2u0c"><b data-page-node-id="8UmvX62nY2DTcLRsxHyzkd">①</b> 错发物品全部回收、核对后重新发放；<b data-page-node-id="bnrBMRgQEtTXYHdkBPJL9d">②</b> 发放环节启用扫码核对（器械包二维码 + 科室标识）；<b data-page-node-id="s9NtXAPbQXoFS5kKq2POS7">③</b> 完善发放前"三查七对"记录表。</td>
+                    <td data-page-node-id="msITccpiQZDAwERGEisQah"><span class="tag t-blue" data-page-node-id="mKgCZ7SEP6DEYqYKbn52x8">待审核</span><br data-page-node-id="L0Anja5WXuLUZTbkMSU06D"><span class="muted" style="font-size:11.5px" data-page-node-id="1bDdHbhbzLQCirP5rbYvnq">提交 09-03 ／ 待护士长审核</span></td>
+                    <td data-page-node-id="uAvsUc0qDvNCRVsA3NQVKZ">苏 / 黄</td>
+                  </tr>
+                  <tr data-page-node-id="1pNCsYcNCm5r7sXWmN6D1S">
+                    <td data-page-node-id="y1sEKQ1ZP3hr99a23iSHPw">6</td>
+                    <td class="code" data-page-node-id="DqNR5dSPSb7rvGThUxjibu">CSSD-AE-2026-037</td>
+                    <td data-page-node-id="vjPQeuIkoZBHZuAaorRfyn"><span class="tag t-purple" data-page-node-id="Q5u9ZAbaOTcJt9pGqxfDbA">职业暴露</span></td>
+                    <td data-page-node-id="LoSOjaEhamLYI8HAEMdU79">2026-08-28<br data-page-node-id="Q1z4oDvZVybqLKcHoVCujX"><span class="muted" data-page-node-id="h3Eo6IkArzbjhwEgW5Zdtj">15:50</span></td>
+                    <td class="batch" data-page-node-id="0mggFL8dYPV9T3imE2Ebuq">－</td>
+                    <td data-page-node-id="OlJzDiSVWVMpmAVE91Qt51">回收阶段锐器（穿刺针）</td>
+                    <td data-page-node-id="50lqiAwZOhqVvkOvgJWgMJ">供应中心</td>
+                    <td class="mr" data-page-node-id="XS7FvyyI5yBZpBH97TXl0N">－</td>
+                    <td class="measure" data-page-node-id="6sNvrFYIx0wiYleAY25R1u"><b data-page-node-id="PmlELKIMSp5NUtoILx78hO">①</b> 按职业暴露流程处理伤口并采血送检、随访 6 个月；<b data-page-node-id="cUQ84asVNBc1z7mgMHsgS2">②</b> 回收岗强制佩戴双层手套 + 防刺盒；<b data-page-node-id="Os8cWCUwkreyHInKwytEZD">③</b> 推动临床科室执行"锐器不入包"前置管理。</td>
+                    <td data-page-node-id="Pgmb25lKYG770YFM2Lh2nW"><span class="tag t-green" data-page-node-id="JhBEFFRfeBhLPEfE2GIjH7">已闭环</span> <span class="tag t-grey" data-page-node-id="1v50MJ0yhkDPuX94TIu20w">已报院感科</span><br data-page-node-id="1iDBffkmUmBu3OeJ1DDa1q"><span class="muted" style="font-size:11.5px" data-page-node-id="FQZeVTMMUPaDOUVC5AoF6y">闭环 2026-08-30 ／ 归档人 陈</span></td>
+                    <td data-page-node-id="KNF35dfhT5Rt1KuRvcxPlk">郑 / 郑</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ---------- 视图3：不良事件上报登记（模板） ---------- -->
+        <section class="view" data-view="new" data-page-node-id="GzzmCirDHFlKwiRtY8ncHT">
+          <div class="panel" data-page-node-id="nT6mLlhPzCMtFPFJjOVPeF">
+            <div class="panel-hd" data-page-node-id="OhqBmBNh8GZbADkUObmegy">
+              <h3 data-page-node-id="1Bh3ad6FvbCsbGNTA3GIE3">CSSD 不良事件上报登记表</h3>
+              <div class="right" data-page-node-id="xOk4ZyQ1XzDuxnrkYZip61">
+                <span class="tag t-grey" data-page-node-id="vwiTYZxbafDB66dEfVl6GB">事件编号：系统自动生成</span>
+              </div>
+            </div>
+            <div class="panel-bd" data-page-node-id="hoIjC72eJHvgM5x8uX12aq">
+
+              <div class="form-sec" data-page-node-id="GNIFjwtU02GHnDXmypEZ7J">
+                <h4 data-page-node-id="iNCMJSMu8zzS14bpm95n70"><span class="no" data-page-node-id="bFfBS1XvGvDvSB0RRkdOwx">1</span>事件标识<span class="hint" data-page-node-id="gRX8xwTxPMaEaFXxMh9dC4">由上报人填写，系统自动生成事件编号</span></h4>
+                <div class="fgrid" data-page-node-id="Mhk5mj7yRH9Rfw0CZHLyZ6">
+                  <div class="fm" data-page-node-id="QniWC6rD2yXQzz07qFiDV2"><label data-page-node-id="RaiLBWmdwQgd8BFo1fhOVy">事件编号</label><input type="text" value="CSSD-AE-2026-043" readonly style="background:#f7f9fc;color:#8a94a6" data-page-node-id="Q7fFi8svmyk1tmznWVLopn"></div>
+                  <div class="fm" data-page-node-id="q228pc6OoQQaaTNOUzFuxx"><label data-page-node-id="BlhUIMuViLkSRWIgJKRVH4">上报人<span class="req" data-page-node-id="KLpkkmfLVP7LruYAAp6X8y">*</span></label><input type="text" placeholder="姓名 / 工号" data-page-node-id="9SOUjEBgAZ1gtj2DiO9knS"></div>
+                  <div class="fm" data-page-node-id="R1fkodVkcnzPmtWJjd97ui"><label data-page-node-id="l5Zd9erqXQKgXTKBKUmiA9">上报日期<span class="req" data-page-node-id="PUlX5OvFe4KT2MKjx90Gii">*</span></label><input type="date" value="2026-09-14" data-page-node-id="WxaHki24zk1pJ7Dxf7sD0l"></div>
+                  <div class="fm" data-page-node-id="J6FdX1tcY9mrfQjhhDUAim"><label data-page-node-id="B0xLD2cmMaXcmuPBaYxcVR">发现环节<span class="req" data-page-node-id="Y2A2MChypjUvIbC7jYoqbM">*</span></label>
+                    <select data-page-node-id="0ZD58eEWlIC9Q6GeHD4sFc">
+                      <option data-page-node-id="lEdrbk6GYgMq02Y0DFh1At">回收</option><option data-page-node-id="KXOiSQhpYcLleroazH3Ktu">清洗消毒</option><option data-page-node-id="sR5Vh1VpeDsbSF4DijcZ7M">干燥与检查</option>
+                      <option data-page-node-id="MdIv9kjRpWkomjiHIfId25">包装</option><option selected data-page-node-id="dGIBMENBPDt8CoYkmVCzN5">灭菌</option><option data-page-node-id="uKi7q9bB09bzVlACc3CiC6">存放</option>
+                      <option data-page-node-id="LFemXX25H67h4mmKVveCNF">发放</option><option data-page-node-id="n9tnHVPy9r2BG8nwkffRXq">使用科室反馈</option><option data-page-node-id="pqm0NqYo1yJenahd2n20Cf">术后追溯核查</option>
+                    </select>
+                  </div>
+                  <div class="fm" data-page-node-id="EOgEX6UpyfRGX6OFC8MXHd"><label data-page-node-id="t8eyRUYn0rqopErsJJMXp1">发现人 / 岗位</label><input type="text" placeholder="如：灭菌岗 张某" data-page-node-id="YxoeAd1064wdL08Q20PPRK"></div>
+                  <div class="fm" data-page-node-id="XZMeCUptqfZJVQBTzGtRBH"><label data-page-node-id="0CoxwB7nUBW9nEQWhBZwHF">信息来源</label>
+                    <select data-page-node-id="MOLVt9TantS3JrDDV3HICd"><option data-page-node-id="ETKx5Dbn87q70AO9nXc75J">本中心自查发现</option><option data-page-node-id="EsE16W6ZMwaJ6pF8YeGuY2">使用科室反馈</option><option data-page-node-id="PJEiY9EOTzLGZGnszTHXxh">监测数据报警</option><option data-page-node-id="2xWsGpZowBwaTs36mAQyg3">院感/护理部通报</option></select>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-sec" data-page-node-id="wekWTgfyAOfBLt19vVV3ty">
+                <h4 data-page-node-id="OdZriTMWVXy0EdVnD5LV4D"><span class="no" data-page-node-id="79hbT7MVNlmuIAcva1lAJW">2</span>事件类型与时间<span class="hint" data-page-node-id="GCkonToaOcPyPnoHPmYohr">事件类型为分类统计核心字段</span></h4>
+                <div class="fgrid" data-page-node-id="WBdWJOOJZSlpINPQDFrDP2">
+                  <div class="fm" data-page-node-id="5nLFexgWIQIzxwxiN46QTS"><label data-page-node-id="8NXfNoAJFwYqIVfOUkB9L2">事件类型<span class="req" data-page-node-id="SBrf3Yfg3iwCEVOTepiKGe">*</span></label>
+                    <select data-page-node-id="BDZalfyA9scGfyvfrk82aa">
+                      <option data-page-node-id="69cGPd2UKe6pSc05HPGDRL">湿包</option><option data-page-node-id="yKwWmiMRTeemm5YB9GSmj7">灭菌监测不合格（生物/化学/BD）</option>
+                      <option data-page-node-id="gZt5vBfmPOQSHuObCiIV8B">包装缺陷（破损 / 封口不合格 / 材料不符）</option>
+                      <option data-page-node-id="BoDGWpE3Ecq8OnTB8OoSJb">清洗质量不合格（血渍 · 锈渍 · 残留）</option>
+                      <option data-page-node-id="AicLyoumJoUeVW7ocQppdj">器械功能不良 / 损坏 / 缺失</option>
+                      <option data-page-node-id="C2vapeaDLnXriuWIqVTSEo">灭菌包发放错误（错发 · 漏发 · 过期发放）</option>
+                      <option data-page-node-id="LU5z4tRS5nWOGUIswOzpBM">标识与追溯信息错误 / 信息缺失</option>
+                      <option data-page-node-id="VIFNsRMS0dMPPT30wSYMSf">急件延误 / 未按约定时间发放</option>
+                      <option data-page-node-id="xjfk2cmCfdjQdA7hXSLba0">职业暴露（锐器伤 · 烫伤 · 化学暴露）</option>
+                      <option data-page-node-id="rCLhosAufm4doEAOpGkTYE">外来器械管理问题</option>
+                      <option data-page-node-id="wYiMbVqB20W2JCypFkO0Bi">无菌物品存储不当 / 超期</option>
+                      <option data-page-node-id="fBnn8uvjwjCt0OXuP2nXlw">其他</option>
+                    </select>
+                  </div>
+                  <div class="fm" data-page-node-id="AaFZIXEvU7TM3AHvF9JYLG"><label data-page-node-id="A5pSSQlV6LJDEC7XV2Cnt1">事件子类 / 具体表现</label><input type="text" placeholder="如：纸塑袋封口开裂 3cm" data-page-node-id="A9vXc5nudwgatDt2BuchN3"></div>
+                  <div class="fm" data-page-node-id="47g90XcgPUdEr7KEKchFBl"><label data-page-node-id="BxYqoSHwMbo80n6qAIKmu5">严重程度分级<span class="req" data-page-node-id="eWABpkbBxE8E0pdOzuARsN">*</span></label>
+                    <select data-page-node-id="vmLb8fLgITFN6gbL35cLeG"><option data-page-node-id="5WoMnlEX4ITBhBixaF0afq">Ⅰ级 · 隐患事件（未造成影响）</option><option data-page-node-id="fNjrmUcwNea4RwrEbQxgVA">Ⅱ级 · 未造成后果事件</option><option data-page-node-id="eLy4ITIZDqqbC9TQ3HVHzE">Ⅲ级 · 造成后果事件</option><option data-page-node-id="VoM2s0KzYHeokwf6E8Lj8Z">Ⅳ级 · 严重事件</option></select>
+                  </div>
+                  <div class="fm" data-page-node-id="ATH9YfGIeARubNlJjuc0yY"><label data-page-node-id="xcNJCqCPsjaZ5EY77ARbaI">发生时间<span class="req" data-page-node-id="m11MLqfyyJvV1URu13ZS5B">*</span></label><input type="datetime-local" value="2026-09-14T09:15" data-page-node-id="FMcBIeIRjmqpu8dYTq3YI3"></div>
+                  <div class="fm" data-page-node-id="VJyKKcyvsWZdKj1coDDiZ2"><label data-page-node-id="p9HumwFFKw9jNSKNyMWQh2">发现时间<span class="req" data-page-node-id="ED59CGoKOz20PcO5zO8Ejh">*</span></label><input type="datetime-local" value="2026-09-14T09:40" data-page-node-id="n1J82AI5EHfTR7vediW1LR"></div>
+                  <div class="fm" data-page-node-id="8SdAv1m7nWqEQPdDUHQd9T"><label data-page-node-id="yq4FeuhiSXaAdgZZAbuklX">是否已用于患者<span class="req" data-page-node-id="qv1ch45dIaAFxKa3EhGQ3f">*</span></label>
+                    <select data-page-node-id="VRJCaXoRGP2phMdFWO6NpE"><option data-page-node-id="NaAS5ovcFnsJGV1abFKpr5">否（使用前拦截）</option><option data-page-node-id="gUBp6eNvnMsnbs1MwgZVeY">是（已使用，需随访）</option><option data-page-node-id="lBTiPSJbHdnqdtq1GcMALi">无法确认</option></select>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-sec" data-page-node-id="SlGSLzR7w4hbQYHhFzSWrv">
+                <h4 data-page-node-id="k1AqBCrqs2Rj0rnrrqoEkB"><span class="no" data-page-node-id="vh32n2H2uwz5BNb7rxl0id">3</span>灭菌与追溯信息<span class="hint" data-page-node-id="2k7bDFTWosvpIzSfpUghy8">支撑批次追溯与定向召回</span></h4>
+                <div class="fgrid" data-page-node-id="lgofnhDAjFXyUvjqyHWcrE">
+                  <div class="fm" data-page-node-id="EvDLvSpiXGPs6lRFJAigQ8"><label data-page-node-id="4EmyD6BjB36hKS7ETxDH69">灭菌批号<span class="req" data-page-node-id="QJPVZEI8l1QgowKNRZRDC9">*</span></label><input type="text" placeholder="如：M20260914-02" data-page-node-id="fBhb6r5xo2gYNmrCVLglRN"></div>
+                  <div class="fm" data-page-node-id="IqzqlFqV2IyxGaLhmsPxrs"><label data-page-node-id="ACaH4hWhxICbcWQMr66to0">灭菌器编号 / 程序</label><input type="text" placeholder="如：M-02 / 134℃ 预真空 4min" data-page-node-id="Dr5cXJidgdUhblE0KQXAmA"></div>
+                  <div class="fm" data-page-node-id="hRwL9Uz9ogJcf1ldEHQwKG"><label data-page-node-id="lVf7O0TADQvvU5Di35fDxT">灭菌日期</label><input type="date" value="2026-09-14" data-page-node-id="Wf1hjxKNs00qO4DCGt3ppp"></div>
+                  <div class="fm" data-page-node-id="hhVzAd7oQLP6NL8xmQfAVU"><label data-page-node-id="9BCRrfBo2THjC1czLWb7l8">生物监测结果</label>
+                    <select data-page-node-id="3yGo1k1NOt763YbOC1PQEs"><option data-page-node-id="Y2xKJNc1T5wWN8lwEPzsf8">合格</option><option data-page-node-id="zO6dkSaquGK0LjP9Ol8oEO">阳性（不合格）</option><option data-page-node-id="TWjblJ4xCu6N270GHy5jXV">未做 / 待复检</option></select>
+                  </div>
+                  <div class="fm" data-page-node-id="kXYhlSYKGamRhyrq1SBHrq"><label data-page-node-id="G0oogOq473sLMGkDkN0CuF">化学监测 / BD 结果</label>
+                    <select data-page-node-id="H6z8uQxFh7YGUdnAQcI2JG"><option data-page-node-id="mfWEnZCyEzGUsmE8F6zaLJ">合格</option><option data-page-node-id="EngUMCat6I2tE0NO0wqtXN">不合格（变色不达标）</option></select>
+                  </div>
+                  <div class="fm" data-page-node-id="HgNskYRUAOt7wgckWgOSQI"><label data-page-node-id="4bNwQCyBir2Ms6ICFV4hN0">炉次装载量</label><input type="text" placeholder="如：18 个包 / 满载" data-page-node-id="cVzETm8WrME6F5XR5T9D9C"></div>
+                  <div class="fm sp2" data-page-node-id="QTLQ58cZ5wWuos84XmwDLM"><label data-page-node-id="QMf9CqMbGaOGIP4p2DB0tH">涉及器械包（包名 + 数量）<span class="req" data-page-node-id="DqqE9Ff77w1EG4dWD29TRR">*</span></label>
+                    <input type="text" placeholder="如：剖宫产器械包 ×2、基础敷料包 ×6" data-page-node-id="pnSu22vyW2ek9eMm25CzL6">
+                  </div>
+                  <div class="fm" data-page-node-id="Uhe5ACOc5VNmEVGtiXxB6x"><label data-page-node-id="NxsqxhzRg37egdyiPLBZrx">包内器械清单要点</label><input type="text" placeholder="如：含动力钻、铣刀" data-page-node-id="h18OeTlEOK2ETpuFUrILsF"></div>
+                </div>
+              </div>
+
+              <div class="form-sec" data-page-node-id="jNZuY7XHjUufwmzrGNieSu">
+                <h4 data-page-node-id="daGPemASn3uwC4KVoTdaXH"><span class="no" data-page-node-id="JJwiw1MqFaWoem3VBdop1f">4</span>使用科室与患者信息<span class="hint" data-page-node-id="gVfWWKURL5O98dNSDQeNTZ">涉及患者时必填，病历号按院内脱敏规则录入</span></h4>
+                <div class="fgrid" data-page-node-id="bdUmJRiHiGLnbMarLFb6E3">
+                  <div class="fm" data-page-node-id="prK9g2meYQyn2oB2vmq0sR"><label data-page-node-id="AHAN3EfsrmFHeInsQyH0gH">使用科室<span class="req" data-page-node-id="xBzP7oSXIUHMWD6JAzKEJP">*</span></label>
+                    <select data-page-node-id="yehrmwHgoVjWlt8gq5ZOKl"><option data-page-node-id="qsOfKDFMxEj2Q3pln5RMSh">手术室</option><option data-page-node-id="FygG3BVQC3bWn5KoQpKDzl">产科</option><option data-page-node-id="LGppRDSVkhrN2Zx52uGtwj">骨三科</option><option data-page-node-id="AkjAfPpV84Lvjk7xxHocQ7">眼科</option><option data-page-node-id="wdC4rfQs26hUfrWH5htr6S">门诊换药室</option><option data-page-node-id="JyDeaN75ePd9HksV4L7kSb">供应中心（内部）</option></select>
+                  </div>
+                  <div class="fm" data-page-node-id="9B7MARjBR5KWOg9DQTsmFc"><label data-page-node-id="EkNPM3Fsqi9IdslLhBDx5C">患者姓名</label><input type="text" placeholder="如：张*明（脱敏）" data-page-node-id="hcOunpwW3tHJiiaIIBTJ3I"></div>
+                  <div class="fm" data-page-node-id="s9hNnnzQxB6HKDRYl9E0fH"><label data-page-node-id="lRL7C2RxnG2FvCjJdgcalZ">患者病历号 / 住院号</label><input type="text" placeholder="如：ZY2026013456" data-page-node-id="7Bkpiz5GGtOvSAsfxAWXYV"></div>
+                  <div class="fm" data-page-node-id="7sQKy2uISylBiXHXYVvHaC"><label data-page-node-id="zT8HB4dmtKsH6kelU5etAq">手术 / 操作名称</label><input type="text" placeholder="如：剖宫产术" data-page-node-id="V9p4F0yyBfkAsC2KxK6bD5"></div>
+                  <div class="fm" data-page-node-id="N0LSFDftNls3r5F7KEJ7Te"><label data-page-node-id="GbrXTre4TdJPL3wH76zpwf">使用日期</label><input type="date" data-page-node-id="nMB0WsD9QdcR0UNOTLCBhV"></div>
+                  <div class="fm" data-page-node-id="8u0hrAdAUqRPr58dbcvlpN"><label data-page-node-id="qnDuNkUhUHAGeeFyi0WmD3">接诊医生 / 护士</label><input type="text" placeholder="用于协同随访" data-page-node-id="y5hwYCEj6sF9YbnEXwzQ3O"></div>
+                </div>
+              </div>
+
+              <div class="form-sec" data-page-node-id="rrh05OFG9jm2k6lxxs72V9">
+                <h4 data-page-node-id="uSkeI7EwrVflUiX4351rZH"><span class="no" data-page-node-id="VCxIZ7CrTY8hAr33uEPBQD">5</span>处理措施与原因分析<span class="hint" data-page-node-id="cl2OUxCzwaMxFn9IxyFrU0">应急处置可多选</span></h4>
+                <div class="fgrid" data-page-node-id="FJEgashKS1MlmvDW3fErNS">
+                  <div class="fm sp3" data-page-node-id="uC6sfPurrzPDbTOmD8n85e"><label data-page-node-id="c0hnqucSSK7wstzL7I7OWt">应急处置措施（多选）</label>
+                    <div class="chk-group" data-page-node-id="hT2xDv6B8fGHaIIArOWVrD">
+                      <label class="chk" data-page-node-id="9jG9pfnMn5BtX9Iyg3j0cC"><input type="checkbox" checked data-page-node-id="MYwRo60s5qpPnEAd0C2B6b">封存该批次全部物品</label>
+                      <label class="chk" data-page-node-id="Ip7FsaWqJOzLB8FqvK6Mmx"><input type="checkbox" checked data-page-node-id="7R8BtSXkm9p9Ji9AKePzV4">召回已发放物品</label>
+                      <label class="chk" data-page-node-id="i5qNbdASzRVPH1DrFxit9o"><input type="checkbox" data-page-node-id="skMuiMkGLINe27G1xDzQVh">暂停使用相关设备</label>
+                      <label class="chk" data-page-node-id="tVHvvYxAFWiAHYvk1KsRbi"><input type="checkbox" checked data-page-node-id="bLYVjluKtO102zhS4TC43c">重新清洗 / 包装 / 灭菌</label>
+                      <label class="chk" data-page-node-id="L9cBIKtPwwM1fApBAJhtQt"><input type="checkbox" data-page-node-id="Mb5zL1P8Crq4OxGfPP39Sy">通知使用科室暂停使用</label>
+                      <label class="chk" data-page-node-id="bgNC6rusbF7F64Faqy8Rp0"><input type="checkbox" data-page-node-id="6m1dvwgWNMlUGLSrHGJfG1">上报院感科</label>
+                      <label class="chk" data-page-node-id="ba0s6S8rl0jilcphbMdBHX"><input type="checkbox" data-page-node-id="roWt8ersVVSNHh4UX40Xkv">上报护理部</label>
+                      <label class="chk" data-page-node-id="jHSMbnYd2N4gVIoEZ9xnDk"><input type="checkbox" data-page-node-id="byQwRatDi0Kg23jCb4owt4">上报医疗安全（不良）事件系统</label>
+                      <label class="chk" data-page-node-id="zD7H3eJsXIFtUrtGdbzvli"><input type="checkbox" data-page-node-id="6ZJyB2Nfywv1H93Q7K9nNN">联系设备厂家校验</label>
+                      <label class="chk" data-page-node-id="AdyreCE6OgcizaVswibRfu"><input type="checkbox" data-page-node-id="Mh0xO583gula5rD0wOIZrO">患者随访</label>
                     </div>
-                    <button id="addProductToPackageBtn" class="mt-3 text-primary text-sm flex items-center"><i class="fa fa-plus-circle mr-1"></i>添加耗材</button>
+                  </div>
+                  <div class="fm sp3" data-page-node-id="4aF6zqCJ7LPs52xucGRwOb"><label data-page-node-id="4DxEjMZXn9L6tFJSJgDMwl">处理措施详细描述<span class="req" data-page-node-id="GCw3Z21VHeNWpQVkwSqGPV">*</span></label>
+                    <textarea placeholder="按①②③分条记录：现场处置 → 临时措施 → 复查验证 → 后续跟进"></textarea>
+                    <div class="hintline" data-page-node-id="dDWrHWlfkcniuA59HtXd92">建议要素：拦截范围、复检结果、放行条件、通知对象与时间</div>
+                  </div>
+                  <div class="fm sp3" data-page-node-id="uRpSbDufoQrl8Uxcxgw9CA"><label data-page-node-id="PLXThg021AethPTmVGYIN7">原因分析（可结合鱼骨图 / 5Why / RCA）</label>
+                    <textarea placeholder="人：/ 机：/ 料：/ 法：/ 环：/ 测："></textarea>
+                  </div>
+                  <div class="fm sp2" data-page-node-id="40EBPbS5WI1kVWQnOAMbLs"><label data-page-node-id="ZdNmj2stXfSF6ov1feLB7Z">整改措施与完成期限</label><input type="text" placeholder="如：更换疏水阀并连续 3 炉监测合格，09-18 前完成" data-page-node-id="wE1riHH8twn6xVY42I5f7v"></div>
+                  <div class="fm" data-page-node-id="0eVHbXpamuNJjlkUmOXAj6"><label data-page-node-id="Ed4qNgaqciyJVdH4PEx2ET">责任人</label><input type="text" placeholder="姓名 / 工号" data-page-node-id="VFI4hQhyvtXx63QPzUhEk5"></div>
                 </div>
-            </div>
+              </div>
 
-            <div class="mb-4">
-                <label class="form-label">系统生成唯一套包编码</label>
-                <div class="flex items-center">
-                    <input type="text" id="packageCode" class="input-field bg-gray-100" readonly placeholder="自动生成">
-                    <button onclick="genPackageCode()" class="btn btn-primary ml-2 whitespace-nowrap">生成编码</button>
+              <div class="form-sec" data-page-node-id="dfJp56w4k8HC1WKs0I7AIi">
+                <h4 data-page-node-id="77ikVWEF3Yed50x0pj5KFh"><span class="no" data-page-node-id="ARRabkPqEPxQyKQzg8AG6E">6</span>结局归档<span class="hint" data-page-node-id="apJSfBKoGRTCIEgrABOZwV">闭环判定与去向分流</span></h4>
+                <div class="fgrid" data-page-node-id="chKHOX0JUWoBcQxh4ntKpL">
+                  <div class="fm" data-page-node-id="wwNOAw2zLKUYMccyuK1DqV"><label data-page-node-id="f1v2uzVAnXdSCrh8yFGlFk">结局分类<span class="req" data-page-node-id="ItABif1vVGgbA2w2VsJko0">*</span></label>
+                    <select data-page-node-id="iuvXEcGnBQbSE4gVbfGhmq">
+                      <option data-page-node-id="jCjYuO3Jzm4flg61AxPbjM">已闭环整改（院内处理完毕）</option>
+                      <option data-page-node-id="UMG3qjSoE4aHStVQR6uBn1">持续改进中（PDCA 跟踪）</option>
+                      <option data-page-node-id="B5GTw7iZff6auBvPnJOQjU">转院感科处理</option>
+                      <option data-page-node-id="LcATkLcxas5uMNQD6MsAHL">转护理部处理</option>
+                      <option data-page-node-id="5ZmyjOyZbHWEyDbSyMujAg">上报医疗安全（不良）事件</option>
+                      <option data-page-node-id="yBV3dzOVtDCDWiYQfFBlnb">暂停使用待复检</option>
+                      <option data-page-node-id="AIqWaAMfPMZhoorSXFnKsf">无需处理（误报 / 非质量问题）</option>
+                    </select>
+                  </div>
+                  <div class="fm" data-page-node-id="K8AO4XbAO3H9xo0kTJ1IAS"><label data-page-node-id="SWWB1yUFmDZEKFQzDaydR7">闭环状态<span class="req" data-page-node-id="kNiA7WKXXQa1wrXRyl8UfB">*</span></label>
+                    <select data-page-node-id="U2q0nn7F7tMizWTfBPyqVF"><option data-page-node-id="pJobAuLsJzjRei5LMARJuB">待审核</option><option data-page-node-id="wK3t4PTJC1G1Qdo9yViOby">整改中</option><option data-page-node-id="BnjWriz45AE2EuTkt5tMoS">已闭环</option><option data-page-node-id="Z45d3hrTdHS6qzKLVJSMZ5">已上报</option></select>
+                  </div>
+                  <div class="fm" data-page-node-id="uAuvE05jfE0ZLUs3DmjJXE"><label data-page-node-id="ld7EZ294Toj8QBYom3DRuX">验证方式</label>
+                    <select data-page-node-id="8zexpJt1RBjlUxjUYzhrGv"><option data-page-node-id="cSBWB65Ds1nSuXZYgHfbBs">复检监测合格</option><option data-page-node-id="rtZUyfg3ScsPmhDdIVhNcW">现场查看 + 记录核查</option><option data-page-node-id="H83AvEjIIYzU3PwE6BkuaZ">培训考核合格</option><option data-page-node-id="MqlDprthqCAWZpAIaGnopU">跟踪观察 1 个月</option></select>
+                  </div>
+                  <div class="fm" data-page-node-id="IWPvyXuIhDH6nl2M0oHf2c"><label data-page-node-id="WgSywePhtHi1zKij66sqMP">归档日期</label><input type="date" data-page-node-id="JPBbk6YNl6a3qF6O7feG9c"></div>
+                  <div class="fm" data-page-node-id="Pp40dBwF3fb6ktia0NFc6x"><label data-page-node-id="qO7uX8UOcA9voHdMi92swO">归档人 / 审核人</label><input type="text" placeholder="护士长 / 质控员" data-page-node-id="MptLw8sBlYGFfosCVXaipa"></div>
+                  <div class="fm" data-page-node-id="ueP2D1DYzKSdedTyNmS5zE"><label data-page-node-id="MPnMjRAgi41KakIIdEgWFY">附件</label><input type="text" placeholder="照片 / 监测报告 / 培训记录" data-page-node-id="AAVumDtcI7QH6GG3oyICF4"></div>
                 </div>
+              </div>
+
+              <div class="actions" data-page-node-id="Y7xXU4crMfgpOLxaLiQ9zl">
+                <button class="btn btn-ghost" onclick="toast('草稿已保存')" data-page-node-id="wnC7t5zQnr7q9UwMWZjXpK">暂存草稿</button>
+                <button class="btn btn-ghost" onclick="toast('已重置表单')" data-page-node-id="zRG0a3roeEsrlYokifNZes">重置</button>
+                <button class="btn btn-primary" onclick="submitForm()" data-page-node-id="F1QeJDO1acwcasZSwcuQ1e">提交并生成台账记录</button>
+              </div>
+
             </div>
-            <div class="flex justify-end space-x-3 pt-4 border-t">
-                <button onclick="closePackageModal()" class="btn btn-outline">取消</button>
-                <button id="savePackageBtn" class="btn btn-primary">保存套包</button>
+          </div>
+        </section>
+
+        <!-- ---------- 视图4：质控指标看板 ---------- -->
+        <section class="view" data-view="board" data-page-node-id="iYRrGaBiidjDfY1o7kUmAJ">
+          <div class="two-col" data-page-node-id="e37oUvTdcKA1LskEHN2oxa">
+            <div class="panel" data-page-node-id="XFXBiejflnrx6Wx8u1s2mF">
+              <div class="panel-hd" data-page-node-id="xJFicOk3y0rWpzOBIbPScZ"><h3 data-page-node-id="Oosfbh5PV11iu8BHQFeTtb">事件类型分布<span class="hd-tip" data-page-node-id="2k9PVprsMzaAKblQSzvaQ1">2026 Q3 ／ 共 12 件</span></h3></div>
+              <div class="panel-bd" data-page-node-id="reYXNTO4oVxirJKPYPUCsi">
+                <div class="bars" data-page-node-id="pa3Sjg9MthQg8FNF56ZSLq">
+                  <div class="bar-row" data-page-node-id="yRQtDLkA1lSgOU8MjqAiVw"><div class="bar-label" data-page-node-id="R8DunN5MFL25Tf35rv6BNw">湿包</div><div class="bar-track" data-page-node-id="ZxFn4gFZGTy5o8U8iHV899"><div class="bar-fill" style="width:33.3%;background:linear-gradient(90deg,#ffb648,#f5891a)" data-page-node-id="ntLgl5ojpkqZJrUlk35Gp1"></div></div><div class="bar-val" data-page-node-id="3QePB6dmoDNPAScmiDPdUW">4 件</div></div>
+                  <div class="bar-row" data-page-node-id="pwZVGv1HfJdQtBZupuSilC"><div class="bar-label" data-page-node-id="rMSROV7NcLNGwbYmeeGVE2">包装缺陷</div><div class="bar-track" data-page-node-id="0fT7yGuldeQHS4EST3VKsf"><div class="bar-fill" style="width:25%;background:linear-gradient(90deg,#ffb648,#f5891a)" data-page-node-id="7NgkideZKo440sV1yKJS7r"></div></div><div class="bar-val" data-page-node-id="YTt65a4QRo4679YgAHD4Oa">3 件</div></div>
+                  <div class="bar-row" data-page-node-id="THZ6eq4LxSpnwcJRoON2ZR"><div class="bar-label" data-page-node-id="hQHjZGF9qOuwTkwo9nJE0t">器械功能不良/缺失</div><div class="bar-track" data-page-node-id="IpOrbf4Iv7rhO3BwjKKHWA"><div class="bar-fill" style="width:16.7%;background:linear-gradient(90deg,#ff8a8a,#e8453c)" data-page-node-id="n4XNBAHPN3D8g5hF1VoOxd"></div></div><div class="bar-val" data-page-node-id="7VcqsIU8C6cUBU4STiwwpc">2 件</div></div>
+                  <div class="bar-row" data-page-node-id="HVThFQnZzQZ0P0DW2Shxgi"><div class="bar-label" data-page-node-id="ejYep2Lrugghspuyc2R1xT">灭菌监测不合格</div><div class="bar-track" data-page-node-id="zh0DFhkY9gzjKMRRlQUGT1"><div class="bar-fill" style="width:8.3%;background:linear-gradient(90deg,#ff8a8a,#e8453c)" data-page-node-id="QjoCiBfpzECUMq4VlcvvQJ"></div></div><div class="bar-val" data-page-node-id="S9jdOD2mu3HJQKSD34WiVT">1 件</div></div>
+                  <div class="bar-row" data-page-node-id="ct6SerxmDXQA3xgEIuNqef"><div class="bar-label" data-page-node-id="BR7SlT4NFIFbdbnw82Uexg">发放错误</div><div class="bar-track" data-page-node-id="f6BNjwYLwqakepK20yYLoz"><div class="bar-fill" style="width:8.3%;background:linear-gradient(90deg,#4fd4e0,#0fa4bd)" data-page-node-id="2Qm47269IVcyzG3FxlzQwH"></div></div><div class="bar-val" data-page-node-id="bAId0xJRMirFzTa1Lkr6UR">1 件</div></div>
+                  <div class="bar-row" data-page-node-id="htsZNIyQuGXLOLIGjcZUHL"><div class="bar-label" data-page-node-id="G8uaqvZ4RGl7SZFRVdRIcH">职业暴露</div><div class="bar-track" data-page-node-id="mvIHVDTTWIrG6V48uTBpt7"><div class="bar-fill" style="width:8.3%;background:linear-gradient(90deg,#9b86f7,#6d4fe8)" data-page-node-id="3G7lNXoBPdlONTyW0q8p02"></div></div><div class="bar-val" data-page-node-id="wEjmN1lAOKrCc3wj2H1F3S">1 件</div></div>
+                </div>
+              </div>
             </div>
-        </div>
+
+            <div class="panel" data-page-node-id="VEiDnBFDGNcpmHOUi1qF2X">
+              <div class="panel-hd" data-page-node-id="YXbzPAMluzhOlJeAUl8i7w"><h3 data-page-node-id="jQRAs2jhXYWMDesgOhBrSl">核心质控指标</h3></div>
+              <div class="panel-bd" data-page-node-id="mwFn9nqBIEcDW0VeIsXbTY">
+                <div class="kpi-list" data-page-node-id="0YEusHm6EdeLtmQOBpcOun">
+                  <div class="kpi" data-page-node-id="UcQ3f12T8GrK3MayZLgJB5"><span class="kdot" style="background:#e8453c" data-page-node-id="LpUAHW5xFmOeHYHAeByn5E"></span>事件上报率<span class="kv" data-page-node-id="kMlws3eLR6KhRro173lrZD">100%</span></div>
+                  <div class="kpi" data-page-node-id="WPtmg9A1Ht9sVQsZTLpCCu"><span class="kdot" style="background:#16a86a" data-page-node-id="hAYm3HE9LhtQD0SLdj3Jw4"></span>事件闭环率<span class="kv" data-page-node-id="AckZDQBcfA7cLUda0pODI4">83.3%</span></div>
+                  <div class="kpi" data-page-node-id="SkgmxsC2tjmT61Jc9LcAJT"><span class="kdot" style="background:#2379e0" data-page-node-id="qYxfWOv9mACCTAoJG3KId8"></span>平均闭环时长<span class="kv" data-page-node-id="Gy0tpBDUDJ2vUTt5ax1boL">4.2 天</span></div>
+                  <div class="kpi" data-page-node-id="SF9nyMWIAcF0f4wuRidYBk"><span class="kdot" style="background:#f59f1a" data-page-node-id="SgMskSwU11wepQMnbDBmwG"></span>Ⅰ / Ⅱ 级事件占比<span class="kv" data-page-node-id="J8YDNcARIAHcd4Gj3XTUEy">91.7%</span></div>
+                  <div class="kpi" data-page-node-id="jPkbiGXHG0wBcLt1bxlJa9"><span class="kdot" style="background:#7b5cf0" data-page-node-id="e2KHX4G394cjbEm9ynJCBH"></span>涉及患者的召回事件<span class="kv" data-page-node-id="amP87yduHK4GlwJu8qiGbZ">1 例</span></div>
+                  <div class="kpi" data-page-node-id="Z8fxqRe1qmcVRGJBKIKpDt"><span class="kdot" style="background:#12b8c9" data-page-node-id="rXUjypCvSs3DOQCojBx6bZ"></span>整改措施落实率<span class="kv" data-page-node-id="ySpyF2bCBPaMpAARIxQZM3">100%</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel" style="margin-top:14px" data-page-node-id="Fx8zPkz99cCtL9FtmP0vmh">
+            <div class="panel-hd" data-page-node-id="uT1YfxdkApIx41K7RoinEy"><h3 data-page-node-id="M5IZvqikATTCLC4C0JQ9Cz">闭环管理流程（PDCA）</h3></div>
+            <div class="panel-bd" data-page-node-id="JkBGIXBkgAakOBlVvL8HbC">
+              <div class="pdca" data-page-node-id="R8xPBlIuFHMcZiSQdNUFwV">
+                <div class="step" data-page-node-id="P2HFxG4RNbPdFNG8Bgfu8W"><b data-page-node-id="6IedggoS5Z547G64tW0Kx3">P · 上报登记</b><p data-page-node-id="AeD5E5YO44qnVuiweDIMvf">发现环节即时登记，24h 内完成上报；系统自动生成事件编号并按类型分级。</p></div>
+                <div class="step" data-page-node-id="e2q0T5i6OGUDwMCHUfIp4C"><b data-page-node-id="djWOfoaVDLhwIxEH4jLvBI">D · 应急处置</b><p data-page-node-id="NY6R19u4Ym8lqBtxEtGl7p">封存 / 召回 / 停用 / 重处理，同步通知使用科室，涉及患者启动随访。</p></div>
+                <div class="step" data-page-node-id="nMiw3WR4uAHfLxj62t0qqu"><b data-page-node-id="zYY2ULHgBFK7x0grVu1uud">C · 原因分析</b><p data-page-node-id="4abQjYfcBtNpeBDSMvZMuC">鱼骨图 + 5Why 定位根因，核查同批次、同设备、同岗位风险面。</p></div>
+                <div class="step" data-page-node-id="WWQIeh9DdFdS6lEWYoi4ef"><b data-page-node-id="29SlJncnFg3pZeMmaTfmbM">A · 整改归档</b><p data-page-node-id="ZSnFCPT7RawpGbblF83lKM">措施落地 + 复检验证，纳入月度质控分析会，必要时修订 SOP 并再培训。</p></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </div>
     </div>
+  </div>
+</div>
 
-    <!-- 选择产品模态框 -->
-    <div id="selectProductModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50 p-4">
-        <div class="bg-white w-full max-w-3xl rounded-lg shadow-lg p-6 max-h-[90vh] overflow-y-auto">
-            <div class="flex justify-between items-center mb-4">
-                <h3 class="text-lg font-bold flex items-center"><i class="fa fa-search mr-2 text-blue-500"></i>选择产品</h3>
-                <button onclick="closeSelectProductModal()" class="text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-full w-8 h-8 flex items-center justify-center transition-colors"><i class="fa fa-times"></i></button>
-            </div>
-            <div class="mb-4">
-                <input type="text" id="productSearchInput" class="input-field" placeholder="输入产品名称或编码搜索..." onkeyup="renderProductSelectionTable()">
-            </div>
-            <div class="overflow-x-auto border rounded">
-                <table class="w-full text-sm">
-                    <thead>
-                        <tr class="border-b bg-gray-50">
-                            <th class="px-3 py-2 text-left">选择</th>
-                            <th class="px-3 py-2 text-left">编码</th>
-                            <th class="px-3 py-2 text-left">产品名称</th>
-                            <th class="px-3 py-2 text-left">规格</th>
-                            <th class="px-3 py-2 text-left">进货价</th>
-                        </tr>
-                    </thead>
-                    <tbody id="productSelectionTableBody"></tbody>
-                </table>
-            </div>
-            <div class="flex justify-end space-x-3 mt-4 pt-4 border-t">
-                <button onclick="closeSelectProductModal()" class="btn btn-outline">取消</button>
-                <button onclick="confirmAddProductToPackage()" class="btn btn-primary">确认添加</button>
-            </div>
-        </div>
-    </div>
+<div id="toast" data-page-node-id="GvMpS10NHUyDNXKglyPzMs"></div>
 
-    <script>
-        // ====================== 全局通用函数 ======================
-        function switchPage(page) {
-            document.querySelectorAll('.page-content').forEach(p => p.classList.add('hidden'));
-            document.getElementById(`page${page.charAt(0).toUpperCase() + page.slice(1)}`).classList.remove('hidden');
-            
-            document.querySelectorAll('.sidebar-link').forEach(link => link.classList.remove('active', 'text-white', 'bg-blue-600'));
-            const activeLink = document.querySelector(`.sidebar-link[data-page="${page}"]`);
-            if (activeLink) activeLink.classList.add('active', 'text-white', 'bg-blue-600');
-            
-            document.getElementById('pageTitle').innerText = { 
-                packageMaintain: '套包维护', 
-                productManage: '产品管理',
-                deptManage: '专科类型管理', 
-                diseaseManage: '病种类型管理' 
-            }[page];
-        }
+<script>
+/* ===== 时钟 ===== */
+function tick(){
+  var d=new Date(), w='日一二三四五六'[d.getDay()];
+  function p(n){return n<10?'0'+n:n}
+  document.getElementById('clock').textContent =
+    d.getFullYear()+'-'+p(d.getMonth()+1)+'-'+p(d.getDate())+' 星期'+w+' '+p(d.getHours())+':'+p(d.getMinutes())+':'+p(d.getSeconds());
+}
+tick(); setInterval(tick,1000);
 
-        function showToast(msg, success = true) {
-            const toast = document.createElement('div');
-            toast.className = `fixed top-4 right-4 px-4 py-3 rounded-lg shadow-lg z-50 text-white flex items-center ${success ? 'bg-green-500' : 'bg-red-500'}`;
-            toast.innerHTML = `<i class="fa ${success ? 'fa-check-circle' : 'fa-exclamation-circle'} mr-2"></i>${msg}`;
-            document.body.appendChild(toast);
-            setTimeout(() => toast.remove(), 2500);
-        }
+/* ===== 视图切换 ===== */
+function show(view){
+  document.querySelectorAll('.view').forEach(function(v){
+    v.classList.toggle('active', v.dataset.view===view);
+  });
+  document.querySelectorAll('.tab').forEach(function(t){
+    t.classList.toggle('active', t.dataset.nav===view);
+  });
+  document.querySelectorAll('.sub-item').forEach(function(s){
+    s.classList.toggle('active', s.dataset.nav===view);
+  });
+  document.querySelector('.scroll').scrollTop=0;
+}
+document.addEventListener('click',function(e){
+  var el=e.target.closest('[data-nav]');
+  if(el && el.dataset.nav && el.dataset.nav!=='none'){ show(el.dataset.nav); }
+  var tg=e.target.closest('[data-toggle]');
+  if(tg){ tg.classList.toggle('open'); }
+});
 
-        function toggleSidebar(show) {
-            const sidebar = document.getElementById('sidebar');
-            const overlay = document.getElementById('overlay');
-            sidebar.classList.toggle('-translate-x-full', show === undefined ? undefined : !show);
-            overlay.classList.toggle('hidden', show === undefined ? undefined : !show);
-        }
+/* ===== 筛选 ===== */
+function filterRows(){
+  var t=document.getElementById('fType').value,
+      d=document.getElementById('fDept').value,
+      s=document.getElementById('fStatus').value,
+      k=document.getElementById('fKey').value.trim().toLowerCase(),
+      n=0;
+  document.querySelectorAll('#ledgerTable tbody tr').forEach(function(tr){
+    var txt=tr.innerText.toLowerCase();
+    var ok = (!t || tr.innerText.indexOf(t)>-1)
+          && (!d || tr.innerText.indexOf(d)>-1)
+          && (!s || tr.innerText.indexOf(s)>-1)
+          && (!k || txt.indexOf(k)>-1);
+    tr.style.display = ok?'':'none';
+    if(ok){ n++; tr.firstElementChild.textContent=n; }
+  });
+  document.getElementById('rowCount').textContent=n;
+}
+['fType','fDept','fStatus'].forEach(function(id){
+  document.getElementById(id).addEventListener('change',filterRows);
+});
+document.getElementById('fKey').addEventListener('input',filterRows);
+function resetFilter(){
+  document.getElementById('fType').value='';
+  document.getElementById('fDept').value='';
+  document.getElementById('fStatus').value='';
+  document.getElementById('fKey').value='';
+  filterRows();
+}
 
-        // ====================== 系统管理 - 基础数据 ======================
-        let deptList = [
-            { id: 1, name: '北峰上肢科', time: '2026-01-22 10:00' },
-            { id: 2, name: '北峰下肢二科', time: '2026-01-22 10:00' },
-            { id: 3, name: '北峰关节科', time: '2026-01-22 10:00' },
-            { id: 4, name: '北峰脊柱一科', time: '2026-01-22 10:00' },
-            { id: 5, name: '北峰运动医学科', time: '2026-01-22 10:00' }
-        ];
-        let diseaseList = [
-            { id: 1, name: '骨折内固定物取出术', time: '2026-01-22 10:05' },
-            { id: 2, name: '桡尺骨/桡骨远端骨折', time: '2026-01-22 10:05' },
-            { id: 3, name: 'PFNA', time: '2026-01-22 10:05' },
-            { id: 4, name: '股骨干髓内钉', time: '2026-01-22 10:05' },
-            { id: 5, name: '股骨髁间', time: '2026-01-22 10:05' },
-            { id: 6, name: '胫骨平台', time: '2026-01-22 10:05' },
-            { id: 7, name: '踝关节', time: '2026-01-22 10:05' },
-            { id: 8, name: '胫骨干', time: '2026-01-22 10:05' },
-            { id: 9, name: '锁骨闭合克氏针\\TEN套餐包', time: '2026-05-13 10:00' }
-        ];
+/* ===== 导出 CSV（Excel 可直接打开） ===== */
+function exportCSV(){
+  var rows=[];
+  document.querySelectorAll('#ledgerTable thead tr').forEach(function(tr){
+    rows.push([].map.call(tr.children,function(th){return th.textContent.trim()}));
+  });
+  var cnt=0;
+  document.querySelectorAll('#ledgerTable tbody tr').forEach(function(tr){
+    if(tr.style.display==='none') return;
+    cnt++;
+    var arr=[].map.call(tr.children,function(td){
+      return td.innerText.replace(/\s*\n\s*/g,' ').trim();
+    });
+    arr[0]=cnt; rows.push(arr);
+  });
+  var csv='\ufeff'+rows.map(function(r){
+    return r.map(function(c){ return '"'+String(c).replace(/"/g,'""')+'"'; }).join(',');
+  }).join('\r\n');
+  var blob=new Blob([csv],{type:'text/csv;charset=utf-8'});
+  var a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='CSSD不良事件管理台账_2026Q3.csv';
+  a.click(); URL.revokeObjectURL(a.href);
+  toast('已导出 '+cnt+' 条记录');
+}
 
-        function renderDeptTable() { /* ... 省略，与之前相同 ... */ }
-        function renderDiseaseTable() { /* ... 省略，与之前相同 ... */ }
-        function delDept(id) { if(confirm('确定删除该专科？')){ deptList = deptList.filter(d => d.id !== id); renderDeptTable(); } }
-        function delDisease(id) { if(confirm('确定删除该病种？')){ diseaseList = diseaseList.filter(d => d.id !== id); renderDiseaseTable(); } }
-
-        // ====================== 产品维护 - 产品管理 ======================
-        let productList = [
-            { id: '04715635440010', name: '可吸收合成医用缝合线·1线1针', spec: '1#', model: '', unit: '根', price: 44.85, regNo: '国械注许20163040413', manufacturer: '中央医疗器材股份有限公司', supplier: '福建省云康贸易有限公司', category: '低值耗材', status: 'enabled', time: '2026-01-22' },
-            { id: '04715635440003', name: '可吸收合成医用缝合线', spec: '3/0/SXMD2B406', model: '', unit: '根', price: 371, regNo: '国械注许20163040413', manufacturer: '中央医疗器材股份有限公司', supplier: '福建省云康贸易有限公司', category: '低值耗材', status: 'enabled', time: '2026-01-22' },
-            { id: '04715635440041', name: '可吸收合成医用缝合线', spec: '1#', model: '', unit: '根', price: 371, regNo: '国械注许20163040413', manufacturer: '中央医疗器材股份有限公司', supplier: '福建省云康贸易有限公司', category: '低值耗材', status: 'disabled', time: '2026-01-22' },
-            { id: '04715635440027', name: '硅胶负压引流球', spec: '200ml', model: '', unit: '只', price: 28, regNo: '国械注许20163040413', manufacturer: '中央医疗器材股份有限公司', supplier: '福建省云康贸易有限公司', category: '低值耗材', status: 'pending', time: '2026-01-22' },
-            { id: '04715635440119', name: '海藻生物胶', spec: '30ml', model: '', unit: '袋', price: 338, regNo: '国械注许20163040413', manufacturer: '中央医疗器材股份有限公司', supplier: '福建省云康贸易有限公司', category: '低值耗材', status: 'enabled', time: '2026-01-22' },
-            { id: '04715635440720', name: '医用粘合剂', spec: '0.35ml', model: '', unit: '支', price: 682, regNo: '国械注许20163040413', manufacturer: '中央医疗器材股份有限公司', supplier: '福建省云康贸易有限公司', category: '高值耗材', status: 'enabled', time: '2026-01-22' },
-        ];
-        
-        let filteredProducts = [...productList];
-
-        function getStatusBadge(status) { /* ... 省略，与之前相同 ... */ }
-        function renderProductTable() { /* ... 省略，与之前相同 ... */ }
-        function renderProductSelectionTable() { /* ... 省略，与之前相同 ... */ }
-        function batchEnableProducts() { /* ... 省略，与之前相同 ... */ }
-        function batchDisableProducts() { /* ... 省略，与之前相同 ... */ }
-        function deleteProduct(index) { /* ... 省略，与之前相同 ... */ }
-
-        // ====================== 套包维护 (v3.4.0 核心改进) ======================
-        let packageList = [
-            {code:'PKG20260501001',name:'骨科基础手术包',type:1,typeText:'可收费套餐包', dept:'北峰关节科', disease:'PFNA', time:'2026-05-01 10:20', details: []},
-            {code:'PKG20260501002',name:'护理常规耗材包',type:2,typeText:'不可收费套餐包', dept:'北峰上肢科', disease:'桡尺骨/桡骨远端骨折', time:'2026-05-01 11:10', details: []},
-            {
-                code: 'PKG20260513001',
-                name: '锁骨闭合克氏针\\TEN套餐包',
-                type: 1,
-                typeText: '可收费套餐包',
-                dept: '北峰上肢科',
-                disease: '锁骨闭合克氏针\\TEN套餐包',
-                time: '2026-05-13 10:00',
-                details: [
-                    { productId: '04715635440119', name: '海藻生物胶', spec: '30ml', unit: '袋', quantity: 1, price: 338.00, amount: 338.00 },
-                    { productId: '04715635440010', name: '可吸收合成医用缝合线·1线1针', spec: '1#', unit: '根', quantity: 2, price: 44.85, amount: 89.70 },
-                ]
-            }
-        ];
-        
-        let currentEditingPackageIndex = -1; // -1 表示新增模式
-        let currentPackageDetails = [];
-
-        function calculatePackageTotal() {
-            let total = 0;
-            document.querySelectorAll('#packageDetailsTableBody tr').forEach(row => {
-                const qty = parseFloat(row.querySelector('.detail-qty').value) || 0;
-                const price = parseFloat(row.querySelector('.detail-price').value) || 0;
-                row.querySelector('.detail-amount').innerText = `¥ ${(qty * price).toFixed(2)}`;
-                total += qty * price;
-            });
-            document.getElementById('packageTotalAmount').innerText = `¥ ${total.toFixed(2)}`;
-            return total;
-        }
-
-        function renderPackageDetailsTable(details) {
-            const tb = document.getElementById('packageDetailsTableBody');
-            tb.innerHTML = details.map((item, index) => `
-                <tr class="border-b table-row-hover">
-                    <td class="px-2 py-2">${item.name}</td>
-                    <td class="px-2 py-2">${item.spec}</td>
-                    <td class="px-2 py-2">${item.unit}</td>
-                    <td class="px-2 py-2"><input type="number" value="${item.quantity}" class="detail-qty w-16 input-field p-1" onchange="calculatePackageTotal()"></td>
-                    <td class="px-2 py-2"><input type="number" value="${item.price}" class="detail-price w-20 input-field p-1" onchange="calculatePackageTotal()"></td>
-                    <td class="px-2 py-2 detail-amount">¥ ${(item.quantity * item.price).toFixed(2)}</td>
-                    <td class="px-2 py-2"><button onclick="removePackageDetail(${index})" class="text-danger text-xs"><i class="fa fa-trash"></i> 删除</button></td>
-                </tr>
-            `).join('');
-            calculatePackageTotal();
-        }
-        
-        function removePackageDetail(index) {
-            currentPackageDetails.splice(index, 1);
-            renderPackageDetailsTable(currentPackageDetails);
-        }
-
-        function openSelectProductModal() {
-            filteredProducts = [...productList];
-            renderProductSelectionTable();
-            document.getElementById('selectProductModal').classList.remove('hidden');
-        }
-        function closeSelectProductModal() { document.getElementById('selectProductModal').classList.add('hidden'); }
-        
-        function confirmAddProductToPackage() {
-            const selectedRadio = document.querySelector('input[name="productSelect"]:checked');
-            if (!selectedRadio) { showToast('请选择一个产品', false); return; }
-            const product = filteredProducts[selectedRadio.value];
-            currentPackageDetails.push({
-                productId: product.id,
-                name: product.name,
-                spec: product.spec,
-                unit: product.unit,
-                quantity: 1,
-                price: product.price,
-                amount: product.price
-            });
-            renderPackageDetailsTable(currentPackageDetails);
-            closeSelectProductModal();
-        }
-
-        document.getElementById('addProductToPackageBtn').onclick = openSelectProductModal;
-
-        function renderPackageTable() {
-            const tb = document.getElementById('packageTableBody');
-            document.getElementById('packageCount').innerText = packageList.length;
-            tb.innerHTML = packageList.map((item, index) => {
-                let typeBadge = item.type === 1 ? 'badge-success' : 'badge-info';
-                const totalAmount = item.details ? item.details.reduce((sum, d) => sum + (d.price * d.quantity), 0) : 0;
-                return `
-                <tr class="border-b table-row-hover">
-                    <td class="px-3 py-4"><input type="radio" name="packageSelect" value="${index}" class="package-radio"></td>
-                    <td class="px-3 py-4 font-mono text-sm">${item.code}</td>
-                    <td class="px-3 py-4 font-medium">${item.name}</td>
-                    <td class="px-3 py-4"><span class="badge ${typeBadge}">${item.typeText}</span></td>
-                    <td class="px-3 py-4">${item.dept}</td>
-                    <td class="px-3 py-4">${item.disease}</td>
-                    <td class="px-3 py-4 font-semibold text-primary">¥ ${totalAmount.toFixed(2)}</td>
-                    <td class="px-3 py-4 text-gray-500">${item.time}</td>
-                    <td class="px-3 py-4">
-                        <button class="text-primary mr-3 hover:underline" onclick="editPackage(${index})">编辑</button>
-                        <button onclick="delPackage(${index})" class="text-danger hover:underline">删除</button>
-                    </td>
-                </tr>`;
-            }).join('');
-        }
-        
-        function loadPackageFormOptions() {
-            const deptSelect = document.getElementById('packageDept');
-            const diseaseSelect = document.getElementById('packageDisease');
-            deptSelect.innerHTML = '<option value="">请选择专科</option>' + deptList.map(d => `<option value="${d.name}">${d.name}</option>`).join('');
-            diseaseSelect.innerHTML = '<option value="">请选择病种</option>' + diseaseList.map(d => `<option value="${d.name}">${d.name}</option>`).join('');
-        }
-
-        function editPackage(index) {
-            currentEditingPackageIndex = index;
-            const pkg = packageList[index];
-            
-            document.getElementById('modalTitle').innerText = '编辑耗材套餐包';
-            document.getElementById('packageName').value = pkg.name;
-            document.getElementById('packageType').value = pkg.type;
-            document.getElementById('packageCode').value = pkg.code;
-            
-            loadPackageFormOptions();
-            document.getElementById('packageDept').value = pkg.dept;
-            document.getElementById('packageDisease').value = pkg.disease;
-            
-            currentPackageDetails = JSON.parse(JSON.stringify(pkg.details || []));
-            renderPackageDetailsTable(currentPackageDetails);
-            
-            document.getElementById('packageModal').classList.remove('hidden');
-        }
-
-        document.getElementById('addNewPackageBtn').onclick = function(){
-            currentEditingPackageIndex = -1;
-            document.getElementById('modalTitle').innerText = '新增耗材套餐包';
-            document.getElementById('packageName').value = '';
-            document.getElementById('packageType').value = '1';
-            document.getElementById('packageCode').value = '';
-            currentPackageDetails = [];
-            renderPackageDetailsTable(currentPackageDetails);
-            loadPackageFormOptions();
-            document.getElementById('packageModal').classList.remove('hidden');
-        };
-
-        function closePackageModal(){ document.getElementById('packageModal').classList.add('hidden'); }
-        function genPackageCode(){
-            let now = new Date();
-            let code = `PKG${now.getFullYear()}${String(now.getMonth()+1).padStart(2,'0')}${String(now.getDate()).padStart(2,'0')}${Math.floor(Math.random()*1000).toString().padStart(3,'0')}`;
-            document.getElementById('packageCode').value = code;
-            showToast('套包编码已自动生成');
-        }
-        function savePackageInfo(){
-            let name = document.getElementById('packageName').value.trim();
-            let type = document.getElementById('packageType').value;
-            let code = document.getElementById('packageCode').value;
-            let dept = document.getElementById('packageDept').value; 
-            let disease = document.getElementById('packageDisease').value;
-
-            if(!name || !code || !dept || !disease){ showToast('请填写完整信息', false); return; }
-            if(currentPackageDetails.length === 0) { showToast('请至少添加一个耗材明细', false); return; }
-
-            const packageData = {
-                code, name, type: parseInt(type), typeText: type==='1'?'可收费套餐包':'不可收费套餐包',
-                dept, disease, time: new Date().toLocaleString().replace(/\//g,'-'),
-                details: JSON.parse(JSON.stringify(currentPackageDetails))
-            };
-            
-            if (currentEditingPackageIndex > -1) {
-                packageData.time = packageList[currentEditingPackageIndex].time; // 保留原始创建时间
-                packageList[currentEditingPackageIndex] = packageData;
-                showToast('套餐包更新成功');
-            } else {
-                packageList.push(packageData);
-                showToast('套餐包保存成功');
-            }
-            
-            renderPackageTable();
-            closePackageModal();
-        }
-        function delPackage(idx){ if(confirm('确定删除该套餐包？')){ packageList.splice(idx,1); renderPackageTable(); } }
-        function refreshPackageList(){ renderPackageTable(); showToast('列表已刷新'); }
-
-        // ====================== 打印功能 ======================
-        function printPackageLabel() { /* ... 省略，与之前相同 ... */ }
-        function printChargeBill() { /* ... 省略，与之前相同 ... */ }
-
-        // ====================== 初始化 ======================
-        document.getElementById('savePackageBtn').onclick = savePackageInfo;
-        document.getElementById('addNewDeptBtn').onclick = () => { const name = prompt('请输入专科名称'); if(name) { deptList.push({id:Date.now(), name, time: new Date().toLocaleString()}); renderDeptTable(); } };
-        document.getElementById('addNewDiseaseBtn').onclick = () => { const name = prompt('请输入病种名称'); if(name) { diseaseList.push({id:Date.now(), name, time: new Date().toLocaleString()}); renderDiseaseTable(); } };
-        
-        // 重复的函数定义在这里统一实现一次
-        function getStatusBadge(status) {
-            if (status === 'enabled') return '<span class="badge badge-success">启用</span>';
-            if (status === 'disabled') return '<span class="badge badge-danger">关闭</span>';
-            return '<span class="badge badge-gray">待启用</span>';
-        }
-        function renderDeptTable() {
-            const tb = document.getElementById('deptTableBody');
-            document.getElementById('deptCount').innerText = deptList.length;
-            tb.innerHTML = deptList.map((item, idx) => `<tr class="border-b table-row-hover"><td class="px-3 py-3">${idx + 1}</td><td class="px-3 py-3 font-medium">${item.name}</td><td class="px-3 py-3 text-gray-500">${item.time}</td><td class="px-3 py-3"><button class="text-primary mr-3 hover:underline">编辑</button><button onclick="delDept(${item.id})" class="text-danger hover:underline">删除</button></td></tr>`).join('');
-        }
-        function renderDiseaseTable() {
-            const tb = document.getElementById('diseaseTableBody');
-            document.getElementById('diseaseCount').innerText = diseaseList.length;
-            tb.innerHTML = diseaseList.map((item, idx) => `<tr class="border-b table-row-hover"><td class="px-3 py-3">${idx + 1}</td><td class="px-3 py-3 font-medium">${item.name}</td><td class="px-3 py-3 text-gray-500">${item.time}</td><td class="px-3 py-3"><button class="text-primary mr-3 hover:underline">编辑</button><button onclick="delDisease(${item.id})" class="text-danger hover:underline">删除</button></td></tr>`).join('');
-        }
-        function renderProductTable() {
-            const tb = document.getElementById('productTableBody');
-            document.getElementById('productCount').innerText = productList.length;
-            tb.innerHTML = productList.map((item, index) => `<tr class="border-b table-row-hover"><td class="px-3 py-3"><input type="checkbox" class="product-checkbox" data-index="${index}"></td><td class="px-3 py-3 font-mono text-sm">${item.id}</td><td class="px-3 py-3 font-medium">${item.name}</td><td class="px-3 py-3">${item.spec}</td><td class="px-3 py-3">${item.model}</td><td class="px-3 py-3">${item.unit}</td><td class="px-3 py-3">¥ ${item.price.toFixed(2)}</td><td class="px-3 py-3 text-xs">${item.regNo}</td><td class="px-3 py-3">${item.manufacturer}</td><td class="px-3 py-3">${item.supplier}</td><td class="px-3 py-3">${item.category}</td><td class="px-3 py-3">${getStatusBadge(item.status)}</td><td class="px-3 py-3"><button class="text-primary mr-3 hover:underline">编辑</button><button onclick="deleteProduct(${index})" class="text-danger hover:underline">删除</button></td></tr>`).join('');
-        }
-        function renderProductSelectionTable() {
-            const keyword = document.getElementById('productSearchInput').value.toLowerCase();
-            filteredProducts = productList.filter(p => p.name.toLowerCase().includes(keyword) || p.id.toLowerCase().includes(keyword));
-            const tb = document.getElementById('productSelectionTableBody');
-            tb.innerHTML = filteredProducts.map((item, index) => `<tr class="border-b table-row-hover"><td class="px-3 py-2"><input type="radio" name="productSelect" value="${index}"></td><td class="px-3 py-2 font-mono text-xs">${item.id}</td><td class="px-3 py-2">${item.name}</td><td class="px-3 py-2">${item.spec}</td><td class="px-3 py-2">¥ ${item.price.toFixed(2)}</td></tr>`).join('');
-        }
-        function batchEnableProducts() { const cbs=document.querySelectorAll('.product-checkbox:checked');if(!cbs.length){showToast('请选择',false);return;}cbs.forEach(cb=>productList[cb.dataset.index].status='enabled');renderProductTable();showToast('启用成功'); }
-        function batchDisableProducts() { const cbs=document.querySelectorAll('.product-checkbox:checked');if(!cbs.length){showToast('请选择',false);return;}cbs.forEach(cb=>productList[cb.dataset.index].status='disabled');renderProductTable();showToast('停用成功'); }
-        function deleteProduct(index) { if(confirm('确定删除该产品？')) { productList.splice(index, 1); renderProductTable(); } }
-        function printPackageLabel() {
-            const sr = document.querySelector('input[name="packageSelect"]:checked'); if (!sr) { showToast('请选择套包', false); return; }
-            const pkg = packageList[parseInt(sr.value)]; const pw = window.open('', '_blank');
-            QRCode.toDataURL(pkg.code, { width: 300, margin: 1 }).then(url => { pw.document.write(`<!DOCTYPE html><html><head><title>套包标签</title><style>body{text-align:center;padding-top:20px;}.qr-image{width:220px;height:220px;}</style></head><body><div style="border:1px solid #ddd;padding:20px;display:inline-block;"><div style="font-size:18px;font-weight:bold;">${pkg.name}</div><div style="font-size:12px;color:#666;margin-bottom:15px;">${pkg.code}</div><img src="${url}" class="qr-image"></div></body></html>`); pw.document.close(); setTimeout(() => pw.print(), 200); });
-        }
-        function printChargeBill() {
-            const sr = document.querySelector('input[name="packageSelect"]:checked'); if (!sr) { showToast('请选择套包', false); return; }
-            const pkg = packageList[parseInt(sr.value)]; const total = pkg.details ? pkg.details.reduce((s, d) => s + (d.price * d.quantity), 0).toFixed(2) : '0.00';
-            let html = `<div class="p-4 border rounded bg-white"><h2 class="text-xl font-bold mb-2 text-center">收费单 - ${pkg.name}</h2><hr class="mb-4">`;
-            if(pkg.details) { html += `<table class="w-full border text-sm"><thead class="bg-gray-50"><tr><th class="border px-2 py-1">项目名称</th><th class="border px-2 py-1">规格</th><th class="border px-2 py-1">单价</th><th class="border px-2 py-1">数量</th><th class="border px-2 py-1">金额</th></tr></thead><tbody>`; pkg.details.forEach(d => { html += `<tr><td class="border px-2 py-1">${d.name}</td><td class="border px-2 py-1">${d.spec}</td><td class="border px-2 py-1">${d.price.toFixed(2)}</td><td class="border px-2 py-1">${d.quantity}</td><td class="border px-2 py-1">${(d.price * d.quantity).toFixed(2)}</td></tr>`; }); html += `</tbody></table>`; }
-            html += `<div class="text-right mt-4 font-bold text-lg">合计金额：¥ ${total}</div></div>`;
-            const pw = window.open('', '_blank'); pw.document.write(`<html><head><title>打印收费单</title></head><body>${html}</body></html>`); pw.document.close(); setTimeout(() => pw.print(), 100);
-        }
-
-        renderDeptTable();
-        renderDiseaseTable();
-        renderProductTable();
-        renderPackageTable();
-        switchPage('packageMaintain');
-    </script>
+/* ===== 提交 ===== */
+function submitForm(){
+  toast('上报成功，事件编号 CSSD-AE-2026-043 已入台账');
+  setTimeout(function(){ show('ledger'); },900);
+}
+function toast(msg){
+  var t=document.getElementById('toast');
+  t.textContent=msg; t.classList.add('show');
+  clearTimeout(window._tt); window._tt=setTimeout(function(){t.classList.remove('show')},2200);
+}
+</script>
 </body>
 </html>
