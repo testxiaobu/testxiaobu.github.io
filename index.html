@@ -1,9 +1,11 @@
 <!DOCTYPE html>
-<html lang="zh-CN" data-page-node-id="DXx7tGEIzKGz3WixRycOaT">
-<head data-page-node-id="dziLsXEk4poufEuUmehFjD">
-<meta charset="UTF-8" data-page-node-id="Zwio2ak6z2OGA4xoCaptA9">
-<meta name="viewport" content="width=device-width, initial-scale=1.0" data-page-node-id="RCYzFI85f1ZIdjr37PuQVx">
-<title>CSSD 不良事件管理台账 — 泉州市正骨医院</title>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="format-detection" content="telephone=no">
+<meta name="theme-color" content="#1657b0">
+<title>质量监控管理 · CSSD不良事件管理台账 — 泉州市正骨医院</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -19,7 +21,7 @@ body{font-family:"Microsoft YaHei","PingFang SC","Hiragino Sans GB",sans-serif;b
 .titlebar{height:48px;flex-shrink:0;display:flex;align-items:center;
   background:linear-gradient(90deg,#12509f 0%,#1a6ac8 45%,#2a86e8 100%);
   color:#fff;box-shadow:0 1px 6px rgba(10,50,110,.28);z-index:40;position:relative}
-.brand{width:168px;flex-shrink:0;display:flex;align-items:center;gap:8px;padding-left:14px}
+.brand{width:176px;flex-shrink:0;display:flex;align-items:center;gap:8px;padding-left:14px}
 .brand-logo{width:24px;height:24px;border-radius:50%;background:rgba(255,255,255,.16);
   display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,.35)}
 .brand-name{font-size:13px;letter-spacing:.5px;opacity:.95}
@@ -33,15 +35,14 @@ body{font-family:"Microsoft YaHei","PingFang SC","Hiragino Sans GB",sans-serif;b
 .body{flex:1;display:flex;min-height:0}
 
 /* 左侧导航 */
-.sidebar{width:168px;flex-shrink:0;background:#fff;border-right:1px solid var(--line);
+.sidebar{width:176px;flex-shrink:0;background:#fff;border-right:1px solid var(--line);
   display:flex;flex-direction:column;overflow-y:auto;overflow-x:hidden}
 .sidebar::-webkit-scrollbar{width:5px}
 .sidebar::-webkit-scrollbar-thumb{background:#d5dbe5;border-radius:3px}
 .tab-strip{display:flex;background:#f4f6fa;border-bottom:1px solid var(--line);height:34px;flex-shrink:0}
 .tab-strip .stab{flex:1;display:flex;align-items:center;justify-content:center;gap:5px;font-size:12px;
   color:var(--sub);position:relative;cursor:default}
-.tab-strip .stab.active{background:#fff;color:var(--blue);font-weight:600;
-  box-shadow:inset 0 -2px 0 var(--blue)}
+.tab-strip .stab.active{background:#fff;color:var(--blue);font-weight:600;box-shadow:inset 0 -2px 0 var(--blue)}
 .tab-strip .stab .x{color:#b9c1cd;font-size:11px}
 nav{padding:8px 0 20px}
 .menu-item{display:flex;align-items:center;gap:9px;height:38px;padding:0 12px;color:#4a5468;
@@ -56,7 +57,7 @@ nav{padding:8px 0 20px}
 .caret{margin-left:auto;font-size:9px;color:#a9b3c2;transition:transform .2s}
 .menu-item.open .caret{transform:rotate(90deg)}
 .sub{overflow:hidden;max-height:0;transition:max-height .25s ease}
-.menu-item.open + .sub{max-height:260px}
+.menu-item.open + .sub{max-height:300px}
 .sub-item{display:flex;align-items:center;height:32px;padding-left:40px;font-size:12.5px;
   color:#6b7688;cursor:pointer;position:relative}
 .sub-item::before{content:"";position:absolute;left:29px;top:50%;width:4px;height:4px;border-radius:50%;
@@ -114,7 +115,6 @@ nav{padding:8px 0 20px}
 .panel-hd h3{font-size:14px;font-weight:600;color:#26303f;display:flex;align-items:center;gap:8px}
 .panel-hd h3::before{content:"";width:3px;height:14px;border-radius:2px;background:var(--blue)}
 .panel-hd .hd-tip{font-size:11.5px;color:var(--muted);margin-left:6px;font-weight:400}
-.panel-hd .right{margin-left:auto;display:flex;gap:8px;align-items:center}
 .panel-bd{padding:14px}
 
 /* 统计条 */
@@ -133,7 +133,7 @@ nav{padding:8px 0 20px}
 .toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:11px 14px;
   border-bottom:1px solid var(--line);background:#fbfcfe;border-radius:10px 10px 0 0}
 .field{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--sub)}
-select,input[type=text],input[type=date],input[type=datetime-local],textarea{
+select,input[type=text],input[type=date],input[type=time],textarea{
   font-family:inherit;font-size:12.5px;color:var(--text);background:#fff;border:1px solid #d8dee8;
   border-radius:6px;padding:5px 8px;outline:none;transition:.15s}
 select:focus,input:focus,textarea:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(35,121,224,.12)}
@@ -144,12 +144,11 @@ select{cursor:pointer;padding-right:22px}
 .btn-primary:hover{background:#1a6bd0}
 .btn-ghost{background:#fff;border-color:#d8dee8;color:#4a5468}
 .btn-ghost:hover{border-color:var(--blue);color:var(--blue)}
-.btn-danger{background:#fff;border-color:#f2c4c0;color:var(--red)}
-.btn-danger:hover{background:#fdf3f2}
 
 /* ============ 表格 ============ */
 .table-wrap{overflow-x:auto;border-radius:0 0 10px 10px}
-table{width:100%;border-collapse:collapse;font-size:12.5px;min-width:1500px}
+table{width:100%;border-collapse:collapse;font-size:12.5px;min-width:1720px}
+#dictTable{min-width:1080px}
 thead th{background:#f4f7fb;color:#4a5468;font-weight:600;text-align:left;
   padding:10px 11px;border-bottom:1px solid var(--line);white-space:nowrap;position:sticky;top:0;z-index:2}
 tbody td{padding:10px 11px;border-bottom:1px solid #eef1f6;vertical-align:top;line-height:1.55;color:#3b4557}
@@ -158,7 +157,6 @@ tbody tr:last-child td{border-bottom:none}
 .code{font-family:Consolas,"Courier New",monospace;font-size:12px;color:#1657b0;font-weight:600;white-space:nowrap}
 .batch{font-family:Consolas,"Courier New",monospace;font-size:12px;color:#2b3445}
 .mr{font-family:Consolas,"Courier New",monospace;font-size:12px;color:#5b6577}
-.cell-strong{font-weight:600;color:#26303f}
 .muted{color:#9aa4b4}
 .tag{display:inline-block;padding:1px 7px;border-radius:9px;font-size:11px;line-height:17px;
   white-space:nowrap;border:1px solid transparent}
@@ -169,8 +167,11 @@ tbody tr:last-child td{border-bottom:none}
 .t-purple{background:#f1edfe;color:#6242d8;border-color:#ded4fb}
 .t-grey{background:#f2f5f9;color:#6b7688;border-color:#e3e8f0}
 .t-cyan{background:#e6f8fa;color:#0b8fa4;border-color:#c7eef3}
-.measure{font-size:12px;color:#4a5468;max-width:260px}
+.measure{font-size:12px;color:#4a5468;max-width:280px}
 .measure b{color:#26303f}
+.desc{font-size:12px;color:#4a5468;max-width:230px}
+.at{display:inline-flex;align-items:center;gap:3px;font-size:11px;color:#1a6bd0;background:#eaf3ff;
+  border:1px solid #cfe4ff;border-radius:8px;padding:0 6px;line-height:16px;margin-top:4px}
 .empty{padding:40px;text-align:center;color:var(--muted);font-size:13px}
 
 /* ============ 表单 ============ */
@@ -188,13 +189,35 @@ tbody tr:last-child td{border-bottom:none}
 .fm label .unit{color:#a9b3c2;font-weight:400;font-size:11px}
 .fm input,.fm select,.fm textarea{width:100%}
 .fm textarea{resize:vertical;min-height:56px;line-height:1.6}
-.chk-group{display:flex;flex-wrap:wrap;gap:8px 16px;padding-top:2px}
-.chk{display:flex;align-items:center;gap:6px;font-size:12.5px;color:#4a5468;cursor:pointer}
-.chk input{width:14px;height:14px;accent-color:var(--blue);cursor:pointer}
+.ro{background:#f7f9fc!important;color:#7a8598!important}
+.err{border-color:var(--red)!important;box-shadow:0 0 0 3px rgba(232,69,60,.14)!important}
 .hintline{font-size:11.5px;color:#a0aabb;margin-top:5px}
+.cas{background:#f4f9ff;border:1px solid #d6e8ff;border-radius:7px;padding:7px 10px;
+  font-size:11.5px;color:#1a6bd0;line-height:1.6;display:none;margin-top:6px}
+.cas b{color:#1657b0}
 .actions{display:flex;gap:10px;justify-content:flex-end;padding:4px 0 20px}
 
-/* ============ 指标看板 ============ */
+/* 图片上传 */
+.upload{margin-top:8px;border:1px dashed #ccd6e4;border-radius:8px;padding:10px 12px;background:#fbfcfe}
+.ubtns{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.thumbs{display:flex;flex-wrap:wrap;gap:8px;margin-top:9px}
+.thumbs:empty{display:none}
+.thumb{position:relative;width:74px;height:74px;border-radius:7px;overflow:hidden;border:1px solid var(--line);background:#fff}
+.thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.thumb .rm{position:absolute;right:2px;top:2px;width:17px;height:17px;border-radius:50%;
+  background:rgba(30,40,55,.72);color:#fff;font-size:12px;line-height:16px;text-align:center;cursor:pointer}
+
+/* ============ 指标字典 ============ */
+.legend{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.legend span{font-size:11.5px;background:#fff;border:1px solid var(--line);border-radius:14px;
+  padding:3px 10px;color:#5b6577}
+.legend span b{color:var(--blue)}
+.notes{margin-top:12px}
+.note-item{background:#fffaf0;border:1px solid #ffe2b8;border-radius:8px;padding:9px 12px;
+  font-size:12px;color:#7a5a12;line-height:1.7;margin-bottom:8px}
+.note-item b{color:#8a5a00}
+
+/* ============ 看板 ============ */
 .bars{display:flex;flex-direction:column;gap:11px;padding:4px 2px}
 .bar-row{display:flex;align-items:center;gap:10px;font-size:12.5px}
 .bar-label{width:150px;flex-shrink:0;color:#4a5468;text-align:right}
@@ -212,317 +235,469 @@ tbody tr:last-child td{border-bottom:none}
 .pdca .step b{display:block;font-size:13px;margin-bottom:6px;color:#26303f}
 .pdca .step p{font-size:11.5px;color:#6b7688;line-height:1.7}
 
-/* toast */
 #toast{position:fixed;right:26px;bottom:26px;background:rgba(32,44,62,.94);color:#fff;
   font-size:13px;padding:11px 18px;border-radius:8px;box-shadow:0 8px 22px rgba(0,0,0,.24);
-  opacity:0;transform:translateY(12px);transition:.28s;pointer-events:none;z-index:99}
+  opacity:0;transform:translateY(12px);transition:.28s;pointer-events:none;z-index:99;max-width:80vw}
 #toast.show{opacity:1;transform:none}
 
+/* ============ 响应式：BS端 / 平板 / 移动端 ============ */
+.hamburger{display:none}
+.nav-mask{display:none}
+.bottombar{display:none}
+
+@media (max-width:1180px){
+  .card-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .stat-row{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .fgrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .fgrid .sp3{grid-column:span 2}
+}
+
+@media (max-width:1023px){
+  .brand{width:auto;padding-left:6px}
+  .brand-name{display:none}
+  .win-btns{display:none}
+  .uinfo{display:none}
+  .title-center{font-size:14px;letter-spacing:.3px}
+  .hamburger{display:flex;width:34px;height:34px;flex-shrink:0;align-items:center;justify-content:center;
+    background:transparent;border:none;cursor:pointer;-webkit-tap-highlight-color:transparent}
+  .sidebar{position:fixed;left:0;top:48px;bottom:0;width:240px;z-index:60;
+    transform:translateX(-100%);transition:transform .26s cubic-bezier(.4,0,.2,1);
+    box-shadow:6px 0 24px rgba(18,44,92,.18)}
+  .sidebar.open{transform:none}
+  .nav-mask.show{display:block;position:fixed;left:0;right:0;top:48px;bottom:0;
+    background:rgba(18,40,80,.38);z-index:50}
+  .menu-item{height:44px;font-size:14px}
+  .sub-item{height:38px;font-size:13px;padding-left:44px}
+  .tab-strip{height:38px}
+  .two-col{grid-template-columns:1fr}
+  .fgrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .fgrid .sp3{grid-column:span 2}
+}
+
+@media (max-width:720px){
+  .titlebar{height:46px}
+  .sidebar{top:46px;width:78vw;max-width:300px}
+  .nav-mask.show{top:46px}
+  .title-center{font-size:13px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  #clock{font-size:11px}
+  .tabs{height:32px;padding-left:6px}
+  .tab{height:28px;font-size:12px;padding:0 12px}
+  .scroll{padding:12px 12px calc(76px + env(safe-area-inset-bottom))}
+
+  .card-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .fcard{height:106px;border-radius:11px;gap:6px}
+  .fcard .cn{font-size:15px;letter-spacing:1px}
+  .fcard .cd{font-size:10.5px}
+  .fcard .gic svg{width:24px;height:24px}
+
+  .stat-row{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .stat{padding:11px 12px;gap:9px}
+  .stat .sico{width:32px;height:32px}
+  .stat .sico svg{width:15px;height:15px}
+  .stat .sv{font-size:18px}
+  .stat .sd{display:none}
+
+  .panel-hd{height:auto;min-height:42px;padding:8px 12px;flex-wrap:wrap}
+  .panel-hd h3{font-size:13px}
+  .panel-hd .hd-tip{margin-left:0;width:100%;margin-top:3px}
+  .toolbar{padding:10px 12px;gap:8px}
+  .toolbar .field{width:100%}
+  .toolbar .field label{flex:0 0 60px}
+  .toolbar .field select,.toolbar .field input{flex:1;min-width:0}
+  .toolbar .right{margin-left:0!important;width:100%;display:flex;gap:8px}
+  .toolbar .right .btn{flex:1;justify-content:center;height:36px;padding:0 8px;font-size:12px}
+  .btn{height:36px}
+
+  .fgrid{grid-template-columns:1fr;gap:12px}
+  .fgrid .sp2,.fgrid .sp3{grid-column:span 1}
+  .form-sec>h4{flex-wrap:wrap}
+  .form-sec>h4 .hint{margin-left:0;width:100%;margin-top:3px}
+  .fm input,.fm select,.fm textarea{font-size:13px;padding:8px 10px}
+  .actions{gap:8px}
+  .actions .btn{flex:1;justify-content:center;height:38px}
+  .upload{padding:10px}
+  .ubtns .btn{flex:1;justify-content:center}
+  .thumb{width:64px;height:64px}
+
+  /* 表格 → 卡片列表 */
+  .table-wrap{overflow:visible;border-radius:0}
+  .cardable{min-width:0}
+  .cardable thead{display:none}
+  .cardable tbody,.cardable tbody tr,.cardable tbody td{display:block;width:100%}
+  .cardable tbody tr{position:relative;margin-bottom:10px;padding:32px 12px 10px;background:#fff;
+    border:1px solid var(--line);border-radius:10px;box-shadow:0 1px 3px rgba(30,50,90,.05)}
+  .cardable tbody tr:hover{background:#fff}
+  .cardable tbody td{border-bottom:none;padding:5px 0;display:flex;gap:10px;font-size:12.5px}
+  .cardable tbody td::before{content:attr(data-label);flex:0 0 76px;color:#8a94a6;font-size:11.5px;line-height:1.7}
+  .cardable tbody td:first-child{position:absolute;top:8px;left:12px;width:20px;height:20px;padding:0;
+    border-radius:50%;background:var(--blue);color:#fff;font-size:11px;font-weight:700;
+    align-items:center;justify-content:center}
+  .cardable tbody td:first-child::before{display:none}
+  #ledgerTable tbody td:nth-child(2){position:absolute;top:9px;left:40px;width:auto;font-size:12.5px}
+  #ledgerTable tbody td:nth-child(2)::before{display:none}
+  #ledgerTable tbody td:nth-child(9),#ledgerTable tbody td:nth-child(13){display:none}
+  #ledgerTable tbody td:nth-child(14),#ledgerTable tbody td:nth-child(16),
+  #ledgerTable tbody td:nth-child(17){display:block;margin-top:5px;padding-top:7px;border-top:1px dashed #eef1f6}
+  #ledgerTable tbody td:nth-child(14)::before,#ledgerTable tbody td:nth-child(16)::before,
+  #ledgerTable tbody td:nth-child(17)::before{display:block;margin-bottom:3px}
+  .measure,.desc{max-width:none}
+  #dictTable tbody td:nth-child(2){display:none}
+  #dictTable tbody td:nth-child(6){display:block;margin-top:5px;padding-top:7px;border-top:1px dashed #eef1f6}
+  #dictTable tbody td:nth-child(6)::before{display:block;margin-bottom:3px}
+
+  .bar-label{width:104px;font-size:11.5px}
+  .pdca{flex-direction:column}
+
+  .bottombar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:55;background:#fff;
+    border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom);
+    box-shadow:0 -2px 12px rgba(30,50,90,.07)}
+  .bbtn{flex:1;border:none;background:none;height:54px;display:flex;flex-direction:column;
+    align-items:center;justify-content:center;gap:3px;font-size:11px;color:#6b7688;
+    cursor:pointer;font-family:inherit;-webkit-tap-highlight-color:transparent}
+  .bbtn svg{width:19px;height:19px;fill:#9aa4b4}
+  .bbtn.active{color:var(--blue)}
+  .bbtn.active svg{fill:var(--blue)}
+}
+
+@media (max-width:380px){
+  .card-grid{grid-template-columns:1fr}
+  .stat-row{grid-template-columns:1fr}
+  .fcard{height:96px}
+}
+
 @media print{
-  .titlebar,.sidebar,.tabs,.toolbar,.actions,.panel-hd .right,#toast{display:none!important}
+  .titlebar,.sidebar,.tabs,.toolbar,.actions,.panel-hd .right,#toast,.bottombar,.nav-mask,.hamburger{display:none!important}
   body,.scroll{background:#fff!important;overflow:visible!important;height:auto!important}
   .panel{border:none;box-shadow:none;margin:0}
   .table-wrap{overflow:visible}
-  table{min-width:0;font-size:10px}
+  .cardable{min-width:0;font-size:10px}
   thead th{background:#eee!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
   .tag{-webkit-print-color-adjust:exact;print-color-adjust:exact}
 }
-@media (max-width:1100px){
-  .card-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .fgrid{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .stat-row{grid-template-columns:repeat(2,minmax(0,1fr))}
-}
 </style>
 </head>
-<body data-page-node-id="Omn0l2OpXwHins2tgcM6pB">
-<div class="app" data-page-node-id="qbUuegHisHNez9m5rF4jLM">
+<body>
+<div class="app">
 
-  <!-- ================= 顶栏 ================= -->
-  <header class="titlebar" data-page-node-id="6OCp7tVK1GOMOu4qOJ4JVi">
-    <div class="brand" data-page-node-id="ra7XFWRw1kRPQSnNBs8Emv">
-      <span class="brand-logo" data-page-node-id="mjX4ksrFVG2rEAVJbg6Reb">
-        <svg viewBox="0 0 24 24" width="13" height="13" fill="#fff" data-page-node-id="rySi1CEvJXC0FAasICUwgM"><path d="M12 2 3 5v6c0 5 3.8 9.7 9 11 5.2-1.3 9-6 9-11V5l-9-3zm-1 13-3-3 1.4-1.4L11 12.2l4.6-4.6L17 9l-6 6z" data-page-node-id="RnirtX4JkUbGcJXnJQuT4e"/></svg>
+  <header class="titlebar">
+    <button class="hamburger" id="btnMenu" aria-label="打开菜单">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="#fff"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </button>
+    <div class="brand">
+      <span class="brand-logo">
+        <svg viewBox="0 0 24 24" width="13" height="13" fill="#fff"><path d="M12 2 3 5v6c0 5 3.8 9.7 9 11 5.2-1.3 9-6 9-11V5l-9-3zm-1 13-3-3 1.4-1.4L11 12.2l4.6-4.6L17 9l-6 6z"/></svg>
       </span>
-      <span class="brand-name" data-page-node-id="IYzWP6iWuvU2sc2hNqPv49">CSSD 消毒供应中心</span>
+      <span class="brand-name">CSSD 消毒供应中心</span>
     </div>
-    <div class="title-center" data-page-node-id="pVfcpwtBnzHd5hMuiBw1ZH">泉州市正骨医院CSSD信息管理系统<span class="ver" data-page-node-id="PjcvRHBFcW5jNFGV73BRNn">v2.0.177</span></div>
-    <div class="title-right" data-page-node-id="OB4ikTABNmSkBUPBx5Odpg">
-      <span id="clock" data-page-node-id="KxDHjzcpUQNpcp62Btaf30">2026-09-14 星期一</span>
-      <span data-page-node-id="jkKiIprBKBdcLHyjwE4tAE">质控员 · 管理员</span>
-      <span class="win-btns" data-page-node-id="S3BCijFlfHggD0SPfnaIlb"><span data-page-node-id="5hCcqjLqR5CbfxFRTqfm1m">—</span><span data-page-node-id="YG2WTfEnj3pKBcCfO9Kwar">▢</span><span data-page-node-id="IVy4oQ2SysowpHqLy0fgWA">✕</span></span>
+    <div class="title-center">泉州市正骨医院CSSD信息管理系统<span class="ver">v2.0.177</span></div>
+    <div class="title-right">
+      <span id="clock">2026-09-19 星期六</span>
+      <span class="uinfo">质控员 · 管理员</span>
+      <span class="win-btns"><span>—</span><span>▢</span><span>✕</span></span>
     </div>
   </header>
 
-  <div class="body" data-page-node-id="eGezi7chOf6azPz1plmHl5">
-    <!-- ================= 左侧导航 ================= -->
-    <aside class="sidebar" data-page-node-id="ibceTk9e84NlGx3J3GKy5M">
-      <div class="tab-strip" data-page-node-id="vzS0FDnxz6h5tMETykLkTl">
-        <div class="stab active" data-page-node-id="o2llrY737eVdJCImAdqyp1">质量控制 <span class="x" data-page-node-id="cyvsHHvtMTgTSgKRLEndLc">✕</span></div>
+  <div class="body">
+    <aside class="sidebar" id="sidebar">
+      <div class="tab-strip">
+        <div class="stab active">质量监控管理 <span class="x">✕</span></div>
       </div>
-      <nav data-page-node-id="ZDcbwDggM9ebFoTijWxpa4">
-        <div class="menu-item" data-nav="qc-home" data-page-node-id="1DyfkzPVeLagTr0zUvhHFo">
-          <span class="ico" style="background:linear-gradient(135deg,#4ea6f7,#1f6fd6)" data-page-node-id="g4ebcO3FcGIyX0OL4tAvzU">
-            <svg viewBox="0 0 24 24" data-page-node-id="SpoExNnTgJzk42yBBy97WO"><path d="M12 3 3 10v11h6v-6h6v6h6V10z" data-page-node-id="2xQSbpsgdghakphBCI2iCA"/></svg></span>
+      <nav>
+        <div class="menu-item" data-nav="qc-home">
+          <span class="ico" style="background:linear-gradient(135deg,#4ea6f7,#1f6fd6)">
+            <svg viewBox="0 0 24 24"><path d="M12 3 3 10v11h6v-6h6v6h6V10z"/></svg></span>
           首页
         </div>
 
-        <!-- 新增：质量控制 -->
-        <div class="menu-item open active-parent" data-toggle="1" data-page-node-id="PD92Dm9M53TjM8T3s3a2I5">
-          <span class="ico" style="background:linear-gradient(135deg,#ff7a6b,#e8453c)" data-page-node-id="uRInWpOQA10pGoukXC8a9N">
-            <svg viewBox="0 0 24 24" data-page-node-id="o8KtSxdvUUA45RDHrGCXCH"><path d="M12 2 3 5v6c0 5 3.8 9.7 9 11 5.2-1.3 9-6 9-11V5l-9-3zm-1 13-3-3 1.4-1.4L11 12.2l4.6-4.6L17 9l-6 6z" data-page-node-id="HEj8Q81BPtWbvueV4oz9NN"/></svg></span>
-          质量控制<span class="caret" data-page-node-id="VvzhJT6r6nCGYgzWDFxF7D">▶</span>
+        <div class="menu-item open active-parent" data-toggle="1">
+          <span class="ico" style="background:linear-gradient(135deg,#ff7a6b,#e8453c)">
+            <svg viewBox="0 0 24 24"><path d="M12 2 3 5v6c0 5 3.8 9.7 9 11 5.2-1.3 9-6 9-11V5l-9-3zm-1 13-3-3 1.4-1.4L11 12.2l4.6-4.6L17 9l-6 6z"/></svg></span>
+          质量监控管理<span class="caret">▶</span>
         </div>
-        <div class="sub" data-page-node-id="JG2NwU43at0JDQzOhmscQW">
-          <div class="sub-item active" data-nav="ledger" data-page-node-id="4eyrzV8gU8MaX8Pfi4lFHd">不良事件管理台账<span class="dot-new" data-page-node-id="IuWFqouc0NKC9hSx3oUeOU">新</span></div>
-          <div class="sub-item" data-nav="new" data-page-node-id="pywAB7QUySEHwTDXUY7BAE">不良事件上报登记</div>
-          <div class="sub-item" data-nav="defect" data-page-node-id="xxDWEuNavXnNIPAvtj6lWT">质量缺陷登记</div>
-          <div class="sub-item" data-nav="recall" data-page-node-id="Qdi9XIuHBKI9PJHH05HYBC">召回与追溯管理</div>
-          <div class="sub-item" data-nav="board" data-page-node-id="vn1WhrCwWcw9yB1XPiGwKt">质控指标看板</div>
+        <div class="sub">
+          <div class="sub-item active" data-nav="ledger">不良事件管理台账<span class="dot-new">新</span></div>
+          <div class="sub-item" data-nav="new">不良事件上报登记</div>
+          <div class="sub-item" data-nav="dict">质量监测指标字典</div>
+          <div class="sub-item" data-nav="board">质控指标看板</div>
         </div>
 
-        <div class="menu-item" data-nav="none" data-page-node-id="bFinypDb4rj1eSY4sMfe4X">
-          <span class="ico" style="background:linear-gradient(135deg,#ff8a8a,#e8453c)" data-page-node-id="odATminmW09RjiUgE3vqFu">
-            <svg viewBox="0 0 24 24" data-page-node-id="By7HUX00GIFScTuHGGZeva"><path d="M4 3h13l3 3v15H4zm3 8h10v2H7zm0-4h7v2H7zm0 8h10v2H7z" data-page-node-id="E6BuPsD8qsQrVs2ydWU2zR"/></svg></span>
-          信息录入<span class="caret" data-page-node-id="bNdecC3hCXdgMHyGmcd5w1">▶</span>
+        <div class="menu-item" data-nav="none">
+          <span class="ico" style="background:linear-gradient(135deg,#ff8a8a,#e8453c)">
+            <svg viewBox="0 0 24 24"><path d="M4 3h13l3 3v15H4zm3 8h10v2H7zm0-4h7v2H7zm0 8h10v2H7z"/></svg></span>
+          信息录入<span class="caret">▶</span>
         </div>
-        <div class="menu-item" data-nav="none" data-page-node-id="QEilcGoGvkI2rfMs3mvfcA">
-          <span class="ico" style="background:linear-gradient(135deg,#ffcf5c,#f59f1a)" data-page-node-id="nhh3bWkgL7Gjo4Q55GwlZx">
-            <svg viewBox="0 0 24 24" data-page-node-id="9HHAPaALKnLo9Z7tjnSqqc"><path d="M10 2h4v20h-4zM2 10h20v4H2z" data-page-node-id="zK0SuDIT9DKdF7ow8CJwxB"/></svg></span>
-          业务查询及打印<span class="caret" data-page-node-id="KcHaZP4DUZjSfsuSy35GzI">▶</span>
+        <div class="menu-item" data-nav="none">
+          <span class="ico" style="background:linear-gradient(135deg,#ffcf5c,#f59f1a)">
+            <svg viewBox="0 0 24 24"><path d="M10 2h4v20h-4zM2 10h20v4H2z"/></svg></span>
+          业务查询及打印<span class="caret">▶</span>
         </div>
-        <div class="menu-item" data-nav="none" data-page-node-id="OuWvTWafq2LaC1my0T1zuS">
-          <span class="ico" style="background:linear-gradient(135deg,#ff9d7a,#e8632c)" data-page-node-id="lzNu9iAj6vjXrB0gGPakCy">
-            <svg viewBox="0 0 24 24" data-page-node-id="Cg4U2X2QsSCZEcbCbJxHV5"><path d="M7 2h10v3H7zm-2 5h14v15H5zm3 3v2h8v-2z" data-page-node-id="CYd5uF6IuBheTBxJQIlZ4F"/></svg></span>
+        <div class="menu-item" data-nav="none">
+          <span class="ico" style="background:linear-gradient(135deg,#ff9d7a,#e8632c)">
+            <svg viewBox="0 0 24 24"><path d="M7 2h10v3H7zm-2 5h14v15H5zm3 3v2h8v-2z"/></svg></span>
           手术申请
         </div>
-        <div class="menu-item" data-nav="none" data-page-node-id="LDgfoOC6zcGZGj93Fsnn7X">
-          <span class="ico" style="background:linear-gradient(135deg,#57d69a,#16a86a)" data-page-node-id="WQnTjxOgidl3LR2VGfnWTq">
-            <svg viewBox="0 0 24 24" data-page-node-id="az0qrIqXZiVXb9OHaSpgoD"><path d="M4 20V10h4v10zm6 0V4h4v16zm6 0v-7h4v7z" data-page-node-id="RwOXLJs9k1fNN8zTRG3r0i"/></svg></span>
-          业务统计<span class="caret" data-page-node-id="aG0DOIqHCGg7XYknNjB4EZ">▶</span>
+        <div class="menu-item" data-nav="none">
+          <span class="ico" style="background:linear-gradient(135deg,#57d69a,#16a86a)">
+            <svg viewBox="0 0 24 24"><path d="M4 20V10h4v10zm6 0V4h4v16zm6 0v-7h4v7z"/></svg></span>
+          业务统计<span class="caret">▶</span>
         </div>
-        <div class="menu-item" data-nav="none" data-page-node-id="UnHedrbi5It1jY3j4u2QKf">
-          <span class="ico" style="background:linear-gradient(135deg,#5aa9f0,#1657b0)" data-page-node-id="0vuPva81xsiYXpnScRaBiN">
-            <svg viewBox="0 0 24 24" data-page-node-id="93TKwYAQJIcKrrKeVXD6Vs"><path d="M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8zm9.4 4-2-1.2.3-2.3-2.2-.7-1-2.1-2.3.5L12 2.6l-2.2 1.6-2.3-.5-1 2.1-2.2.7.3 2.3L2.6 12l2 1.2-.3 2.3 2.2.7 1 2.1 2.3-.5L12 21.4l2.2-1.6 2.3.5 1-2.1 2.2-.7-.3-2.3z" data-page-node-id="DbFgbN02ZrfjGAxeNUN1DA"/></svg></span>
-          系统管理<span class="caret" data-page-node-id="7H9H1uKaU9ksd3QtqJg63B">▶</span>
+        <div class="menu-item" data-nav="none">
+          <span class="ico" style="background:linear-gradient(135deg,#5aa9f0,#1657b0)">
+            <svg viewBox="0 0 24 24"><path d="M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8zm9.4 4-2-1.2.3-2.3-2.2-.7-1-2.1-2.3.5L12 2.6l-2.2 1.6-2.3-.5-1 2.1-2.2.7.3 2.3L2.6 12l2 1.2-.3 2.3 2.2.7 1 2.1 2.3-.5L12 21.4l2.2-1.6 2.3.5 1-2.1 2.2-.7-.3-2.3z"/></svg></span>
+          系统管理<span class="caret">▶</span>
         </div>
       </nav>
     </aside>
 
-    <!-- ================= 右侧主区 ================= -->
-    <div class="main" data-page-node-id="52pmbPs07oCiaZ6JKgkIU8">
-      <div class="tabs" id="tabs" data-page-node-id="fPqwD2pt4chtypWc83SAAl">
-        <div class="tab active" data-nav="ledger" data-page-node-id="0HpvzPVrA1veNF1SJ0haUr">不良事件管理台账</div>
-        <div class="tab" data-nav="qc-home" data-page-node-id="T7SApMqTJczaimBOFHZJ3I">质量控制首页</div>
-        <div class="tab" data-nav="new" data-page-node-id="XqJCcfjHuj7crQyDQFN7Wz">不良事件上报登记</div>
-        <div class="tab" data-nav="board" data-page-node-id="wTd6M7WdBMZMmdZ6zzorrY">质控指标看板</div>
+    <div class="main">
+      <div class="tabs" id="tabs">
+        <div class="tab active" data-nav="ledger">不良事件管理台账</div>
+        <div class="tab" data-nav="qc-home">质量监控首页</div>
+        <div class="tab" data-nav="new">不良事件上报登记</div>
+        <div class="tab" data-nav="dict">质量监测指标字典</div>
+        <div class="tab" data-nav="board">质控指标看板</div>
       </div>
 
-      <div class="scroll" data-page-node-id="MNlpFlmsXQXVklC5YF8Tgu">
+      <div class="scroll">
 
-        <!-- ---------- 视图1：质量控制首页（卡片） ---------- -->
-        <section class="view" data-view="qc-home" data-page-node-id="jVs6yRqWbNk3FFyIhJfpGg">
-          <div class="card-grid" data-page-node-id="6s8e4xr0axBk56a7zjUGQ8">
-            <div class="fcard g-red" data-nav="new" data-page-node-id="YHeEME8xKiDITFXDyAaw8c">
-              <div class="gic" data-page-node-id="oEjsYLzsHHRVexsRX9RAGj"><svg viewBox="0 0 24 24" width="30" height="30" fill="#fff" data-page-node-id="lS3V2qbKUAwxWy6ku0Cp0h"><path d="M12 2 3 5v6c0 5 3.8 9.7 9 11 5.2-1.3 9-6 9-11V5l-9-3zm1 14h-2v-2h2zm0-4h-2V7h2z" data-page-node-id="tc27K6CbvARhjTuklsFcAD"/></svg></div>
-              <div class="cn" data-page-node-id="Wiv6baNHA4fh1aK7dN3gA1">不良事件上报</div>
-              <div class="cd" data-page-node-id="CAX9ewjDkM03FNQ9IWIH9m">事件登记 · 一键上报</div>
+        <!-- ===== 视图1：质量监控首页 ===== -->
+        <section class="view" data-view="qc-home">
+          <div class="card-grid">
+            <div class="fcard g-red" data-nav="new">
+              <div class="gic"><svg viewBox="0 0 24 24" width="30" height="30" fill="#fff"><path d="M12 2 3 5v6c0 5 3.8 9.7 9 11 5.2-1.3 9-6 9-11V5l-9-3zm1 14h-2v-2h2zm0-4h-2V7h2z"/></svg></div>
+              <div class="cn">不良事件上报</div>
+              <div class="cd">四级指标联动 · 必填校验</div>
             </div>
-            <div class="fcard g-blue" data-nav="ledger" data-page-node-id="B1KgXcioWAXA1TkNA0UvhY">
-              <div class="gic" data-page-node-id="lNolF4NbUvuHE58k0RgIij"><svg viewBox="0 0 24 24" width="30" height="30" fill="#fff" data-page-node-id="ZeuegmTEVvaCaZ6ACjrPJd"><path d="M4 3h13l3 3v15H4zm3 8h10v2H7zm0-4h7v2H7zm0 8h10v2H7z" data-page-node-id="eSnP3XU821IigdRIGUZV6H"/></svg></div>
-              <div class="cn" data-page-node-id="dm2JDTgou9jCWz3XmcuSV4">不良事件台账</div>
-              <div class="cd" data-page-node-id="0fcoROVH6qDGY3UvsDN70v">全量查询 · 导出归档</div>
+            <div class="fcard g-blue" data-nav="ledger">
+              <div class="gic"><svg viewBox="0 0 24 24" width="30" height="30" fill="#fff"><path d="M4 3h13l3 3v15H4zm3 8h10v2H7zm0-4h7v2H7zm0 8h10v2H7z"/></svg></div>
+              <div class="cn">不良事件台账</div>
+              <div class="cd">全量查询 · 导出归档</div>
             </div>
-            <div class="fcard g-orange" data-nav="defect" data-page-node-id="UnWBFCxHlHKQ3KhkldE3Hs">
-              <div class="gic" data-page-node-id="ucmFvtumXKfG79a44pQVQZ"><svg viewBox="0 0 24 24" width="30" height="30" fill="#fff" data-page-node-id="DHcLHXIxHquAKUUEfcwElB"><path d="M12 2 1 21h22zm1 15h-2v2h2zm0-7h-2v5h2z" data-page-node-id="lCftFJHCtv38yFRb7wLo6Q"/></svg></div>
-              <div class="cn" data-page-node-id="5EPHuQSeyBE6QnXJh8GyON">质量缺陷登记</div>
-              <div class="cd" data-page-node-id="0aIzNCtmmfPRg9YDFwwyFm">清洗 · 包装 · 灭菌</div>
+            <div class="fcard g-orange" data-nav="dict">
+              <div class="gic"><svg viewBox="0 0 24 24" width="30" height="30" fill="#fff"><path d="M12 2 1 21h22zm1 15h-2v2h2zm0-7h-2v5h2z"/></svg></div>
+              <div class="cn">质量监测指标</div>
+              <div class="cd">字典 · 25 条指标</div>
             </div>
-            <div class="fcard g-purple" data-nav="recall" data-page-node-id="LfjDemdwJ2xJmuZmhBKNsE">
-              <div class="gic" data-page-node-id="kD0nlfEuJY920ZiksE5QkZ"><svg viewBox="0 0 24 24" width="30" height="30" fill="#fff" data-page-node-id="mKY8ek6blrysLBIHJUiKnK"><path d="M12 4V1L8 5l4 4V6a6 6 0 1 1-6 6H4a8 8 0 1 0 8-8z" data-page-node-id="sGcVXN1hq1KCHeDY2u7oEr"/></svg></div>
-              <div class="cn" data-page-node-id="oCquUJe5Mvf53WhjXKekiB">召回与追溯</div>
-              <div class="cd" data-page-node-id="hPAQOhn3BCEJgl1wTdL2Xq">批次追溯 · 定向召回</div>
+            <div class="fcard g-purple" data-nav="board">
+              <div class="gic"><svg viewBox="0 0 24 24" width="30" height="30" fill="#fff"><path d="M12 4V1L8 5l4 4V6a6 6 0 1 1-6 6H4a8 8 0 1 0 8-8z"/></svg></div>
+              <div class="cn">批次召回追溯</div>
+              <div class="cd">灭菌批号反查去向</div>
             </div>
-            <div class="fcard g-green" data-nav="board" data-page-node-id="xMU7U2vpqcwAFtqS69qxga">
-              <div class="gic" data-page-node-id="AJl6XrkMJqqGLdWHeQLYkW"><svg viewBox="0 0 24 24" width="30" height="30" fill="#fff" data-page-node-id="lqrKjIChHiraQm8S3sKjqF"><path d="M4 20V10h4v10zm6 0V4h4v16zm6 0v-7h4v7z" data-page-node-id="KnC3Y0W4ucs7sPIMVKsefg"/></svg></div>
-              <div class="cn" data-page-node-id="P7duc68o2ujkgLAgOFKPym">质控指标看板</div>
-              <div class="cd" data-page-node-id="nRHfYkupxhNWv6CGwcjFmq">闭环率 · 类型分布</div>
+            <div class="fcard g-green" data-nav="board">
+              <div class="gic"><svg viewBox="0 0 24 24" width="30" height="30" fill="#fff"><path d="M4 20V10h4v10zm6 0V4h4v16zm6 0v-7h4v7z"/></svg></div>
+              <div class="cn">质控指标看板</div>
+              <div class="cd">类别 · 环节分布</div>
             </div>
-            <div class="fcard g-cyan" data-nav="board" data-page-node-id="BAy5sS5BFE7N8IZEYtUEDM">
-              <div class="gic" data-page-node-id="IN5L9RXxuCEIDPvIFgwUrB"><svg viewBox="0 0 24 24" width="30" height="30" fill="#fff" data-page-node-id="vbjeXhP4XTvwgQMzowGWUB"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm1 15h-2v-2h2zm0-4h-2V7h2z" data-page-node-id="FIUk0rQRl0nhktSxsp2dtQ"/></svg></div>
-              <div class="cn" data-page-node-id="JfJZi7fE2CZVmuCmYzl0eZ">整改跟踪 / RCA</div>
-              <div class="cd" data-page-node-id="CC54jO9Wb3NBApZAmvlCi3">PDCA · 原因分析</div>
+            <div class="fcard g-cyan" data-nav="board">
+              <div class="gic"><svg viewBox="0 0 24 24" width="30" height="30" fill="#fff"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm1 15h-2v-2h2zm0-4h-2V7h2z"/></svg></div>
+              <div class="cn">整改跟踪 RCA</div>
+              <div class="cd">PDCA 闭环管理</div>
             </div>
           </div>
         </section>
 
-        <!-- ---------- 视图2：不良事件管理台账 ---------- -->
-        <section class="view active" data-view="ledger" data-page-node-id="zVSxcpSMbg3El6wFiEVV6G">
-          <div class="stat-row" data-page-node-id="OIg9XnwZZw6uLB98IoEwAU">
-            <div class="stat" data-page-node-id="nI8pvpdUaAAtcTDwYwdeQq">
-              <div class="sico" style="background:linear-gradient(135deg,#ff7a6b,#e8453c)" data-page-node-id="D63Xop6g2XwpWYl888tD51">
-                <svg viewBox="0 0 24 24" data-page-node-id="7iUW5yaRO2dIsWeshEn9Pw"><path d="M12 2 3 5v6c0 5 3.8 9.7 9 11 5.2-1.3 9-6 9-11V5l-9-3zm1 14h-2v-2h2zm0-4h-2V7h2z" data-page-node-id="8E8FNYPh9Bw7Oqri4cE2TR"/></svg></div>
-              <div data-page-node-id="ftT5tYXCUCEYoBBqov3y75"><div class="sv" data-page-node-id="zQL4ygpLRJypDJMMBfJ4Pm">12 <span style="font-size:12px;font-weight:400" data-page-node-id="dzbacVQpqkvW239by2y3XA">件</span></div><div class="sl" data-page-node-id="G7NFCDAnQRUPGIaVmNB6XN">本季度不良事件总数</div></div>
-              <div class="sd down" data-page-node-id="IDnUjWEJAfFeIXF7W0BdOA">↓ 3 件</div>
+        <!-- ===== 视图2：不良事件管理台账 ===== -->
+        <section class="view active" data-view="ledger">
+          <div class="stat-row">
+            <div class="stat">
+              <div class="sico" style="background:linear-gradient(135deg,#ff7a6b,#e8453c)">
+                <svg viewBox="0 0 24 24"><path d="M12 2 3 5v6c0 5 3.8 9.7 9 11 5.2-1.3 9-6 9-11V5l-9-3zm1 14h-2v-2h2zm0-4h-2V7h2z"/></svg></div>
+              <div><div class="sv">12 <span style="font-size:12px;font-weight:400">件</span></div><div class="sl">本季度不良事件总数</div></div>
+              <div class="sd down">↓ 3 件</div>
             </div>
-            <div class="stat" data-page-node-id="ZHU9CxcDJIFZRd8bxuj95W">
-              <div class="sico" style="background:linear-gradient(135deg,#48d69a,#16a86a)" data-page-node-id="anZAAqNMbVT4hPFSdbkJFW">
-                <svg viewBox="0 0 24 24" data-page-node-id="BdzrSoe2IEDXPwjHGvDa6G"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z" data-page-node-id="xLin8TIotWOA250QawGvoq"/></svg></div>
-              <div data-page-node-id="aL1i5y0q9pQoMgxes96DpR"><div class="sv" data-page-node-id="42eh33Xf4XiBK4YGXBZZvF">83.3<span style="font-size:12px;font-weight:400" data-page-node-id="Bk4wz1GRMku1JrJi40Vt79">%</span></div><div class="sl" data-page-node-id="wP1Eq4jWyjhLqANQB2z7Os">事件闭环率</div></div>
-              <div class="sd down" data-page-node-id="cbVywQk0JHRlA1riS28fFH">↑ 8.3%</div>
+            <div class="stat">
+              <div class="sico" style="background:linear-gradient(135deg,#48d69a,#16a86a)">
+                <svg viewBox="0 0 24 24"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg></div>
+              <div><div class="sv">83.3<span style="font-size:12px;font-weight:400">%</span></div><div class="sl">事件闭环率</div></div>
+              <div class="sd down">↑ 8.3%</div>
             </div>
-            <div class="stat" data-page-node-id="Jknv3WAfJrm7EsS1sA0VwQ">
-              <div class="sico" style="background:linear-gradient(135deg,#4ea6f7,#1f6fd6)" data-page-node-id="1FRH0piLkp8GxSJp4GAYpV">
-                <svg viewBox="0 0 24 24" data-page-node-id="ZSkHYXR7vcsJ1WY1rsE85V"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm1 11h-5v-2h3V6h2z" data-page-node-id="rNi1lOZLA8s5iuhZx2DbYM"/></svg></div>
-              <div data-page-node-id="36qHkNUWX4DlHkMxt4pxxm"><div class="sv" data-page-node-id="y1MYjGPEIFNGuDlqitKp6U">4.2 <span style="font-size:12px;font-weight:400" data-page-node-id="jJCfNajYCNoq6L2Pc5Fwf7">天</span></div><div class="sl" data-page-node-id="fvBTg7XcnLek6nu39D80TQ">平均闭环时长</div></div>
-              <div class="sd" data-page-node-id="XwQDBaAh4wOQJT2ShlwVHt">持平</div>
+            <div class="stat">
+              <div class="sico" style="background:linear-gradient(135deg,#4ea6f7,#1f6fd6)">
+                <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm1 11h-5v-2h3V6h2z"/></svg></div>
+              <div><div class="sv">4.2 <span style="font-size:12px;font-weight:400">天</span></div><div class="sl">平均闭环时长</div></div>
+              <div class="sd">持平</div>
             </div>
-            <div class="stat" data-page-node-id="7S11BS51qvbJwtdOWYvCRH">
-              <div class="sico" style="background:linear-gradient(135deg,#9b86f7,#6d4fe8)" data-page-node-id="qI0bIjbxqDGKdcDyQVS3qP">
-                <svg viewBox="0 0 24 24" data-page-node-id="3ULXJla5m7Ac9vExhIEJsD"><path d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5zm0 2c-4 0-8 2-8 4.5V21h16v-2.5C20 16 16 14 12 14z" data-page-node-id="CFSWvcFFRqtXHskTTWBj2T"/></svg></div>
-              <div data-page-node-id="AdWtw64yScpRK7NwQECpZP"><div class="sv" data-page-node-id="AzVf5GMBH3uCCgrQBBhEKA">1 <span style="font-size:12px;font-weight:400" data-page-node-id="qXMn06iCxNz4vNDMtvLWyT">例</span></div><div class="sl" data-page-node-id="BH96DJ5SfutYDLqeapONV0">已用于患者的召回事件</div></div>
-              <div class="sd up" data-page-node-id="FwwQp6CgsKQ87AlUa5E9h1">需随访</div>
+            <div class="stat">
+              <div class="sico" style="background:linear-gradient(135deg,#9b86f7,#6d4fe8)">
+                <svg viewBox="0 0 24 24"><path d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5zm0 2c-4 0-8 2-8 4.5V21h16v-2.5C20 16 16 14 12 14z"/></svg></div>
+              <div><div class="sv">1 <span style="font-size:12px;font-weight:400">例</span></div><div class="sl">涉及患者的召回事件</div></div>
+              <div class="sd up">需随访</div>
             </div>
           </div>
 
-          <div class="panel" data-page-node-id="44hsNcAHfSzJKQRrTJMDEg">
-            <div class="toolbar" data-page-node-id="7tR6ARM5wQYhoGTdETSH9H">
-              <div class="field" data-page-node-id="hcuLG7lBJYowF1E3wERgwT"><label data-page-node-id="mB5pUnzfify9JkIuCEgCOQ">事件类型</label>
-                <select id="fType" data-page-node-id="ZjPMrGv4YD2vCFB934ScGd">
-                  <option value="" data-page-node-id="wdkVKQDRTa4SifrfvFNxdX">全部</option>
-                  <option data-page-node-id="whxJboHFJA1ZC1GlbWCg6f">湿包</option>
-                  <option data-page-node-id="2EB9iHHZ1S9A18BGHRORcQ">灭菌监测不合格</option>
-                  <option data-page-node-id="wjSAkY0M58HQFVmL0pVjJq">包装缺陷</option>
-                  <option data-page-node-id="TDfhNleH4taM54hUc5Cbnx">器械功能不良/缺失</option>
-                  <option data-page-node-id="uvkxs7h1oEGGSQaprK8zR9">发放错误</option>
-                  <option data-page-node-id="P0rs5bbH9OrcDq4EF0958o">标识追溯信息错误</option>
-                  <option data-page-node-id="LFiUQ2RXYG3BwTlJ1Cn1Px">职业暴露</option>
-                </select>
+          <div class="panel">
+            <div class="toolbar">
+              <div class="field"><label>指标类别</label>
+                <select id="fCat"><option value="">全部</option><option>过程指标</option><option>专科指标</option><option>结果指标</option><option>结构指标</option><option>其他指标</option></select>
               </div>
-              <div class="field" data-page-node-id="YCFgkHAS9VFnpdtWdCuu3j"><label data-page-node-id="WPaHfTCdQEwUAARmyy065f">使用科室</label>
-                <select id="fDept" data-page-node-id="TpmzzwcAM5G2ibYyoCTtHR">
-                  <option value="" data-page-node-id="j4dbSGj3TKkhKJYAAdtQu0">全部</option>
-                  <option data-page-node-id="aeBKrlp72ogOt0dcLpZ0Ig">手术室</option><option data-page-node-id="8QFiLplRihgHqOdDd8rnXm">产科</option><option data-page-node-id="8S3z0fVJfK1HCa38AmJui4">骨三科</option>
-                  <option data-page-node-id="hkrpAnntREJDwVdc3mIYp7">眼科</option><option data-page-node-id="R7KcznXoLEceoa318tgfiU">门诊换药室</option>
-                </select>
+              <div class="field"><label>环节</label>
+                <select id="fLink"><option value="">全部</option><option>回收</option><option>分类</option><option>清洗</option><option>消毒</option><option>干燥</option><option>器械检查与保养</option><option>包装</option><option>灭菌</option><option>储存</option><option>发放</option></select>
               </div>
-              <div class="field" data-page-node-id="BaDFDue7erPt9yxB2o48KR"><label data-page-node-id="GWu55YbNQAnW1URB8od2RF">结局归档</label>
-                <select id="fStatus" data-page-node-id="0nzOcSHsajORAmV9F1I2WT">
-                  <option value="" data-page-node-id="BdXJ5u75lNquOkk30XB28Q">全部</option>
-                  <option data-page-node-id="UzFtUIJA1tEk7PIbVzdmQK">已闭环</option><option data-page-node-id="jgJtLCKCuCH2czWwalmeJn">整改中</option><option data-page-node-id="qitE7OpYP6IAhDmtDsTKKn">已上报</option><option data-page-node-id="xh1QMtXvoVnNviA1iDTJOB">待审核</option>
-                </select>
+              <div class="field"><label>事件级别</label>
+                <select id="fLv"><option value="">全部</option><option>Ⅰ级</option><option>Ⅱ级</option><option>Ⅲ级</option><option>Ⅳ级</option></select>
               </div>
-              <div class="field" data-page-node-id="FZNW4QZgtefFw6XnonYois"><label data-page-node-id="JNXJzl20JHIpR9F5cVynJw">关键词</label>
-                <input type="text" id="fKey" placeholder="编号 / 批号 / 器械包 / 病历号" style="width:210px" data-page-node-id="CBJjDgEp8deZF9cc2Ukn9t">
+              <div class="field"><label>使用科室</label>
+                <select id="fDept"><option value="">全部</option><option>手术室</option><option>产科</option><option>骨三科</option><option>眼科</option><option>门诊换药室</option></select>
               </div>
-              <button class="btn btn-ghost" onclick="resetFilter()" data-page-node-id="Ak2yu5ZzpxyBwDYaLdGE76">重置</button>
-              <div class="right" style="margin-left:auto;display:flex;gap:8px" data-page-node-id="WhOKGR1WUu5hebMKdjuHUU">
-                <button class="btn btn-ghost" onclick="exportCSV()" data-page-node-id="IOgmUlBDpXQxlL3LFVtQ6J">
-                  <svg viewBox="0 0 24 24" width="13" height="13" fill="#5b6577" data-page-node-id="Ks85zhPKESX0wPBKAmBOWu"><path d="M12 16 7 11h3V4h4v7h3zM5 18h14v2H5z" data-page-node-id="NdOYcOeTD57ckQka01IO8g"/></svg>导出Excel</button>
-                <button class="btn btn-ghost" onclick="window.print()" data-page-node-id="56ZOVEFhRse1FDUppfLZg2">
-                  <svg viewBox="0 0 24 24" width="13" height="13" fill="#5b6577" data-page-node-id="3AbCDM65LYRWghko4UmSQ7"><path d="M6 9V2h12v7zm12 5h-2V8H8v6H6v-5h12zM6 19h12v-4H6zm-2 2h16v-5H4z" data-page-node-id="xRwRh9C6FK809b1qQwiFnG"/></svg>打印台账</button>
-                <button class="btn btn-primary" data-nav="new" data-page-node-id="FMzLglqkFkILis8FD9w9lu">+ 新增不良事件</button>
+              <div class="field"><label>关键词</label>
+                <input type="text" id="fKey" placeholder="编号 / 指标 / 批号 / 住院号" style="width:200px">
+              </div>
+              <button class="btn btn-ghost" onclick="resetFilter()">重置</button>
+              <div class="right" style="margin-left:auto;display:flex;gap:8px">
+                <button class="btn btn-ghost" onclick="exportCSV()">导出Excel</button>
+                <button class="btn btn-ghost" onclick="window.print()">打印台账</button>
+                <button class="btn btn-primary" data-nav="new">+ 新增不良事件</button>
               </div>
             </div>
 
-            <div class="panel-hd" style="border-radius:0" data-page-node-id="isaXKBu6Yiik3kkWdufP6n">
-              <h3 data-page-node-id="8e87piMMcBoFtQav6wLaBk">CSSD 不良事件管理台账<span class="hd-tip" data-page-node-id="Hmq12OXTNuuBnPbsiqVwrU">统计周期：2026-07-01 ~ 2026-09-14 ／ 共 <span id="rowCount" data-page-node-id="2b9AThCR4JtCUPLagSaz3H">6</span> 条</span></h3>
+            <div class="panel-hd" style="border-radius:0">
+              <h3>CSSD 不良事件管理台账<span class="hd-tip">模块：质量监控管理 ／ 统计周期 2026-07-01 ~ 2026-09-19 ／ 共 <span id="rowCount">6</span> 条</span></h3>
             </div>
 
-            <div class="table-wrap" data-page-node-id="IyaFFETHiyG9fGN2NVJqHG">
-              <table id="ledgerTable" data-page-node-id="RJvQlGTDjJZmiBsQyOQsGM">
-                <thead data-page-node-id="PcpKfzHhm62wcXOFAlo3EL">
-                  <tr data-page-node-id="Zf348RpZ40PxGzd8t0kgai">
-                    <th style="width:44px" data-page-node-id="hdJdYkICjjes3DYGHneSiH">序号</th>
-                    <th style="width:132px" data-page-node-id="XPhms5TOgYwO2VPbvh7Xq0">事件编号</th>
-                    <th style="width:132px" data-page-node-id="WTizPo1DoxMYglRz7zzt5T">事件类型</th>
-                    <th style="width:126px" data-page-node-id="GZ8Gquay0zHg1nKavDYjUe">发生时间</th>
-                    <th style="width:124px" data-page-node-id="QZLgnJq19kAcbBDMLGV1lp">灭菌批号</th>
-                    <th style="width:150px" data-page-node-id="dosCor5XxxEyjQ8SRU8FcK">涉及器械包</th>
-                    <th style="width:96px" data-page-node-id="ggQ5rSpECMfae2Hcypnp0Z">使用科室</th>
-                    <th style="width:126px" data-page-node-id="Tjy2wrmIGZ7vreUY516iZl">患者病历号</th>
-                    <th style="width:290px" data-page-node-id="LK8MshUOwJObLpbXwe5Pi5">处理措施</th>
-                    <th style="width:170px" data-page-node-id="zcii1KglvnzEU96BKDkM8o">结局归档</th>
-                    <th style="width:130px" data-page-node-id="wnC6iI1NrHiOxFHvyxYD3t">上报人 / 责任人</th>
+            <div class="table-wrap">
+              <table id="ledgerTable" class="cardable">
+                <thead>
+                  <tr>
+                    <th style="width:44px">序号</th>
+                    <th style="width:130px">事件编号</th>
+                    <th style="width:88px">指标类别</th>
+                    <th style="width:120px">环节（问题事件类型）</th>
+                    <th style="width:180px">指标名称</th>
+                    <th style="width:96px">日期</th>
+                    <th style="width:110px">发生班次</th>
+                    <th style="width:74px">责任人</th>
+                    <th style="width:74px">质控员</th>
+                    <th style="width:130px">不良事件级别</th>
+                    <th style="width:92px">使用科室</th>
+                    <th style="width:112px">患者住院号</th>
+                    <th style="width:80px">患者姓名</th>
+                    <th style="width:230px">事件描述</th>
+                    <th style="width:118px">灭菌批号</th>
+                    <th style="width:270px">处理措施</th>
+                    <th style="width:190px">结局归档</th>
+                    <th style="width:96px">状态</th>
                   </tr>
                 </thead>
-                <tbody data-page-node-id="AHKJKjKwVSM7SpnLlt8M4C">
-                  <tr data-page-node-id="5fEG3R0WWUiUPpOX3218om">
-                    <td data-page-node-id="QcMfDZzPPBrq6a5No2nwUt">1</td>
-                    <td class="code" data-page-node-id="q7QjNR8ASmcaDFl69ZsVqG">CSSD-AE-2026-042</td>
-                    <td data-page-node-id="nU93MHpryR0Cqs3Cv0CI1Z"><span class="tag t-orange" data-page-node-id="9L6gjECrw6YV3KyYy46bWI">湿包</span></td>
-                    <td data-page-node-id="PplDLldPOWQ4M1fmpXWI7Y">2026-09-12<br data-page-node-id="lbiInunuhEnRYGJUmiKFho"><span class="muted" data-page-node-id="J6vojzNPswX11kBPC3GFmG">09:15</span></td>
-                    <td class="batch" data-page-node-id="jOLLFnDBG9AS0kTrF1P2UB">M20260911-03</td>
-                    <td data-page-node-id="KdqJYpSf4BtaLS6ZxYHNHN">剖宫产器械包 <b data-page-node-id="AXLVOmFVjwewhuJdBtmTF5">×2</b><br data-page-node-id="LYNYsGzZTfWXplZQG5gZRG"><span class="muted" data-page-node-id="JjcilyMiGZ278hvT0pEi6D">纸塑包装</span></td>
-                    <td data-page-node-id="teHpWAOFNsPcNDZwchqq0K">产科</td>
-                    <td class="mr" data-page-node-id="AySFMOpQAQKoRPV8muthld">未使用</td>
-                    <td class="measure" data-page-node-id="tAN7lFGXiRMFfAwA3UOeLi"><b data-page-node-id="Ekg7EDGVi8Pr5EoyGLjneT">①</b> 该批次同炉次包全部拦截封存；<b data-page-node-id="Mw0osZVMeznVDHgASSXRFm">②</b> 器械包重新清洗、干燥后二次灭菌；<b data-page-node-id="4u3WzrJ4VTF4k61bWbDpzj">③</b> 排查灭菌器疏水阀及干燥程序，更换疏水阀；<b data-page-node-id="2ObtoWfm7McmbDFGwIhJWQ">④</b> 连续 3 炉次监测合格后放行。</td>
-                    <td data-page-node-id="7RHjUMPebVZWyWveeHBhWH"><span class="tag t-green" data-page-node-id="UHmylDCHP5h1SpJ7YVwbSa">已闭环</span><br data-page-node-id="JMz0o5zg48LFJOgLEjzuqF"><span class="muted" style="font-size:11.5px" data-page-node-id="aACcHgV0bA2thlqq2Ax8PN">闭环 2026-09-13 ／ 归档人 陈</span></td>
-                    <td data-page-node-id="rHP3MIL5odCO0SGE09ad3z">林 / 陈</td>
+                <tbody>
+                  <tr>
+                    <td>1</td>
+                    <td class="code">CSSD-AE-2026-042</td>
+                    <td><span class="tag t-blue">过程指标</span></td>
+                    <td>灭菌</td>
+                    <td class="cell-strong">预防无菌包湿包护理措施质量<span class="muted" style="font-weight:400">（敏感指标）</span></td>
+                    <td>2026-09-12</td>
+                    <td>早班 A<br><span class="muted">08:00–16:00</span></td>
+                    <td>林××</td>
+                    <td>陈××</td>
+                    <td><span class="tag t-orange">Ⅱ级</span> 未造成后果</td>
+                    <td>产科</td>
+                    <td class="muted">—</td>
+                    <td class="muted">—</td>
+                    <td class="desc">灭菌器 M-02 出炉后检出 2 个湿包（剖宫产器械包），包外指示胶带变色合格但包内可见冷凝水。</td>
+                    <td class="batch">M20260911-03</td>
+                    <td class="measure"><b>①</b> 同炉次物品全部拦截封存；<b>②</b> 重新清洗干燥后二次灭菌；<b>③</b> 排查灭菌器疏水阀并更换；<b>④</b> 连续 3 炉次监测合格后放行。</td>
+                    <td>已闭环整改（院内处理完毕）<span class="at">附件 2</span></td>
+                    <td><span class="tag t-green">已闭环</span></td>
                   </tr>
-                  <tr data-page-node-id="lidRQmc6poKDH9mVfg2vIe">
-                    <td data-page-node-id="SLn18MS590HsxMaszxct7B">2</td>
-                    <td class="code" data-page-node-id="C9bBJKVOwIzjFFj7AdOebD">CSSD-AE-2026-041</td>
-                    <td data-page-node-id="SK82GkFJs4xdmsPDHShAgw"><span class="tag t-red" data-page-node-id="XYtmdIatAusGajsjBRqjQ9">灭菌监测不合格</span></td>
-                    <td data-page-node-id="MRd9gx0z0J7o0CgSucBiBU">2026-09-10<br data-page-node-id="V4sTgzrDKllLgcqSa1nhuc"><span class="muted" data-page-node-id="il9b6i8mTdN3M3RcSc6UKk">16:40</span></td>
-                    <td class="batch" data-page-node-id="CPuSb2dT4gD8Qj8p26wPeN">M20260910-01</td>
-                    <td data-page-node-id="MOXwJBnK6aTobdq6Z1i26Q">骨科动力器械包 <b data-page-node-id="b6lCAFszCgQGgBEszRst69">×1</b><br data-page-node-id="onycnxXZdz5qjB4OKdMLht"><span class="muted" data-page-node-id="2ZMeGLNLHAHFSMXpIDpQHR">含动力钻、铣刀</span></td>
-                    <td data-page-node-id="luzV4IVSQAyYv5WtGUKAC7">手术室</td>
-                    <td class="mr" data-page-node-id="9PjArh1nbIRiX5sFXlEVMk">ZY2026013456<br data-page-node-id="ULRz9RBe9ylNKhVcbh6X1j"><span class="muted" data-page-node-id="gfEWieghuiUNr5gEylVoQh">（已脱敏）</span></td>
-                    <td class="measure" data-page-node-id="cKgiVSy1s9rCV1SiHZzy0Y"><b data-page-node-id="Na4UNHq7VuhCyl1w4tMW7X">①</b> 立即停用该灭菌器（编号 M-02）并挂"禁用"标识；<b data-page-node-id="oUusv90fRNOgPR8HIvQoEi">②</b> 召回已发放同批次全部器械包，追溯已使用器械并通知手术室暂停；<b data-page-node-id="2rwkrfAn6TpGKYEtHDjWkJ">③</b> 复做生物监测 + BD 试验，检修灭菌器并联系厂家校验；<b data-page-node-id="ADEYgmvi8E7ABa1HludMWe">④</b> 已上报院感科与护理部，患者术后随访无异常。</td>
-                    <td data-page-node-id="pkaHK1Nu9lZrarpCHaw1nG"><span class="tag t-purple" data-page-node-id="1cnr8SnOeWnscmhDQd1le8">已上报</span> <span class="tag t-blue" data-page-node-id="oOhFzoYoWoIaaA2Z16NfmH">整改中</span><br data-page-node-id="AZvrn131WLjUaSrIJ8v3QL"><span class="muted" style="font-size:11.5px" data-page-node-id="VrZMNcBvSgi8O0Ptsahldm">转院感科 ／ 期限 09-20</span></td>
-                    <td data-page-node-id="pdnEfGeDJIxAXZg2pr9w8l">吴 / 郑</td>
+                  <tr>
+                    <td>2</td>
+                    <td class="code">CSSD-AE-2026-041</td>
+                    <td><span class="tag t-purple">结果指标</span></td>
+                    <td class="muted">—（跨环节）</td>
+                    <td class="cell-strong">湿包发生率</td>
+                    <td>2026-09-10</td>
+                    <td>中班 P<br><span class="muted">16:00–00:00</span></td>
+                    <td>吴××</td>
+                    <td>郑××</td>
+                    <td><span class="tag t-red">Ⅲ级</span> 造成后果</td>
+                    <td>手术室</td>
+                    <td class="mr">ZY2026013456</td>
+                    <td>张×明</td>
+                    <td class="desc">骨科动力器械包生物监测阳性（对照合格），该批次已发放至手术室，其中 1 包已用于手术。</td>
+                    <td class="batch">M20260910-01</td>
+                    <td class="measure"><b>①</b> 停用灭菌器 M-02 并挂禁用标识；<b>②</b> 召回已发放同批次全部物品；<b>③</b> 复做生物监测 + BD 试验；<b>④</b> 上报院感科与护理部，患者术后随访无异常。</td>
+                    <td>转院感科处理<span class="at">附件 3</span></td>
+                    <td><span class="tag t-purple">整改中</span></td>
                   </tr>
-                  <tr data-page-node-id="Ke7yDzGzNmscMVXvNxp6fB">
-                    <td data-page-node-id="qN6isuZNqTSTeiSkuZFvum">3</td>
-                    <td class="code" data-page-node-id="wevMTbUKFAxFhXENBKgEAG">CSSD-AE-2026-040</td>
-                    <td data-page-node-id="gTwucfrfFVIDgOQFM4nvAX"><span class="tag t-orange" data-page-node-id="7ysCJNml9VWkrCs8NeO2FA">包装缺陷</span></td>
-                    <td data-page-node-id="9efFTAaxhHxpcauD98kfmt">2026-09-08<br data-page-node-id="7uiZpPB2U87cV7cIDk8Gdv"><span class="muted" data-page-node-id="lNwELi1DW9V0IXzE4FQInj">14:05</span></td>
-                    <td class="batch" data-page-node-id="Ayj3M74DHylZU4gdCHKmMI">M20260908-02</td>
-                    <td data-page-node-id="5GbMlfXwFRyElVoKYAVpGE">腹腔镜器械包 <b data-page-node-id="oOkCBFIMIPFbViJndAXOqN">×1</b></td>
-                    <td data-page-node-id="4At58jn4XRloEgEkHkvEXB">手术室</td>
-                    <td class="mr" data-page-node-id="KtYZ6CBBwBuVxarX2a2bWt">未使用</td>
-                    <td class="measure" data-page-node-id="0jms9fchKxPPsoKxm9xefj"><b data-page-node-id="CpUQP0HnDEK9qNZEwtpwfr">①</b> 封口开裂包现场退回包装区；<b data-page-node-id="RFWbkqRy9ZfuooBzTkgPdy">②</b> 封口机温度/压力参数校准并记录；<b data-page-node-id="P679bqFcL4KqLJJA3Eis9Z">③</b> 同班次封口产品全部复检剥离强度；<b data-page-node-id="4FC83uDtOIRkeU5sBKreyv">④</b> 组织包装岗位再培训并考核。</td>
-                    <td data-page-node-id="lSBklkbCxi5ZbfCEWJQdcx"><span class="tag t-green" data-page-node-id="TJ6RTLsKXEqqgKHK2xAdHb">已闭环</span><br data-page-node-id="qLwEbz9W4aKKQGWuwg9QDa"><span class="muted" style="font-size:11.5px" data-page-node-id="ZjsNGd8SF0o6tdriiohVuY">闭环 2026-09-09 ／ 归档人 陈</span></td>
-                    <td data-page-node-id="jUPBbNTitWWPYR4DlBAFC0">黄 / 陈</td>
+                  <tr>
+                    <td>3</td>
+                    <td class="code">CSSD-AE-2026-040</td>
+                    <td><span class="tag t-blue">过程指标</span></td>
+                    <td>包装</td>
+                    <td class="cell-strong">包装合格率</td>
+                    <td>2026-09-08</td>
+                    <td>早班 A<br><span class="muted">08:00–16:00</span></td>
+                    <td>黄××</td>
+                    <td>陈××</td>
+                    <td><span class="tag t-orange">Ⅱ级</span> 未造成后果</td>
+                    <td>手术室</td>
+                    <td class="muted">—</td>
+                    <td class="muted">—</td>
+                    <td class="desc">腹腔镜器械包纸塑袋封口开裂约 3cm，封口机温度波动，同班次产品需全部复检。</td>
+                    <td class="batch">M20260908-02</td>
+                    <td class="measure"><b>①</b> 开裂包退回包装区；<b>②</b> 封口机温度/压力校准并记录；<b>③</b> 同班次封口产品复检剥离强度；<b>④</b> 包装岗位再培训并考核。</td>
+                    <td>已闭环整改（院内处理完毕）<span class="at">附件 1</span></td>
+                    <td><span class="tag t-green">已闭环</span></td>
                   </tr>
-                  <tr data-page-node-id="mxUTmdBdYYc6IitYbVqpdA">
-                    <td data-page-node-id="EDRtCMoSUd5XdMNHCtFKKj">4</td>
-                    <td class="code" data-page-node-id="Mr2ccdwwdEwD7ZuTAsX8Bc">CSSD-AE-2026-039</td>
-                    <td data-page-node-id="MromKHfLuQUBTzCwCDHLu4"><span class="tag t-red" data-page-node-id="751fbnHolcFXGi438FR5a6">器械功能不良/缺失</span></td>
-                    <td data-page-node-id="vQ9wOv3mQ1Tn0C2c7MiTUs">2026-09-05<br data-page-node-id="XXZAzAc3inOIOpL2bI2EHR"><span class="muted" data-page-node-id="0EPxFxtF9s0TW5NV5GC0Z5">10:20</span></td>
-                    <td class="batch" data-page-node-id="pIi7Nnx1zxhLKYgh0HdNGC">M20260905-04</td>
-                    <td data-page-node-id="ZTMeY9cHP5rm0RnuKWnULS">椎间孔镜器械包 <b data-page-node-id="MIrYcwBAemiI8ozF35PaoH">×1</b><br data-page-node-id="IX89bkSfG62ALQTEa4lvdn"><span class="muted" data-page-node-id="Yfx1iADNyVukit2dP1uxla">咬骨钳 ×2</span></td>
-                    <td data-page-node-id="QyDvH9Yrag6IwPQfeGyYvU">骨三科</td>
-                    <td class="mr" data-page-node-id="xocb1OdNNg4nxnBsTiEOD0">ZY2026013921</td>
-                    <td class="measure" data-page-node-id="T1Q6AO3JeBvdH8Th9nlqrH"><b data-page-node-id="rRLqGg5cAEDkV0EQGNqgSM">①</b> 术中更换备用器械，未影响手术进程；<b data-page-node-id="DGa5nIGGkODW94fDK3hswj">②</b> 不良器械隔离送修，建立单件器械寿命台账；<b data-page-node-id="eCfQoUQYqHmcIpaP3oeXin">③</b> 清洗包装环节增设关节灵活度检查点并双人核对包内清单。</td>
-                    <td data-page-node-id="GejFyxIorfTV3FlrQWkkNT"><span class="tag t-green" data-page-node-id="yZM8iWmnhTLLNkT380dsUQ">已闭环</span><br data-page-node-id="a29BNscZFa9RDBC80JBUQH"><span class="muted" style="font-size:11.5px" data-page-node-id="H1PfXzXBYD7v35sRgD8WoN">闭环 2026-09-07 ／ 归档人 林</span></td>
-                    <td data-page-node-id="8pUFH8FQaLLzDcgHAEjqBa">林 / 吴</td>
+                  <tr>
+                    <td>4</td>
+                    <td class="code">CSSD-AE-2026-039</td>
+                    <td><span class="tag t-blue">过程指标</span></td>
+                    <td>器械检查与保养</td>
+                    <td class="cell-strong">器械检查包装质量<span class="muted" style="font-weight:400">（一般指标）</span></td>
+                    <td>2026-09-05</td>
+                    <td>早班 A<br><span class="muted">08:00–16:00</span></td>
+                    <td>林××</td>
+                    <td>吴××</td>
+                    <td><span class="tag t-red">Ⅲ级</span> 造成后果</td>
+                    <td>骨三科</td>
+                    <td class="mr">ZY2026013921</td>
+                    <td>李×芳</td>
+                    <td class="desc">椎间孔镜器械包内咬骨钳关节卡顿，术中更换备用器械，未影响手术进程。</td>
+                    <td class="batch">M20260905-04</td>
+                    <td class="measure"><b>①</b> 不良器械隔离送修，建立单件器械寿命台账；<b>②</b> 清洗包装环节增设关节灵活度检查点；<b>③</b> 包内清单双人核对。</td>
+                    <td>已闭环整改（院内处理完毕）<span class="at">附件 2</span></td>
+                    <td><span class="tag t-green">已闭环</span></td>
                   </tr>
-                  <tr data-page-node-id="eEcsQBK2jNHVsMH5QK6pbz">
-                    <td data-page-node-id="kV5ZwO8krCHfrOkAY9m4EH">5</td>
-                    <td class="code" data-page-node-id="ympFUwv3s4YQRcLHwnsKlk">CSSD-AE-2026-038</td>
-                    <td data-page-node-id="4uGMlnuOvvf6PFxF6OVaRG"><span class="tag t-cyan" data-page-node-id="lu1l0fhWQIMC779dF4J4LL">发放错误</span></td>
-                    <td data-page-node-id="rXCtgygSSjHPeBBTgl79BV">2026-09-03<br data-page-node-id="B2WZ3dz3Y3RyIF42mhgfsM"><span class="muted" data-page-node-id="DH3juTiyHwNafNAfs40Whu">08:35</span></td>
-                    <td class="batch" data-page-node-id="u9hOJzuKH6BQPBSV7y8moq">M20260902-06</td>
-                    <td data-page-node-id="hlKzt39y4fSGx5vu1nP0mg">基础敷料包 <b data-page-node-id="sWc0VTH5srzlgVpKWj0ymm">×6</b></td>
-                    <td data-page-node-id="nkf0RumQY7c5niaHQt5cls">门诊换药室</td>
-                    <td class="mr" data-page-node-id="2xMZI1luKRe2IYYE4QTyEk">未使用</td>
-                    <td class="measure" data-page-node-id="o013AiOgacQN7Mq6Wj2u0c"><b data-page-node-id="8UmvX62nY2DTcLRsxHyzkd">①</b> 错发物品全部回收、核对后重新发放；<b data-page-node-id="bnrBMRgQEtTXYHdkBPJL9d">②</b> 发放环节启用扫码核对（器械包二维码 + 科室标识）；<b data-page-node-id="s9NtXAPbQXoFS5kKq2POS7">③</b> 完善发放前"三查七对"记录表。</td>
-                    <td data-page-node-id="msITccpiQZDAwERGEisQah"><span class="tag t-blue" data-page-node-id="mKgCZ7SEP6DEYqYKbn52x8">待审核</span><br data-page-node-id="L0Anja5WXuLUZTbkMSU06D"><span class="muted" style="font-size:11.5px" data-page-node-id="1bDdHbhbzLQCirP5rbYvnq">提交 09-03 ／ 待护士长审核</span></td>
-                    <td data-page-node-id="uAvsUc0qDvNCRVsA3NQVKZ">苏 / 黄</td>
+                  <tr>
+                    <td>5</td>
+                    <td class="code">CSSD-AE-2026-038</td>
+                    <td><span class="tag t-blue">过程指标</span></td>
+                    <td>发放</td>
+                    <td class="cell-strong">无菌物品发放质量<span class="muted" style="font-weight:400">（一般指标）</span></td>
+                    <td>2026-09-03</td>
+                    <td>夜班 N<br><span class="muted">00:00–08:00</span></td>
+                    <td>苏××</td>
+                    <td>黄××</td>
+                    <td><span class="tag t-orange">Ⅱ级</span> 未造成后果</td>
+                    <td>门诊换药室</td>
+                    <td class="muted">—</td>
+                    <td class="muted">—</td>
+                    <td class="desc">基础敷料包 6 个错发至眼科，发放时未扫码核对科室标识。</td>
+                    <td class="batch">M20260902-06</td>
+                    <td class="measure"><b>①</b> 错发物品回收核对后重新发放；<b>②</b> 发放环节启用扫码核对；<b>③</b> 完善发放前"三查七对"记录表。</td>
+                    <td>持续改进中（PDCA 跟踪）</td>
+                    <td><span class="tag t-blue">待审核</span></td>
                   </tr>
-                  <tr data-page-node-id="1pNCsYcNCm5r7sXWmN6D1S">
-                    <td data-page-node-id="y1sEKQ1ZP3hr99a23iSHPw">6</td>
-                    <td class="code" data-page-node-id="DqNR5dSPSb7rvGThUxjibu">CSSD-AE-2026-037</td>
-                    <td data-page-node-id="vjPQeuIkoZBHZuAaorRfyn"><span class="tag t-purple" data-page-node-id="Q5u9ZAbaOTcJt9pGqxfDbA">职业暴露</span></td>
-                    <td data-page-node-id="LoSOjaEhamLYI8HAEMdU79">2026-08-28<br data-page-node-id="Q1z4oDvZVybqLKcHoVCujX"><span class="muted" data-page-node-id="h3Eo6IkArzbjhwEgW5Zdtj">15:50</span></td>
-                    <td class="batch" data-page-node-id="0mggFL8dYPV9T3imE2Ebuq">－</td>
-                    <td data-page-node-id="OlJzDiSVWVMpmAVE91Qt51">回收阶段锐器（穿刺针）</td>
-                    <td data-page-node-id="50lqiAwZOhqVvkOvgJWgMJ">供应中心</td>
-                    <td class="mr" data-page-node-id="XS7FvyyI5yBZpBH97TXl0N">－</td>
-                    <td class="measure" data-page-node-id="6sNvrFYIx0wiYleAY25R1u"><b data-page-node-id="PmlELKIMSp5NUtoILx78hO">①</b> 按职业暴露流程处理伤口并采血送检、随访 6 个月；<b data-page-node-id="cUQ84asVNBc1z7mgMHsgS2">②</b> 回收岗强制佩戴双层手套 + 防刺盒；<b data-page-node-id="Os8cWCUwkreyHInKwytEZD">③</b> 推动临床科室执行"锐器不入包"前置管理。</td>
-                    <td data-page-node-id="Pgmb25lKYG770YFM2Lh2nW"><span class="tag t-green" data-page-node-id="JhBEFFRfeBhLPEfE2GIjH7">已闭环</span> <span class="tag t-grey" data-page-node-id="1v50MJ0yhkDPuX94TIu20w">已报院感科</span><br data-page-node-id="1iDBffkmUmBu3OeJ1DDa1q"><span class="muted" style="font-size:11.5px" data-page-node-id="FQZeVTMMUPaDOUVC5AoF6y">闭环 2026-08-30 ／ 归档人 陈</span></td>
-                    <td data-page-node-id="KNF35dfhT5Rt1KuRvcxPlk">郑 / 郑</td>
+                  <tr>
+                    <td>6</td>
+                    <td class="code">CSSD-AE-2026-037</td>
+                    <td><span class="tag t-cyan">专科指标</span></td>
+                    <td class="muted">—</td>
+                    <td class="cell-strong">过氧化氢等离子体灭菌效果监测达标率</td>
+                    <td>2026-08-28</td>
+                    <td>中班 P<br><span class="muted">16:00–00:00</span></td>
+                    <td>郑××</td>
+                    <td>郑××</td>
+                    <td><span class="tag t-orange">Ⅱ级</span> 未造成后果</td>
+                    <td>眼科</td>
+                    <td class="muted">—</td>
+                    <td class="muted">—</td>
+                    <td class="desc">过氧化氢低温灭菌舱连续 2 舱次化学指示卡变色不达标，器械管腔干燥不彻底。</td>
+                    <td class="batch">H20260828-01</td>
+                    <td class="measure"><b>①</b> 暂停该舱次物品发放；<b>②</b> 延长干燥时间并复测管腔含水量；<b>③</b> 该指标按国家卫健委口径单独统计，不与常规灭菌合格率合并。</td>
+                    <td>暂停使用待复检<span class="at">附件 1</span></td>
+                    <td><span class="tag t-orange">整改中</span></td>
                   </tr>
                 </tbody>
               </table>
@@ -530,206 +705,263 @@ tbody tr:last-child td{border-bottom:none}
           </div>
         </section>
 
-        <!-- ---------- 视图3：不良事件上报登记（模板） ---------- -->
-        <section class="view" data-view="new" data-page-node-id="GzzmCirDHFlKwiRtY8ncHT">
-          <div class="panel" data-page-node-id="nT6mLlhPzCMtFPFJjOVPeF">
-            <div class="panel-hd" data-page-node-id="OhqBmBNh8GZbADkUObmegy">
-              <h3 data-page-node-id="1Bh3ad6FvbCsbGNTA3GIE3">CSSD 不良事件上报登记表</h3>
-              <div class="right" data-page-node-id="xOk4ZyQ1XzDuxnrkYZip61">
-                <span class="tag t-grey" data-page-node-id="vwiTYZxbafDB66dEfVl6GB">事件编号：系统自动生成</span>
-              </div>
+        <!-- ===== 视图3：不良事件上报登记 ===== -->
+        <section class="view" data-view="new">
+          <div class="panel">
+            <div class="panel-hd">
+              <h3>CSSD 不良事件上报登记表</h3>
+              <div class="right"><span class="tag t-grey">模块：质量监控管理</span></div>
             </div>
-            <div class="panel-bd" data-page-node-id="hoIjC72eJHvgM5x8uX12aq">
+            <div class="panel-bd">
+              <form id="formNew" onsubmit="return false">
 
-              <div class="form-sec" data-page-node-id="GNIFjwtU02GHnDXmypEZ7J">
-                <h4 data-page-node-id="iNCMJSMu8zzS14bpm95n70"><span class="no" data-page-node-id="bFfBS1XvGvDvSB0RRkdOwx">1</span>事件标识<span class="hint" data-page-node-id="gRX8xwTxPMaEaFXxMh9dC4">由上报人填写，系统自动生成事件编号</span></h4>
-                <div class="fgrid" data-page-node-id="Mhk5mj7yRH9Rfw0CZHLyZ6">
-                  <div class="fm" data-page-node-id="QniWC6rD2yXQzz07qFiDV2"><label data-page-node-id="RaiLBWmdwQgd8BFo1fhOVy">事件编号</label><input type="text" value="CSSD-AE-2026-043" readonly style="background:#f7f9fc;color:#8a94a6" data-page-node-id="Q7fFi8svmyk1tmznWVLopn"></div>
-                  <div class="fm" data-page-node-id="q228pc6OoQQaaTNOUzFuxx"><label data-page-node-id="BlhUIMuViLkSRWIgJKRVH4">上报人<span class="req" data-page-node-id="KLpkkmfLVP7LruYAAp6X8y">*</span></label><input type="text" placeholder="姓名 / 工号" data-page-node-id="9SOUjEBgAZ1gtj2DiO9knS"></div>
-                  <div class="fm" data-page-node-id="R1fkodVkcnzPmtWJjd97ui"><label data-page-node-id="l5Zd9erqXQKgXTKBKUmiA9">上报日期<span class="req" data-page-node-id="PUlX5OvFe4KT2MKjx90Gii">*</span></label><input type="date" value="2026-09-14" data-page-node-id="WxaHki24zk1pJ7Dxf7sD0l"></div>
-                  <div class="fm" data-page-node-id="J6FdX1tcY9mrfQjhhDUAim"><label data-page-node-id="B0xLD2cmMaXcmuPBaYxcVR">发现环节<span class="req" data-page-node-id="Y2A2MChypjUvIbC7jYoqbM">*</span></label>
-                    <select data-page-node-id="0ZD58eEWlIC9Q6GeHD4sFc">
-                      <option data-page-node-id="lEdrbk6GYgMq02Y0DFh1At">回收</option><option data-page-node-id="KXOiSQhpYcLleroazH3Ktu">清洗消毒</option><option data-page-node-id="sR5Vh1VpeDsbSF4DijcZ7M">干燥与检查</option>
-                      <option data-page-node-id="MdIv9kjRpWkomjiHIfId25">包装</option><option selected data-page-node-id="dGIBMENBPDt8CoYkmVCzN5">灭菌</option><option data-page-node-id="uKi7q9bB09bzVlACc3CiC6">存放</option>
-                      <option data-page-node-id="LFemXX25H67h4mmKVveCNF">发放</option><option data-page-node-id="n9tnHVPy9r2BG8nwkffRXq">使用科室反馈</option><option data-page-node-id="pqm0NqYo1yJenahd2n20Cf">术后追溯核查</option>
-                    </select>
-                  </div>
-                  <div class="fm" data-page-node-id="EOgEX6UpyfRGX6OFC8MXHd"><label data-page-node-id="t8eyRUYn0rqopErsJJMXp1">发现人 / 岗位</label><input type="text" placeholder="如：灭菌岗 张某" data-page-node-id="YxoeAd1064wdL08Q20PPRK"></div>
-                  <div class="fm" data-page-node-id="XZMeCUptqfZJVQBTzGtRBH"><label data-page-node-id="0CoxwB7nUBW9nEQWhBZwHF">信息来源</label>
-                    <select data-page-node-id="MOLVt9TantS3JrDDV3HICd"><option data-page-node-id="ETKx5Dbn87q70AO9nXc75J">本中心自查发现</option><option data-page-node-id="EsE16W6ZMwaJ6pF8YeGuY2">使用科室反馈</option><option data-page-node-id="PJEiY9EOTzLGZGnszTHXxh">监测数据报警</option><option data-page-node-id="2xWsGpZowBwaTs36mAQyg3">院感/护理部通报</option></select>
+                <div class="form-sec">
+                  <h4><span class="no">1</span>指标归属与定位<span class="hint">指标类别 → 环节 → 指标名称 三级联动</span></h4>
+                  <div class="fgrid">
+                    <div class="fm"><label>模块名称</label>
+                      <input type="text" class="ro" value="质量监控管理" readonly></div>
+                    <div class="fm"><label>指标类别<span class="req">*</span></label>
+                      <select id="fCatSel" class="reqf">
+                        <option value="">请选择</option>
+                        <option>过程指标</option><option>专科指标</option><option>结果指标</option>
+                        <option>结构指标</option><option>其他指标</option>
+                      </select></div>
+                    <div class="fm"><label>环节（问题事件类型）<span class="req">*</span></label>
+                      <select id="fLinkSel" class="reqf"></select></div>
+                    <div class="fm sp3"><label>指标名称<span class="req">*</span></label>
+                      <select id="fNameSel" class="reqf"></select>
+                      <div class="cas" id="fNote"></div></div>
                   </div>
                 </div>
-              </div>
 
-              <div class="form-sec" data-page-node-id="wekWTgfyAOfBLt19vVV3ty">
-                <h4 data-page-node-id="OdZriTMWVXy0EdVnD5LV4D"><span class="no" data-page-node-id="79hbT7MVNlmuIAcva1lAJW">2</span>事件类型与时间<span class="hint" data-page-node-id="GCkonToaOcPyPnoHPmYohr">事件类型为分类统计核心字段</span></h4>
-                <div class="fgrid" data-page-node-id="WBdWJOOJZSlpINPQDFrDP2">
-                  <div class="fm" data-page-node-id="5nLFexgWIQIzxwxiN46QTS"><label data-page-node-id="8NXfNoAJFwYqIVfOUkB9L2">事件类型<span class="req" data-page-node-id="SBrf3Yfg3iwCEVOTepiKGe">*</span></label>
-                    <select data-page-node-id="BDZalfyA9scGfyvfrk82aa">
-                      <option data-page-node-id="69cGPd2UKe6pSc05HPGDRL">湿包</option><option data-page-node-id="yKwWmiMRTeemm5YB9GSmj7">灭菌监测不合格（生物/化学/BD）</option>
-                      <option data-page-node-id="gZt5vBfmPOQSHuObCiIV8B">包装缺陷（破损 / 封口不合格 / 材料不符）</option>
-                      <option data-page-node-id="BoDGWpE3Ecq8OnTB8OoSJb">清洗质量不合格（血渍 · 锈渍 · 残留）</option>
-                      <option data-page-node-id="AicLyoumJoUeVW7ocQppdj">器械功能不良 / 损坏 / 缺失</option>
-                      <option data-page-node-id="C2vapeaDLnXriuWIqVTSEo">灭菌包发放错误（错发 · 漏发 · 过期发放）</option>
-                      <option data-page-node-id="LU5z4tRS5nWOGUIswOzpBM">标识与追溯信息错误 / 信息缺失</option>
-                      <option data-page-node-id="VIFNsRMS0dMPPT30wSYMSf">急件延误 / 未按约定时间发放</option>
-                      <option data-page-node-id="xjfk2cmCfdjQdA7hXSLba0">职业暴露（锐器伤 · 烫伤 · 化学暴露）</option>
-                      <option data-page-node-id="rCLhosAufm4doEAOpGkTYE">外来器械管理问题</option>
-                      <option data-page-node-id="wYiMbVqB20W2JCypFkO0Bi">无菌物品存储不当 / 超期</option>
-                      <option data-page-node-id="fBnn8uvjwjCt0OXuP2nXlw">其他</option>
-                    </select>
-                  </div>
-                  <div class="fm" data-page-node-id="AaFZIXEvU7TM3AHvF9JYLG"><label data-page-node-id="A5pSSQlV6LJDEC7XV2Cnt1">事件子类 / 具体表现</label><input type="text" placeholder="如：纸塑袋封口开裂 3cm" data-page-node-id="A9vXc5nudwgatDt2BuchN3"></div>
-                  <div class="fm" data-page-node-id="47g90XcgPUdEr7KEKchFBl"><label data-page-node-id="BxYqoSHwMbo80n6qAIKmu5">严重程度分级<span class="req" data-page-node-id="eWABpkbBxE8E0pdOzuARsN">*</span></label>
-                    <select data-page-node-id="vmLb8fLgITFN6gbL35cLeG"><option data-page-node-id="5WoMnlEX4ITBhBixaF0afq">Ⅰ级 · 隐患事件（未造成影响）</option><option data-page-node-id="fNjrmUcwNea4RwrEbQxgVA">Ⅱ级 · 未造成后果事件</option><option data-page-node-id="eLy4ITIZDqqbC9TQ3HVHzE">Ⅲ级 · 造成后果事件</option><option data-page-node-id="VoM2s0KzYHeokwf6E8Lj8Z">Ⅳ级 · 严重事件</option></select>
-                  </div>
-                  <div class="fm" data-page-node-id="ATH9YfGIeARubNlJjuc0yY"><label data-page-node-id="xcNJCqCPsjaZ5EY77ARbaI">发生时间<span class="req" data-page-node-id="m11MLqfyyJvV1URu13ZS5B">*</span></label><input type="datetime-local" value="2026-09-14T09:15" data-page-node-id="FMcBIeIRjmqpu8dYTq3YI3"></div>
-                  <div class="fm" data-page-node-id="VJyKKcyvsWZdKj1coDDiZ2"><label data-page-node-id="p9HumwFFKw9jNSKNyMWQh2">发现时间<span class="req" data-page-node-id="ED59CGoKOz20PcO5zO8Ejh">*</span></label><input type="datetime-local" value="2026-09-14T09:40" data-page-node-id="n1J82AI5EHfTR7vediW1LR"></div>
-                  <div class="fm" data-page-node-id="8SdAv1m7nWqEQPdDUHQd9T"><label data-page-node-id="yq4FeuhiSXaAdgZZAbuklX">是否已用于患者<span class="req" data-page-node-id="qv1ch45dIaAFxKa3EhGQ3f">*</span></label>
-                    <select data-page-node-id="VRJCaXoRGP2phMdFWO6NpE"><option data-page-node-id="NaAS5ovcFnsJGV1abFKpr5">否（使用前拦截）</option><option data-page-node-id="gUBp6eNvnMsnbs1MwgZVeY">是（已使用，需随访）</option><option data-page-node-id="lBTiPSJbHdnqdtq1GcMALi">无法确认</option></select>
+                <div class="form-sec">
+                  <h4><span class="no">2</span>事件基本信息<span class="hint">日期、班次、级别、科室为必填</span></h4>
+                  <div class="fgrid">
+                    <div class="fm"><label>日期<span class="req">*</span></label>
+                      <input type="date" id="fDate" class="reqf" value="2026-09-19"></div>
+                    <div class="fm"><label>发生班次<span class="req">*</span></label>
+                      <select id="fShift" class="reqf">
+                        <option value="">请选择</option>
+                        <option>早班 A（08:00–16:00）</option>
+                        <option>中班 P（16:00–00:00）</option>
+                        <option>夜班 N（00:00–08:00）</option>
+                        <option>行政班（08:00–12:00 / 14:30–17:30）</option>
+                      </select></div>
+                    <div class="fm"><label>不良事件级别<span class="req">*</span></label>
+                      <select id="fLevel" class="reqf">
+                        <option value="">请选择</option>
+                        <option>Ⅰ级 · 隐患事件（未造成影响）</option>
+                        <option>Ⅱ级 · 未造成后果事件</option>
+                        <option>Ⅲ级 · 造成后果事件</option>
+                        <option>Ⅳ级 · 严重事件</option>
+                      </select></div>
+                    <div class="fm"><label>使用科室<span class="req">*</span></label>
+                      <select id="fDeptSel" class="reqf">
+                        <option value="">请选择</option>
+                        <option>手术室</option><option>产科</option><option>骨一科</option><option>骨二科</option>
+                        <option>骨三科</option><option>急诊科</option><option>ICU</option><option>眼科</option>
+                        <option>耳鼻喉科</option><option>门诊换药室</option><option>康复科</option><option>供应中心（内部）</option>
+                      </select></div>
+                    <div class="fm"><label>灭菌批号</label>
+                      <input type="text" id="fBatch" placeholder="如：M20260919-02">
+                      <div class="hintline">原表未标注必填，建议涉及灭菌环节时必录</div></div>
+                    <div class="fm"><label>发生时间</label><input type="time" value="09:15"></div>
                   </div>
                 </div>
-              </div>
 
-              <div class="form-sec" data-page-node-id="SlGSLzR7w4hbQYHhFzSWrv">
-                <h4 data-page-node-id="k1AqBCrqs2Rj0rnrrqoEkB"><span class="no" data-page-node-id="vh32n2H2uwz5BNb7rxl0id">3</span>灭菌与追溯信息<span class="hint" data-page-node-id="2k7bDFTWosvpIzSfpUghy8">支撑批次追溯与定向召回</span></h4>
-                <div class="fgrid" data-page-node-id="lgofnhDAjFXyUvjqyHWcrE">
-                  <div class="fm" data-page-node-id="EvDLvSpiXGPs6lRFJAigQ8"><label data-page-node-id="4EmyD6BjB36hKS7ETxDH69">灭菌批号<span class="req" data-page-node-id="QJPVZEI8l1QgowKNRZRDC9">*</span></label><input type="text" placeholder="如：M20260914-02" data-page-node-id="fBhb6r5xo2gYNmrCVLglRN"></div>
-                  <div class="fm" data-page-node-id="IqzqlFqV2IyxGaLhmsPxrs"><label data-page-node-id="ACaH4hWhxICbcWQMr66to0">灭菌器编号 / 程序</label><input type="text" placeholder="如：M-02 / 134℃ 预真空 4min" data-page-node-id="Dr5cXJidgdUhblE0KQXAmA"></div>
-                  <div class="fm" data-page-node-id="hRwL9Uz9ogJcf1ldEHQwKG"><label data-page-node-id="lVf7O0TADQvvU5Di35fDxT">灭菌日期</label><input type="date" value="2026-09-14" data-page-node-id="Wf1hjxKNs00qO4DCGt3ppp"></div>
-                  <div class="fm" data-page-node-id="hhVzAd7oQLP6NL8xmQfAVU"><label data-page-node-id="9BCRrfBo2THjC1czLWb7l8">生物监测结果</label>
-                    <select data-page-node-id="3yGo1k1NOt763YbOC1PQEs"><option data-page-node-id="Y2xKJNc1T5wWN8lwEPzsf8">合格</option><option data-page-node-id="zO6dkSaquGK0LjP9Ol8oEO">阳性（不合格）</option><option data-page-node-id="TWjblJ4xCu6N270GHy5jXV">未做 / 待复检</option></select>
+                <div class="form-sec">
+                  <h4><span class="no">3</span>责任与质控人员<span class="hint">责任人、质控员均为必填，用于闭环追踪</span></h4>
+                  <div class="fgrid">
+                    <div class="fm"><label>责任人<span class="req">*</span></label>
+                      <input type="text" class="reqf" placeholder="姓名 / 工号"></div>
+                    <div class="fm"><label>质控员<span class="req">*</span></label>
+                      <input type="text" class="reqf" placeholder="姓名 / 工号"></div>
+                    <div class="fm"><label>上报人</label><input type="text" placeholder="默认当前登录人"></div>
                   </div>
-                  <div class="fm" data-page-node-id="kXYhlSYKGamRhyrq1SBHrq"><label data-page-node-id="G0oogOq473sLMGkDkN0CuF">化学监测 / BD 结果</label>
-                    <select data-page-node-id="H6z8uQxFh7YGUdnAQcI2JG"><option data-page-node-id="mfWEnZCyEzGUsmE8F6zaLJ">合格</option><option data-page-node-id="EngUMCat6I2tE0NO0wqtXN">不合格（变色不达标）</option></select>
-                  </div>
-                  <div class="fm" data-page-node-id="HgNskYRUAOt7wgckWgOSQI"><label data-page-node-id="4bNwQCyBir2Ms6ICFV4hN0">炉次装载量</label><input type="text" placeholder="如：18 个包 / 满载" data-page-node-id="cVzETm8WrME6F5XR5T9D9C"></div>
-                  <div class="fm sp2" data-page-node-id="QTLQ58cZ5wWuos84XmwDLM"><label data-page-node-id="QMf9CqMbGaOGIP4p2DB0tH">涉及器械包（包名 + 数量）<span class="req" data-page-node-id="DqqE9Ff77w1EG4dWD29TRR">*</span></label>
-                    <input type="text" placeholder="如：剖宫产器械包 ×2、基础敷料包 ×6" data-page-node-id="pnSu22vyW2ek9eMm25CzL6">
-                  </div>
-                  <div class="fm" data-page-node-id="Uhe5ACOc5VNmEVGtiXxB6x"><label data-page-node-id="NxsqxhzRg37egdyiPLBZrx">包内器械清单要点</label><input type="text" placeholder="如：含动力钻、铣刀" data-page-node-id="h18OeTlEOK2ETpuFUrILsF"></div>
                 </div>
-              </div>
 
-              <div class="form-sec" data-page-node-id="jNZuY7XHjUufwmzrGNieSu">
-                <h4 data-page-node-id="daGPemASn3uwC4KVoTdaXH"><span class="no" data-page-node-id="JJwiw1MqFaWoem3VBdop1f">4</span>使用科室与患者信息<span class="hint" data-page-node-id="gVfWWKURL5O98dNSDQeNTZ">涉及患者时必填，病历号按院内脱敏规则录入</span></h4>
-                <div class="fgrid" data-page-node-id="bdUmJRiHiGLnbMarLFb6E3">
-                  <div class="fm" data-page-node-id="prK9g2meYQyn2oB2vmq0sR"><label data-page-node-id="AHAN3EfsrmFHeInsQyH0gH">使用科室<span class="req" data-page-node-id="xBzP7oSXIUHMWD6JAzKEJP">*</span></label>
-                    <select data-page-node-id="yehrmwHgoVjWlt8gq5ZOKl"><option data-page-node-id="qsOfKDFMxEj2Q3pln5RMSh">手术室</option><option data-page-node-id="FygG3BVQC3bWn5KoQpKDzl">产科</option><option data-page-node-id="LGppRDSVkhrN2Zx52uGtwj">骨三科</option><option data-page-node-id="AkjAfPpV84Lvjk7xxHocQ7">眼科</option><option data-page-node-id="wdC4rfQs26hUfrWH5htr6S">门诊换药室</option><option data-page-node-id="JyDeaN75ePd9HksV4L7kSb">供应中心（内部）</option></select>
+                <div class="form-sec">
+                  <h4><span class="no">4</span>患者信息<span class="hint">住院号、患者姓名为非必选项</span></h4>
+                  <div class="fgrid">
+                    <div class="fm"><label>患者住院号<span class="unit">（非必选项）</span></label>
+                      <input type="text" placeholder="如：ZY2026013456"></div>
+                    <div class="fm"><label>患者姓名<span class="unit">（非必选项）</span></label>
+                      <input type="text" placeholder="如：张×明（脱敏）"></div>
+                    <div class="fm"><label>是否已用于患者</label>
+                      <select><option>否（使用前拦截）</option><option>是（已使用，需随访）</option><option>无法确认</option></select></div>
                   </div>
-                  <div class="fm" data-page-node-id="9B7MARjBR5KWOg9DQTsmFc"><label data-page-node-id="EkNPM3Fsqi9IdslLhBDx5C">患者姓名</label><input type="text" placeholder="如：张*明（脱敏）" data-page-node-id="hcOunpwW3tHJiiaIIBTJ3I"></div>
-                  <div class="fm" data-page-node-id="s9hNnnzQxB6HKDRYl9E0fH"><label data-page-node-id="lRL7C2RxnG2FvCjJdgcalZ">患者病历号 / 住院号</label><input type="text" placeholder="如：ZY2026013456" data-page-node-id="7Bkpiz5GGtOvSAsfxAWXYV"></div>
-                  <div class="fm" data-page-node-id="7sQKy2uISylBiXHXYVvHaC"><label data-page-node-id="zT8HB4dmtKsH6kelU5etAq">手术 / 操作名称</label><input type="text" placeholder="如：剖宫产术" data-page-node-id="V9p4F0yyBfkAsC2KxK6bD5"></div>
-                  <div class="fm" data-page-node-id="N0LSFDftNls3r5F7KEJ7Te"><label data-page-node-id="GbrXTre4TdJPL3wH76zpwf">使用日期</label><input type="date" data-page-node-id="nMB0WsD9QdcR0UNOTLCBhV"></div>
-                  <div class="fm" data-page-node-id="8u0hrAdAUqRPr58dbcvlpN"><label data-page-node-id="qnDuNkUhUHAGeeFyi0WmD3">接诊医生 / 护士</label><input type="text" placeholder="用于协同随访" data-page-node-id="y5hwYCEj6sF9YbnEXwzQ3O"></div>
                 </div>
-              </div>
 
-              <div class="form-sec" data-page-node-id="rrh05OFG9jm2k6lxxs72V9">
-                <h4 data-page-node-id="uSkeI7EwrVflUiX4351rZH"><span class="no" data-page-node-id="VCxIZ7CrTY8hAr33uEPBQD">5</span>处理措施与原因分析<span class="hint" data-page-node-id="cl2OUxCzwaMxFn9IxyFrU0">应急处置可多选</span></h4>
-                <div class="fgrid" data-page-node-id="FJEgashKS1MlmvDW3fErNS">
-                  <div class="fm sp3" data-page-node-id="uC6sfPurrzPDbTOmD8n85e"><label data-page-node-id="c0hnqucSSK7wstzL7I7OWt">应急处置措施（多选）</label>
-                    <div class="chk-group" data-page-node-id="hT2xDv6B8fGHaIIArOWVrD">
-                      <label class="chk" data-page-node-id="9jG9pfnMn5BtX9Iyg3j0cC"><input type="checkbox" checked data-page-node-id="MYwRo60s5qpPnEAd0C2B6b">封存该批次全部物品</label>
-                      <label class="chk" data-page-node-id="Ip7FsaWqJOzLB8FqvK6Mmx"><input type="checkbox" checked data-page-node-id="7R8BtSXkm9p9Ji9AKePzV4">召回已发放物品</label>
-                      <label class="chk" data-page-node-id="i5qNbdASzRVPH1DrFxit9o"><input type="checkbox" data-page-node-id="skMuiMkGLINe27G1xDzQVh">暂停使用相关设备</label>
-                      <label class="chk" data-page-node-id="tVHvvYxAFWiAHYvk1KsRbi"><input type="checkbox" checked data-page-node-id="bLYVjluKtO102zhS4TC43c">重新清洗 / 包装 / 灭菌</label>
-                      <label class="chk" data-page-node-id="L9cBIKtPwwM1fApBAJhtQt"><input type="checkbox" data-page-node-id="Mb5zL1P8Crq4OxGfPP39Sy">通知使用科室暂停使用</label>
-                      <label class="chk" data-page-node-id="bgNC6rusbF7F64Faqy8Rp0"><input type="checkbox" data-page-node-id="6m1dvwgWNMlUGLSrHGJfG1">上报院感科</label>
-                      <label class="chk" data-page-node-id="ba0s6S8rl0jilcphbMdBHX"><input type="checkbox" data-page-node-id="roWt8ersVVSNHh4UX40Xkv">上报护理部</label>
-                      <label class="chk" data-page-node-id="jHSMbnYd2N4gVIoEZ9xnDk"><input type="checkbox" data-page-node-id="byQwRatDi0Kg23jCb4owt4">上报医疗安全（不良）事件系统</label>
-                      <label class="chk" data-page-node-id="zD7H3eJsXIFtUrtGdbzvli"><input type="checkbox" data-page-node-id="6ZJyB2Nfywv1H93Q7K9nNN">联系设备厂家校验</label>
-                      <label class="chk" data-page-node-id="AdyreCE6OgcizaVswibRfu"><input type="checkbox" data-page-node-id="Mh0xO583gula5rD0wOIZrO">患者随访</label>
+                <div class="form-sec">
+                  <h4><span class="no">5</span>事件描述与处理措施</h4>
+                  <div class="fgrid">
+                    <div class="fm sp3"><label>事件描述<span class="req">*</span></label>
+                      <textarea class="reqf" id="fDesc" placeholder="记录发现经过、涉及物品、监测结果、影响范围"></textarea></div>
+                  </div>
+                </div>
+
+                <div class="form-sec">
+                  <h4><span class="no">6</span>处理措施与结局归档<span class="hint">结局归档支持图片上传（现场照片 / 监测报告 / 整改凭证）</span></h4>
+                  <div class="fgrid">
+                    <div class="fm sp3"><label>处理措施<span class="req">*</span></label>
+                      <textarea class="reqf" id="fAct" placeholder="按①②③分条：应急处置 → 临时措施 → 复查验证 → 后续跟进"></textarea></div>
+                    <div class="fm sp3"><label>结局归档<span class="req">*</span> <span class="unit">（含图片上传）</span></label>
+                      <select id="fOutcome" class="reqf">
+                        <option value="">请选择</option>
+                        <option>已闭环整改（院内处理完毕）</option>
+                        <option>持续改进中（PDCA 跟踪）</option>
+                        <option>转院感科处理</option>
+                        <option>转护理部处理</option>
+                        <option>上报医疗安全（不良）事件</option>
+                        <option>暂停使用待复检</option>
+                        <option>无需处理（误报 / 非质量问题）</option>
+                      </select>
+                      <div class="upload">
+                        <input type="file" id="evaFile" accept="image/*" multiple hidden>
+                        <div class="ubtns">
+                          <button type="button" class="btn btn-ghost" onclick="pickImg('camera')">
+                            <svg viewBox="0 0 24 24" width="14" height="14" fill="#5b6577"><path d="M9 3h6l1.5 2H21a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h4.5zm3 4a4.5 4.5 0 1 0 0 9 4.5 4.5 0 0 0 0-9zm0 2a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5z"/></svg>
+                            拍照上传</button>
+                          <button type="button" class="btn btn-ghost" onclick="pickImg('album')">
+                            <svg viewBox="0 0 24 24" width="14" height="14" fill="#5b6577"><path d="M4 4h16v16H4zm2 2v9l3.5-4 3 3.5L15 11l3 4V6z"/></svg>
+                            从相册 / 本地选择</button>
+                          <span class="hintline" style="margin:0">最多 6 张，支持 jpg / png</span>
+                        </div>
+                        <div class="thumbs" id="thumbs"></div>
+                      </div>
                     </div>
+                    <div class="fm"><label>整改期限</label><input type="date"></div>
+                    <div class="fm"><label>验证人</label><input type="text" placeholder="护士长 / 质控员"></div>
+                    <div class="fm"><label>闭环状态</label>
+                      <select><option>待审核</option><option>整改中</option><option>已闭环</option><option>已上报</option></select></div>
                   </div>
-                  <div class="fm sp3" data-page-node-id="4aF6zqCJ7LPs52xucGRwOb"><label data-page-node-id="4DxEjMZXn9L6tFJSJgDMwl">处理措施详细描述<span class="req" data-page-node-id="GCw3Z21VHeNWpQVkwSqGPV">*</span></label>
-                    <textarea placeholder="按①②③分条记录：现场处置 → 临时措施 → 复查验证 → 后续跟进"></textarea>
-                    <div class="hintline" data-page-node-id="dDWrHWlfkcniuA59HtXd92">建议要素：拦截范围、复检结果、放行条件、通知对象与时间</div>
-                  </div>
-                  <div class="fm sp3" data-page-node-id="uRpSbDufoQrl8Uxcxgw9CA"><label data-page-node-id="PLXThg021AethPTmVGYIN7">原因分析（可结合鱼骨图 / 5Why / RCA）</label>
-                    <textarea placeholder="人：/ 机：/ 料：/ 法：/ 环：/ 测："></textarea>
-                  </div>
-                  <div class="fm sp2" data-page-node-id="40EBPbS5WI1kVWQnOAMbLs"><label data-page-node-id="ZdNmj2stXfSF6ov1feLB7Z">整改措施与完成期限</label><input type="text" placeholder="如：更换疏水阀并连续 3 炉监测合格，09-18 前完成" data-page-node-id="wE1riHH8twn6xVY42I5f7v"></div>
-                  <div class="fm" data-page-node-id="0eVHbXpamuNJjlkUmOXAj6"><label data-page-node-id="Ed4qNgaqciyJVdH4PEx2ET">责任人</label><input type="text" placeholder="姓名 / 工号" data-page-node-id="VFI4hQhyvtXx63QPzUhEk5"></div>
                 </div>
-              </div>
 
-              <div class="form-sec" data-page-node-id="dfJp56w4k8HC1WKs0I7AIi">
-                <h4 data-page-node-id="77ikVWEF3Yed50x0pj5KFh"><span class="no" data-page-node-id="ARRabkPqEPxQyKQzg8AG6E">6</span>结局归档<span class="hint" data-page-node-id="apJSfBKoGRTCIEgrABOZwV">闭环判定与去向分流</span></h4>
-                <div class="fgrid" data-page-node-id="chKHOX0JUWoBcQxh4ntKpL">
-                  <div class="fm" data-page-node-id="wwNOAw2zLKUYMccyuK1DqV"><label data-page-node-id="f1v2uzVAnXdSCrh8yFGlFk">结局分类<span class="req" data-page-node-id="ItABif1vVGgbA2w2VsJko0">*</span></label>
-                    <select data-page-node-id="iuvXEcGnBQbSE4gVbfGhmq">
-                      <option data-page-node-id="jCjYuO3Jzm4flg61AxPbjM">已闭环整改（院内处理完毕）</option>
-                      <option data-page-node-id="UMG3qjSoE4aHStVQR6uBn1">持续改进中（PDCA 跟踪）</option>
-                      <option data-page-node-id="B5GTw7iZff6auBvPnJOQjU">转院感科处理</option>
-                      <option data-page-node-id="LcATkLcxas5uMNQD6MsAHL">转护理部处理</option>
-                      <option data-page-node-id="5ZmyjOyZbHWEyDbSyMujAg">上报医疗安全（不良）事件</option>
-                      <option data-page-node-id="yBV3dzOVtDCDWiYQfFBlnb">暂停使用待复检</option>
-                      <option data-page-node-id="AIqWaAMfPMZhoorSXFnKsf">无需处理（误报 / 非质量问题）</option>
-                    </select>
-                  </div>
-                  <div class="fm" data-page-node-id="K8AO4XbAO3H9xo0kTJ1IAS"><label data-page-node-id="SWWB1yUFmDZEKFQzDaydR7">闭环状态<span class="req" data-page-node-id="kNiA7WKXXQa1wrXRyl8UfB">*</span></label>
-                    <select data-page-node-id="U2q0nn7F7tMizWTfBPyqVF"><option data-page-node-id="pJobAuLsJzjRei5LMARJuB">待审核</option><option data-page-node-id="wK3t4PTJC1G1Qdo9yViOby">整改中</option><option data-page-node-id="BnjWriz45AE2EuTkt5tMoS">已闭环</option><option data-page-node-id="Z45d3hrTdHS6qzKLVJSMZ5">已上报</option></select>
-                  </div>
-                  <div class="fm" data-page-node-id="uAuvE05jfE0ZLUs3DmjJXE"><label data-page-node-id="ld7EZ294Toj8QBYom3DRuX">验证方式</label>
-                    <select data-page-node-id="8zexpJt1RBjlUxjUYzhrGv"><option data-page-node-id="cSBWB65Ds1nSuXZYgHfbBs">复检监测合格</option><option data-page-node-id="rtZUyfg3ScsPmhDdIVhNcW">现场查看 + 记录核查</option><option data-page-node-id="H83AvEjIIYzU3PwE6BkuaZ">培训考核合格</option><option data-page-node-id="MqlDprthqCAWZpAIaGnopU">跟踪观察 1 个月</option></select>
-                  </div>
-                  <div class="fm" data-page-node-id="IWPvyXuIhDH6nl2M0oHf2c"><label data-page-node-id="WgSywePhtHi1zKij66sqMP">归档日期</label><input type="date" data-page-node-id="JPBbk6YNl6a3qF6O7feG9c"></div>
-                  <div class="fm" data-page-node-id="Pp40dBwF3fb6ktia0NFc6x"><label data-page-node-id="qO7uX8UOcA9voHdMi92swO">归档人 / 审核人</label><input type="text" placeholder="护士长 / 质控员" data-page-node-id="MptLw8sBlYGFfosCVXaipa"></div>
-                  <div class="fm" data-page-node-id="ueP2D1DYzKSdedTyNmS5zE"><label data-page-node-id="MPnMjRAgi41KakIIdEgWFY">附件</label><input type="text" placeholder="照片 / 监测报告 / 培训记录" data-page-node-id="AAVumDtcI7QH6GG3oyICF4"></div>
+                <div class="actions">
+                  <button class="btn btn-ghost" type="button" onclick="toast('草稿已保存')">暂存草稿</button>
+                  <button class="btn btn-ghost" type="button" onclick="resetForm()">重置</button>
+                  <button class="btn btn-primary" type="button" onclick="submitForm()">提交并生成台账记录</button>
                 </div>
-              </div>
-
-              <div class="actions" data-page-node-id="Y7xXU4crMfgpOLxaLiQ9zl">
-                <button class="btn btn-ghost" onclick="toast('草稿已保存')" data-page-node-id="wnC7t5zQnr7q9UwMWZjXpK">暂存草稿</button>
-                <button class="btn btn-ghost" onclick="toast('已重置表单')" data-page-node-id="zRG0a3roeEsrlYokifNZes">重置</button>
-                <button class="btn btn-primary" onclick="submitForm()" data-page-node-id="F1QeJDO1acwcasZSwcuQ1e">提交并生成台账记录</button>
-              </div>
-
+              </form>
             </div>
           </div>
         </section>
 
-        <!-- ---------- 视图4：质控指标看板 ---------- -->
-        <section class="view" data-view="board" data-page-node-id="iYRrGaBiidjDfY1o7kUmAJ">
-          <div class="two-col" data-page-node-id="e37oUvTdcKA1LskEHN2oxa">
-            <div class="panel" data-page-node-id="XFXBiejflnrx6Wx8u1s2mF">
-              <div class="panel-hd" data-page-node-id="xJFicOk3y0rWpzOBIbPScZ"><h3 data-page-node-id="Oosfbh5PV11iu8BHQFeTtb">事件类型分布<span class="hd-tip" data-page-node-id="2k9PVprsMzaAKblQSzvaQ1">2026 Q3 ／ 共 12 件</span></h3></div>
-              <div class="panel-bd" data-page-node-id="reYXNTO4oVxirJKPYPUCsi">
-                <div class="bars" data-page-node-id="pa3Sjg9MthQg8FNF56ZSLq">
-                  <div class="bar-row" data-page-node-id="yRQtDLkA1lSgOU8MjqAiVw"><div class="bar-label" data-page-node-id="R8DunN5MFL25Tf35rv6BNw">湿包</div><div class="bar-track" data-page-node-id="ZxFn4gFZGTy5o8U8iHV899"><div class="bar-fill" style="width:33.3%;background:linear-gradient(90deg,#ffb648,#f5891a)" data-page-node-id="ntLgl5ojpkqZJrUlk35Gp1"></div></div><div class="bar-val" data-page-node-id="3QePB6dmoDNPAScmiDPdUW">4 件</div></div>
-                  <div class="bar-row" data-page-node-id="pwZVGv1HfJdQtBZupuSilC"><div class="bar-label" data-page-node-id="rMSROV7NcLNGwbYmeeGVE2">包装缺陷</div><div class="bar-track" data-page-node-id="0fT7yGuldeQHS4EST3VKsf"><div class="bar-fill" style="width:25%;background:linear-gradient(90deg,#ffb648,#f5891a)" data-page-node-id="7NgkideZKo440sV1yKJS7r"></div></div><div class="bar-val" data-page-node-id="YTt65a4QRo4679YgAHD4Oa">3 件</div></div>
-                  <div class="bar-row" data-page-node-id="THZ6eq4LxSpnwcJRoON2ZR"><div class="bar-label" data-page-node-id="hQHjZGF9qOuwTkwo9nJE0t">器械功能不良/缺失</div><div class="bar-track" data-page-node-id="IpOrbf4Iv7rhO3BwjKKHWA"><div class="bar-fill" style="width:16.7%;background:linear-gradient(90deg,#ff8a8a,#e8453c)" data-page-node-id="n4XNBAHPN3D8g5hF1VoOxd"></div></div><div class="bar-val" data-page-node-id="7VcqsIU8C6cUBU4STiwwpc">2 件</div></div>
-                  <div class="bar-row" data-page-node-id="HVThFQnZzQZ0P0DW2Shxgi"><div class="bar-label" data-page-node-id="ejYep2Lrugghspuyc2R1xT">灭菌监测不合格</div><div class="bar-track" data-page-node-id="zh0DFhkY9gzjKMRRlQUGT1"><div class="bar-fill" style="width:8.3%;background:linear-gradient(90deg,#ff8a8a,#e8453c)" data-page-node-id="QjoCiBfpzECUMq4VlcvvQJ"></div></div><div class="bar-val" data-page-node-id="S9jdOD2mu3HJQKSD34WiVT">1 件</div></div>
-                  <div class="bar-row" data-page-node-id="ct6SerxmDXQA3xgEIuNqef"><div class="bar-label" data-page-node-id="BR7SlT4NFIFbdbnw82Uexg">发放错误</div><div class="bar-track" data-page-node-id="f6BNjwYLwqakepK20yYLoz"><div class="bar-fill" style="width:8.3%;background:linear-gradient(90deg,#4fd4e0,#0fa4bd)" data-page-node-id="2Qm47269IVcyzG3FxlzQwH"></div></div><div class="bar-val" data-page-node-id="bAId0xJRMirFzTa1Lkr6UR">1 件</div></div>
-                  <div class="bar-row" data-page-node-id="htsZNIyQuGXLOLIGjcZUHL"><div class="bar-label" data-page-node-id="G8uaqvZ4RGl7SZFRVdRIcH">职业暴露</div><div class="bar-track" data-page-node-id="mvIHVDTTWIrG6V48uTBpt7"><div class="bar-fill" style="width:8.3%;background:linear-gradient(90deg,#9b86f7,#6d4fe8)" data-page-node-id="3G7lNXoBPdlONTyW0q8p02"></div></div><div class="bar-val" data-page-node-id="wEjmN1lAOKrCc3wj2H1F3S">1 件</div></div>
+        <!-- ===== 视图4：质量监测指标字典 ===== -->
+        <section class="view" data-view="dict">
+          <div class="panel">
+            <div class="panel-hd">
+              <h3>质量监测指标字典<span class="hd-tip">模块：质量监控管理 ／ 共 25 条指标 · 5 个类别 · 10 个环节</span></h3>
+            </div>
+            <div class="panel-bd">
+              <div class="legend">
+                <span>层级：<b>模块</b> → <b>指标类别</b> → <b>环节（问题事件类型）</b> → <b>指标名称</b></span>
+                <span>类别：过程 / 专科 / 结果 / 结构 / 其他</span>
+                <span>标记：一般指标 · 敏感指标 · 重点环节</span>
+              </div>
+              <div class="table-wrap">
+                <table id="dictTable" class="cardable">
+                  <thead>
+                    <tr>
+                      <th style="width:48px">序号</th>
+                      <th style="width:110px">模块名称</th>
+                      <th style="width:96px">指标类别</th>
+                      <th style="width:150px">环节（问题事件类型）</th>
+                      <th style="width:340px">指标名称</th>
+                      <th>备注 / 需求批注</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>1</td><td>质量监控管理</td><td><span class="tag t-blue">过程指标</span></td><td>回收</td><td class="cell-strong">器械清洗效果定期抽检合格率</td><td class="muted">—</td></tr>
+                    <tr><td>2</td><td>质量监控管理</td><td><span class="tag t-blue">过程指标</span></td><td>分类</td><td class="muted">（该环节暂未配置指标）</td><td class="muted">—</td></tr>
+                    <tr><td>3</td><td>质量监控管理</td><td><span class="tag t-blue">过程指标</span></td><td>清洗</td><td class="muted">（该环节暂未配置指标）</td><td class="muted">—</td></tr>
+                    <tr><td>4</td><td>质量监控管理</td><td><span class="tag t-blue">过程指标</span></td><td>消毒</td><td class="muted">（该环节暂未配置指标）</td><td class="muted">—</td></tr>
+                    <tr><td>5</td><td>质量监控管理</td><td><span class="tag t-blue">过程指标</span></td><td>干燥</td><td class="muted">（该环节暂未配置指标）</td><td class="muted">—</td></tr>
+                    <tr><td>6</td><td>质量监控管理</td><td><span class="tag t-blue">过程指标</span></td><td>器械检查与保养</td><td class="cell-strong">器械检查包装质量<span class="muted" style="font-weight:400">（一般指标）</span></td><td class="muted">—</td></tr>
+                    <tr><td>7</td><td>质量监控管理</td><td><span class="tag t-blue">过程指标</span></td><td>包装</td><td class="cell-strong">包装合格率</td><td class="muted">—</td></tr>
+                    <tr><td>8</td><td>质量监控管理</td><td><span class="tag t-blue">过程指标</span></td><td>灭菌</td><td class="cell-strong">灭菌装载合格率</td><td class="muted">—</td></tr>
+                    <tr><td>9</td><td>质量监控管理</td><td><span class="tag t-blue">过程指标</span></td><td>灭菌</td><td class="cell-strong">灭菌程序选择错误例（次）数</td><td class="muted">—</td></tr>
+                    <tr><td>10</td><td>质量监控管理</td><td><span class="tag t-blue">过程指标</span></td><td>灭菌</td><td class="cell-strong">预防无菌包湿包护理措施质量<span class="muted" style="font-weight:400">（敏感指标）</span></td><td class="muted">—</td></tr>
+                    <tr><td>11</td><td>质量监控管理</td><td><span class="tag t-blue">过程指标</span></td><td>储存</td><td class="muted">（该环节暂未配置指标）</td><td class="muted">—</td></tr>
+                    <tr><td>12</td><td>质量监控管理</td><td><span class="tag t-blue">过程指标</span></td><td>发放</td><td class="cell-strong">无菌物品发放质量<span class="muted" style="font-weight:400">（一般指标）</span></td><td class="muted">—</td></tr>
+                    <tr><td>13</td><td>质量监控管理</td><td><span class="tag t-blue">过程指标</span></td><td>发放</td><td class="cell-strong">特殊科室检查<span class="muted" style="font-weight:400">（一般指标）</span></td><td class="muted">—</td></tr>
+                    <tr><td>14</td><td>质量监控管理</td><td><span class="tag t-blue">过程指标</span></td><td>发放</td><td class="cell-strong">外来医疗器械与植入物管理质量<span class="muted" style="font-weight:400">（重点环节）</span></td><td class="muted">—</td></tr>
+                    <tr><td>15</td><td>质量监控管理</td><td><span class="tag t-blue">过程指标</span></td><td>发放</td><td class="cell-strong">安全核查护理质量<span class="muted" style="font-weight:400">（重点环节）</span></td><td class="muted">—</td></tr>
+                    <tr><td>16</td><td>质量监控管理</td><td><span class="tag t-blue">过程指标</span></td><td>发放</td><td class="cell-strong">预防针刺伤管理</td><td class="muted">—</td></tr>
+                    <tr><td>17</td><td>质量监控管理</td><td><span class="tag t-purple">专科指标</span></td><td class="muted">—</td><td class="cell-strong">过氧化氢等离子体灭菌效果监测达标率</td><td>与常规灭菌合格率<b>分开计算</b>（国家卫健委指标单列），过氧化氢灭菌更易不合格</td></tr>
+                    <tr><td>18</td><td>质量监控管理</td><td><span class="tag t-purple">专科指标</span></td><td class="muted">—</td><td class="cell-strong">植入物及外来医疗器械清洗消毒返还合格率</td><td class="muted">—</td></tr>
+                    <tr><td>19</td><td>质量监控管理</td><td><span class="tag t-red">结果指标</span></td><td class="muted">—（跨环节）</td><td class="cell-strong">湿包发生率</td><td><b>批注：</b>湿包贯穿很多工作环节（含设备），不能算作干燥环节</td></tr>
+                    <tr><td>20</td><td>质量监控管理</td><td><span class="tag t-red">结果指标</span></td><td class="muted">—（跨环节）</td><td class="cell-strong">灭菌效果监测合格率</td><td><b>批注：</b>湿包贯穿很多工作环节（含设备耗材），不能算作灭菌环节</td></tr>
+                    <tr><td>21</td><td>质量监控管理</td><td><span class="tag t-cyan">结构指标</span></td><td class="muted">—</td><td class="cell-strong">复用医疗器械（含植入物及外来）集中管理率</td><td class="muted">—</td></tr>
+                    <tr><td>22</td><td>质量监控管理</td><td><span class="tag t-cyan">结构指标</span></td><td class="muted">—</td><td class="cell-strong">从业人员离职（岗）率</td><td class="muted">—</td></tr>
+                    <tr><td>23</td><td>质量监控管理</td><td><span class="tag t-cyan">结构指标</span></td><td class="muted">—</td><td class="cell-strong">继续教育率</td><td class="muted">—</td></tr>
+                    <tr><td>24</td><td>质量监控管理</td><td><span class="tag t-cyan">结构指标</span></td><td class="muted">—</td><td class="cell-strong">设备设施定期维护检测完成率</td><td>原表记为「设备施定期维护检测完成率」，疑似笔误，界面已修正</td></tr>
+                    <tr><td>25</td><td>质量监控管理</td><td><span class="tag t-grey">其他指标</span></td><td class="muted">—</td><td class="cell-strong">预处理质量</td><td class="muted">—</td></tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="notes">
+                <div class="note-item"><b>需求批注 1：</b>湿包贯穿很多工作环节（包括设备、耗材），因此在指标归口上既不能算作干燥环节，也不能算作灭菌环节 —— 对应「湿包发生率」「灭菌效果监测合格率」两条结果指标单独统计。</div>
+                <div class="note-item"><b>需求批注 2：</b>「过氧化氢等离子体灭菌效果监测达标率」与常规灭菌合格率<b>不一样</b>，过氧化氢容易灭菌不合格，国家卫健委指标中单独计算。</div>
+                <div class="note-item"><b>待确认项：</b>原表「灭菌批号」字段（N 列）未标注必填规则，界面暂按"涉及灭菌环节时建议必录"处理，请与需求方确认后固化。</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===== 视图5：质控指标看板 ===== -->
+        <section class="view" data-view="board">
+          <div class="two-col">
+            <div class="panel">
+              <div class="panel-hd"><h3>按指标类别分布<span class="hd-tip">2026 Q3 ／ 共 12 件</span></h3></div>
+              <div class="panel-bd">
+                <div class="bars">
+                  <div class="bar-row"><div class="bar-label">过程指标</div><div class="bar-track"><div class="bar-fill" style="width:66.7%;background:linear-gradient(90deg,#4ea6f7,#1f6fd6)"></div></div><div class="bar-val">8 件</div></div>
+                  <div class="bar-row"><div class="bar-label">专科指标</div><div class="bar-track"><div class="bar-fill" style="width:16.7%;background:linear-gradient(90deg,#9b86f7,#6d4fe8)"></div></div><div class="bar-val">2 件</div></div>
+                  <div class="bar-row"><div class="bar-label">结果指标</div><div class="bar-track"><div class="bar-fill" style="width:8.3%;background:linear-gradient(90deg,#ff8a8a,#e8453c)"></div></div><div class="bar-val">1 件</div></div>
+                  <div class="bar-row"><div class="bar-label">结构指标</div><div class="bar-track"><div class="bar-fill" style="width:0;background:linear-gradient(90deg,#4fd4e0,#0fa4bd)"></div></div><div class="bar-val">0 件</div></div>
+                  <div class="bar-row"><div class="bar-label">其他指标</div><div class="bar-track"><div class="bar-fill" style="width:8.3%;background:linear-gradient(90deg,#ffb648,#f5891a)"></div></div><div class="bar-val">1 件</div></div>
                 </div>
               </div>
             </div>
 
-            <div class="panel" data-page-node-id="VEiDnBFDGNcpmHOUi1qF2X">
-              <div class="panel-hd" data-page-node-id="YXbzPAMluzhOlJeAUl8i7w"><h3 data-page-node-id="jQRAs2jhXYWMDesgOhBrSl">核心质控指标</h3></div>
-              <div class="panel-bd" data-page-node-id="mwFn9nqBIEcDW0VeIsXbTY">
-                <div class="kpi-list" data-page-node-id="0YEusHm6EdeLtmQOBpcOun">
-                  <div class="kpi" data-page-node-id="UcQ3f12T8GrK3MayZLgJB5"><span class="kdot" style="background:#e8453c" data-page-node-id="LpUAHW5xFmOeHYHAeByn5E"></span>事件上报率<span class="kv" data-page-node-id="kMlws3eLR6KhRro173lrZD">100%</span></div>
-                  <div class="kpi" data-page-node-id="WPtmg9A1Ht9sVQsZTLpCCu"><span class="kdot" style="background:#16a86a" data-page-node-id="hAYm3HE9LhtQD0SLdj3Jw4"></span>事件闭环率<span class="kv" data-page-node-id="AckZDQBcfA7cLUda0pODI4">83.3%</span></div>
-                  <div class="kpi" data-page-node-id="SkgmxsC2tjmT61Jc9LcAJT"><span class="kdot" style="background:#2379e0" data-page-node-id="qYxfWOv9mACCTAoJG3KId8"></span>平均闭环时长<span class="kv" data-page-node-id="Gy0tpBDUDJ2vUTt5ax1boL">4.2 天</span></div>
-                  <div class="kpi" data-page-node-id="SF9nyMWIAcF0f4wuRidYBk"><span class="kdot" style="background:#f59f1a" data-page-node-id="SgMskSwU11wepQMnbDBmwG"></span>Ⅰ / Ⅱ 级事件占比<span class="kv" data-page-node-id="J8YDNcARIAHcd4Gj3XTUEy">91.7%</span></div>
-                  <div class="kpi" data-page-node-id="jPkbiGXHG0wBcLt1bxlJa9"><span class="kdot" style="background:#7b5cf0" data-page-node-id="e2KHX4G394cjbEm9ynJCBH"></span>涉及患者的召回事件<span class="kv" data-page-node-id="amP87yduHK4GlwJu8qiGbZ">1 例</span></div>
-                  <div class="kpi" data-page-node-id="Z8fxqRe1qmcVRGJBKIKpDt"><span class="kdot" style="background:#12b8c9" data-page-node-id="rXUjypCvSs3DOQCojBx6bZ"></span>整改措施落实率<span class="kv" data-page-node-id="ySpyF2bCBPaMpAARIxQZM3">100%</span></div>
+            <div class="panel">
+              <div class="panel-hd"><h3>核心质控指标</h3></div>
+              <div class="panel-bd">
+                <div class="kpi-list">
+                  <div class="kpi"><span class="kdot" style="background:#e8453c"></span>事件上报率<span class="kv">100%</span></div>
+                  <div class="kpi"><span class="kdot" style="background:#16a86a"></span>事件闭环率<span class="kv">83.3%</span></div>
+                  <div class="kpi"><span class="kdot" style="background:#2379e0"></span>平均闭环时长<span class="kv">4.2 天</span></div>
+                  <div class="kpi"><span class="kdot" style="background:#f59f1a"></span>Ⅰ/Ⅱ 级事件占比<span class="kv">75.0%</span></div>
+                  <div class="kpi"><span class="kdot" style="background:#7b5cf0"></span>涉及患者的召回事件<span class="kv">1 例</span></div>
+                  <div class="kpi"><span class="kdot" style="background:#12b8c9"></span>整改措施落实率<span class="kv">100%</span></div>
                 </div>
               </div>
             </div>
           </div>
 
-          <div class="panel" style="margin-top:14px" data-page-node-id="Fx8zPkz99cCtL9FtmP0vmh">
-            <div class="panel-hd" data-page-node-id="uT1YfxdkApIx41K7RoinEy"><h3 data-page-node-id="M5IZvqikATTCLC4C0JQ9Cz">闭环管理流程（PDCA）</h3></div>
-            <div class="panel-bd" data-page-node-id="JkBGIXBkgAakOBlVvL8HbC">
-              <div class="pdca" data-page-node-id="R8xPBlIuFHMcZiSQdNUFwV">
-                <div class="step" data-page-node-id="P2HFxG4RNbPdFNG8Bgfu8W"><b data-page-node-id="6IedggoS5Z547G64tW0Kx3">P · 上报登记</b><p data-page-node-id="AeD5E5YO44qnVuiweDIMvf">发现环节即时登记，24h 内完成上报；系统自动生成事件编号并按类型分级。</p></div>
-                <div class="step" data-page-node-id="e2q0T5i6OGUDwMCHUfIp4C"><b data-page-node-id="djWOfoaVDLhwIxEH4jLvBI">D · 应急处置</b><p data-page-node-id="NY6R19u4Ym8lqBtxEtGl7p">封存 / 召回 / 停用 / 重处理，同步通知使用科室，涉及患者启动随访。</p></div>
-                <div class="step" data-page-node-id="nMiw3WR4uAHfLxj62t0qqu"><b data-page-node-id="zYY2ULHgBFK7x0grVu1uud">C · 原因分析</b><p data-page-node-id="4abQjYfcBtNpeBDSMvZMuC">鱼骨图 + 5Why 定位根因，核查同批次、同设备、同岗位风险面。</p></div>
-                <div class="step" data-page-node-id="WWQIeh9DdFdS6lEWYoi4ef"><b data-page-node-id="29SlJncnFg3pZeMmaTfmbM">A · 整改归档</b><p data-page-node-id="ZSnFCPT7RawpGbblF83lKM">措施落地 + 复检验证，纳入月度质控分析会，必要时修订 SOP 并再培训。</p></div>
+          <div class="panel">
+            <div class="panel-hd"><h3>按环节分布（过程指标）</h3></div>
+            <div class="panel-bd">
+              <div class="bars">
+                <div class="bar-row"><div class="bar-label">灭菌</div><div class="bar-track"><div class="bar-fill" style="width:37.5%;background:linear-gradient(90deg,#ff8a8a,#e8453c)"></div></div><div class="bar-val">3 件</div></div>
+                <div class="bar-row"><div class="bar-label">发放</div><div class="bar-track"><div class="bar-fill" style="width:25%;background:linear-gradient(90deg,#ffb648,#f5891a)"></div></div><div class="bar-val">2 件</div></div>
+                <div class="bar-row"><div class="bar-label">包装</div><div class="bar-track"><div class="bar-fill" style="width:12.5%;background:linear-gradient(90deg,#4ea6f7,#1f6fd6)"></div></div><div class="bar-val">1 件</div></div>
+                <div class="bar-row"><div class="bar-label">器械检查与保养</div><div class="bar-track"><div class="bar-fill" style="width:12.5%;background:linear-gradient(90deg,#4ea6f7,#1f6fd6)"></div></div><div class="bar-val">1 件</div></div>
+                <div class="bar-row"><div class="bar-label">回收</div><div class="bar-track"><div class="bar-fill" style="width:12.5%;background:linear-gradient(90deg,#48d69a,#16a86a)"></div></div><div class="bar-val">1 件</div></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel" style="margin-top:14px">
+            <div class="panel-hd"><h3>闭环管理流程（PDCA）</h3></div>
+            <div class="panel-bd">
+              <div class="pdca">
+                <div class="step"><b>P · 上报登记</b><p>按「指标类别 → 环节 → 指标名称」三级定位，24h 内完成上报；系统自动生成事件编号。</p></div>
+                <div class="step"><b>D · 应急处置</b><p>封存 / 召回 / 停用设备 / 重处理，通知使用科室，涉及患者启动随访。</p></div>
+                <div class="step"><b>C · 原因分析</b><p>鱼骨图 + 5Why 定位根因，核查同批次、同设备、同班次风险面，质控员复核。</p></div>
+                <div class="step"><b>A · 整改归档</b><p>措施落地 + 复检验证，结局归档支持上传整改凭证图片，纳入月度质控分析会。</p></div>
               </div>
             </div>
           </div>
@@ -740,7 +972,21 @@ tbody tr:last-child td{border-bottom:none}
   </div>
 </div>
 
-<div id="toast" data-page-node-id="GvMpS10NHUyDNXKglyPzMs"></div>
+<div class="nav-mask" id="navMask"></div>
+<nav class="bottombar" id="bottombar">
+  <button class="bbtn" data-nav="qc-home">
+    <svg viewBox="0 0 24 24"><path d="M12 3 3 10v11h6v-6h6v6h6V10z"/></svg>首页</button>
+  <button class="bbtn" data-nav="new">
+    <svg viewBox="0 0 24 24"><path d="M11 11V5h2v6h6v2h-6v6h-2v-6H5v-2z"/></svg>上报</button>
+  <button class="bbtn active" data-nav="ledger">
+    <svg viewBox="0 0 24 24"><path d="M4 3h13l3 3v15H4zm3 8h10v2H7zm0-4h7v2H7zm0 8h10v2H7z"/></svg>台账</button>
+  <button class="bbtn" data-nav="dict">
+    <svg viewBox="0 0 24 24"><path d="M4 6h16v2H4zm0 5h16v2H4zm0 5h10v2H4z"/></svg>字典</button>
+  <button class="bbtn" data-nav="board">
+    <svg viewBox="0 0 24 24"><path d="M4 20V10h4v10zm6 0V4h4v16zm6 0v-7h4v7z"/></svg>看板</button>
+</nav>
+
+<div id="toast"></div>
 
 <script>
 /* ===== 时钟 ===== */
@@ -751,6 +997,68 @@ function tick(){
     d.getFullYear()+'-'+p(d.getMonth()+1)+'-'+p(d.getDate())+' 星期'+w+' '+p(d.getHours())+':'+p(d.getMinutes())+':'+p(d.getSeconds());
 }
 tick(); setInterval(tick,1000);
+
+/* ===== 指标字典（与 Excel 模块设计一致）===== */
+var IND = {
+  '过程指标': {
+    '回收': ['器械清洗效果定期抽检合格率'],
+    '分类': ['（该环节暂未配置指标）'],
+    '清洗': ['（该环节暂未配置指标）'],
+    '消毒': ['（该环节暂未配置指标）'],
+    '干燥': ['（该环节暂未配置指标）'],
+    '器械检查与保养': ['器械检查包装质量（一般指标）'],
+    '包装': ['包装合格率'],
+    '灭菌': ['灭菌装载合格率','灭菌程序选择错误例（次）数','预防无菌包湿包护理措施质量（敏感指标）'],
+    '储存': ['（该环节暂未配置指标）'],
+    '发放': ['无菌物品发放质量（一般指标）','特殊科室检查（一般指标）','外来医疗器械与植入物管理质量（重点环节）','安全核查护理质量（重点环节）','预防针刺伤管理']
+  },
+  '专科指标': { '—': ['过氧化氢等离子体灭菌效果监测达标率','植入物及外来医疗器械清洗消毒返还合格率'] },
+  '结果指标': { '—': ['湿包发生率','灭菌效果监测合格率'] },
+  '结构指标': { '—': ['复用医疗器械（含植入物及外来）集中管理率','从业人员离职（岗）率','继续教育率','设备设施定期维护检测完成率'] },
+  '其他指标': { '—': ['预处理质量'] }
+};
+var NOTE = {
+  '过氧化氢等离子体灭菌效果监测达标率':'与常规灭菌合格率分开计算（国家卫健委指标单列），过氧化氢灭菌更易不合格。',
+  '湿包发生率':'湿包贯穿很多工作环节（含设备），不能算作干燥环节，单独统计。',
+  '灭菌效果监测合格率':'湿包贯穿很多工作环节（含设备耗材），不能算作灭菌环节，单独统计。'
+};
+
+var fCat=document.getElementById('fCatSel'),
+    fLink=document.getElementById('fLinkSel'),
+    fName=document.getElementById('fNameSel'),
+    fNoteBox=document.getElementById('fNote');
+
+function showNote(v){
+  var t = NOTE[v] || '';
+  fNoteBox.innerHTML = t ? '<b>指标口径提示：</b>' + t : '';
+  fNoteBox.style.display = t ? 'block' : 'none';
+}
+function fillName(){
+  var arr = (IND[fCat.value] && IND[fCat.value][fLink.value]) || [];
+  fName.innerHTML = '<option value="">请选择</option>';
+  arr.forEach(function(v){
+    if(v.indexOf('暂未配置') > -1) return;
+    var o=document.createElement('option'); o.value=v; o.textContent=v; fName.appendChild(o);
+  });
+  if(arr.length && arr[0].indexOf('暂未配置') > -1){
+    var o=document.createElement('option'); o.value=''; o.textContent='该环节暂未配置指标，请联系质控科补充'; fName.appendChild(o);
+  }
+  if(fName.options.length === 2){ fName.selectedIndex = 1; }
+  showNote(fName.value);
+}
+function fillLink(){
+  var obj = IND[fCat.value] || {};
+  fLink.innerHTML = '<option value="">请选择</option>';
+  Object.keys(obj).forEach(function(k){
+    var o=document.createElement('option'); o.value=k; o.textContent = (k==='—' ? '—（该类别不区分环节）' : k); fLink.appendChild(o);
+  });
+  if(fLink.options.length === 2){ fLink.selectedIndex = 1; }
+  fillName();
+}
+fCat.addEventListener('change', fillLink);
+fLink.addEventListener('change', fillName);
+fName.addEventListener('change', function(){ showNote(this.value); });
+fillLink();
 
 /* ===== 视图切换 ===== */
 function show(view){
@@ -763,80 +1071,164 @@ function show(view){
   document.querySelectorAll('.sub-item').forEach(function(s){
     s.classList.toggle('active', s.dataset.nav===view);
   });
-  document.querySelector('.scroll').scrollTop=0;
+  document.querySelectorAll('.bbtn').forEach(function(b){
+    b.classList.toggle('active', b.dataset.nav===view);
+  });
+  document.querySelector('.scroll').scrollTop = 0;
 }
-document.addEventListener('click',function(e){
-  var el=e.target.closest('[data-nav]');
-  if(el && el.dataset.nav && el.dataset.nav!=='none'){ show(el.dataset.nav); }
-  var tg=e.target.closest('[data-toggle]');
+document.addEventListener('click', function(e){
+  var el = e.target.closest('[data-nav]');
+  if(el && el.dataset.nav && el.dataset.nav !== 'none'){ show(el.dataset.nav); if(typeof closeMenu === 'function') closeMenu(); }
+  var tg = e.target.closest('[data-toggle]');
   if(tg){ tg.classList.toggle('open'); }
 });
 
+/* ===== 移动端抽屉 ===== */
+var _sidebar = document.getElementById('sidebar');
+var _mask = document.getElementById('navMask');
+function openMenu(){ _sidebar.classList.add('open'); _mask.classList.add('show'); }
+function closeMenu(){ _sidebar.classList.remove('open'); _mask.classList.remove('show'); }
+document.getElementById('btnMenu').addEventListener('click', openMenu);
+_mask.addEventListener('click', closeMenu);
+window.addEventListener('resize', function(){ if(window.innerWidth > 1023) closeMenu(); });
+
+/* ===== 表格：为移动端卡片视图写入列标签 ===== */
+(function(){
+  document.querySelectorAll('table.cardable').forEach(function(tb){
+    var ths = [].map.call(tb.querySelectorAll('thead th'), function(t){ return t.textContent.trim(); });
+    tb.querySelectorAll('tbody tr').forEach(function(tr){
+      [].forEach.call(tr.children, function(td, i){ if(ths[i]) td.setAttribute('data-label', ths[i]); });
+    });
+  });
+})();
+
 /* ===== 筛选 ===== */
 function filterRows(){
-  var t=document.getElementById('fType').value,
+  var c=document.getElementById('fCat').value,
+      l=document.getElementById('fLink').value,
+      v=document.getElementById('fLv').value,
       d=document.getElementById('fDept').value,
-      s=document.getElementById('fStatus').value,
       k=document.getElementById('fKey').value.trim().toLowerCase(),
       n=0;
   document.querySelectorAll('#ledgerTable tbody tr').forEach(function(tr){
-    var txt=tr.innerText.toLowerCase();
-    var ok = (!t || tr.innerText.indexOf(t)>-1)
-          && (!d || tr.innerText.indexOf(d)>-1)
-          && (!s || tr.innerText.indexOf(s)>-1)
-          && (!k || txt.indexOf(k)>-1);
-    tr.style.display = ok?'':'none';
-    if(ok){ n++; tr.firstElementChild.textContent=n; }
+    var txt = tr.innerText.toLowerCase();
+    var ok = (!c || tr.innerText.indexOf(c) > -1)
+          && (!l || tr.innerText.indexOf(l) > -1)
+          && (!v || tr.innerText.indexOf(v) > -1)
+          && (!d || tr.innerText.indexOf(d) > -1)
+          && (!k || txt.indexOf(k) > -1);
+    tr.style.display = ok ? '' : 'none';
+    if(ok){ n++; tr.firstElementChild.textContent = n; }
   });
-  document.getElementById('rowCount').textContent=n;
+  document.getElementById('rowCount').textContent = n;
 }
-['fType','fDept','fStatus'].forEach(function(id){
-  document.getElementById(id).addEventListener('change',filterRows);
+['fCat','fLink','fLv','fDept'].forEach(function(id){
+  document.getElementById(id).addEventListener('change', filterRows);
 });
-document.getElementById('fKey').addEventListener('input',filterRows);
+document.getElementById('fKey').addEventListener('input', filterRows);
 function resetFilter(){
-  document.getElementById('fType').value='';
-  document.getElementById('fDept').value='';
-  document.getElementById('fStatus').value='';
-  document.getElementById('fKey').value='';
+  ['fCat','fLink','fLv','fDept'].forEach(function(id){ document.getElementById(id).value = ''; });
+  document.getElementById('fKey').value = '';
   filterRows();
 }
 
-/* ===== 导出 CSV（Excel 可直接打开） ===== */
+/* ===== 导出 CSV ===== */
 function exportCSV(){
-  var rows=[];
+  var rows = [];
   document.querySelectorAll('#ledgerTable thead tr').forEach(function(tr){
-    rows.push([].map.call(tr.children,function(th){return th.textContent.trim()}));
+    rows.push([].map.call(tr.children, function(th){ return th.textContent.trim(); }));
   });
-  var cnt=0;
+  var cnt = 0;
   document.querySelectorAll('#ledgerTable tbody tr').forEach(function(tr){
-    if(tr.style.display==='none') return;
+    if(tr.style.display === 'none') return;
     cnt++;
-    var arr=[].map.call(tr.children,function(td){
-      return td.innerText.replace(/\s*\n\s*/g,' ').trim();
+    var arr = [].map.call(tr.children, function(td){
+      return td.innerText.replace(/\s*\n\s*/g, ' ').trim();
     });
-    arr[0]=cnt; rows.push(arr);
+    arr[0] = cnt;
+    rows.push(arr);
   });
-  var csv='\ufeff'+rows.map(function(r){
-    return r.map(function(c){ return '"'+String(c).replace(/"/g,'""')+'"'; }).join(',');
+  var csv = '\ufeff' + rows.map(function(r){
+    return r.map(function(c){ return '"' + String(c).replace(/"/g, '""') + '"'; }).join(',');
   }).join('\r\n');
-  var blob=new Blob([csv],{type:'text/csv;charset=utf-8'});
-  var a=document.createElement('a');
-  a.href=URL.createObjectURL(blob);
-  a.download='CSSD不良事件管理台账_2026Q3.csv';
-  a.click(); URL.revokeObjectURL(a.href);
-  toast('已导出 '+cnt+' 条记录');
+  var blob = new Blob([csv], {type:'text/csv;charset=utf-8'});
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'CSSD不良事件管理台账_2026Q3.csv';
+  a.click();
+  URL.revokeObjectURL(a.href);
+  toast('已导出 ' + cnt + ' 条记录');
 }
 
-/* ===== 提交 ===== */
+/* ===== 图片上传（结局归档）===== */
+var _files = [];
+function pickImg(mode){
+  var f = document.getElementById('evaFile');
+  if(mode === 'camera'){ f.setAttribute('capture', 'environment'); } else { f.removeAttribute('capture'); }
+  f.click();
+}
+document.getElementById('evaFile').addEventListener('change', function(e){
+  var arr = [].slice.call(e.target.files || []);
+  arr.forEach(function(file){
+    if(_files.length >= 6) return;
+    if(!/^image\//.test(file.type)) return;
+    _files.push(file);
+  });
+  if(arr.length > 6) toast('最多上传 6 张图片');
+  renderThumbs();
+  e.target.value = '';
+});
+function renderThumbs(){
+  var box = document.getElementById('thumbs');
+  box.innerHTML = '';
+  _files.forEach(function(f, i){
+    var d = document.createElement('div');
+    d.className = 'thumb';
+    d.innerHTML = '<img src="' + URL.createObjectURL(f) + '" alt="附件' + (i+1) + '">'
+                + '<span class="rm" data-i="' + i + '">×</span>';
+    box.appendChild(d);
+  });
+  box.querySelectorAll('.rm').forEach(function(b){
+    b.addEventListener('click', function(){
+      _files.splice(parseInt(b.dataset.i, 10), 1);
+      renderThumbs();
+    });
+  });
+}
+
+/* ===== 必填校验与提交 ===== */
+document.addEventListener('input', function(e){ if(e.target && e.target.classList) e.target.classList.remove('err'); });
+document.addEventListener('change', function(e){ if(e.target && e.target.classList) e.target.classList.remove('err'); });
+
 function submitForm(){
-  toast('上报成功，事件编号 CSSD-AE-2026-043 已入台账');
-  setTimeout(function(){ show('ledger'); },900);
+  var bad = null;
+  document.querySelectorAll('#formNew .reqf').forEach(function(el){
+    var val = (el.tagName === 'SELECT') ? el.value : el.value.trim();
+    if(!val){ el.classList.add('err'); if(!bad) bad = el; }
+    else { el.classList.remove('err'); }
+  });
+  if(bad){
+    try{ bad.scrollIntoView({behavior:'smooth', block:'center'}); bad.focus(); }catch(err){}
+    toast('还有必填项未完成，请检查红色标记的字段');
+    return;
+  }
+  var name = fName.value || '（未配置指标）';
+  toast('上报成功：' + fCat.value + ' ／ ' + name + '，已入台账（附件 ' + _files.length + ' 张）');
+  setTimeout(function(){ show('ledger'); }, 1000);
+}
+function resetForm(){
+  document.getElementById('formNew').reset();
+  _files = []; renderThumbs();
+  document.querySelectorAll('#formNew .err').forEach(function(el){ el.classList.remove('err'); });
+  fillLink();
+  toast('表单已重置');
 }
 function toast(msg){
-  var t=document.getElementById('toast');
-  t.textContent=msg; t.classList.add('show');
-  clearTimeout(window._tt); window._tt=setTimeout(function(){t.classList.remove('show')},2200);
+  var t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(window._tt);
+  window._tt = setTimeout(function(){ t.classList.remove('show'); }, 2400);
 }
 </script>
 </body>
