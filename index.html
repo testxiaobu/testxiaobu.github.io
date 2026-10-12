@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PDA 耗材核销功能 — 界面原型 V1.2</title>
+<title>PDA 耗材核销功能 — 界面原型 V1.3</title>
 <style>
   * { margin:0; padding:0; box-sizing:border-box; }
   body {
@@ -147,7 +147,7 @@
   .ftag.nobill { background:#eceff3; color:#9aa4b0; }
   .d-item .r2 { margin-top:7px; font-size:12px; color:#7d8b9d; display:flex; flex-wrap:wrap; gap:4px 12px; }
   .d-item .r2 b { color:#4d94e8; font-weight:normal; }
-  /* ===== 屏4 损耗登记（使用 = 收费 + 损耗） ===== */
+  /* ===== 屏4 损耗登记（使用 = 实际 + 损耗） ===== */
   .d-item .r3 { margin-top:8px; display:flex; flex-wrap:wrap; gap:6px 10px; align-items:center; }
   .q-block { font-size:12px; color:#5a6675; background:#f4f7fb; border:1px solid #e2e9f2; border-radius:8px; padding:3px 8px; display:flex; align-items:center; gap:4px; }
   .q-block b, .qnum { color:#2f6fc0; font-weight:bold; }
@@ -291,9 +291,9 @@
 </head>
 <body>
 
-<div class="page-title">PDA 手持终端 · 耗材核销功能界面原型<span class="ver-badge">V1.2</span></div>
+<div class="page-title">PDA 手持终端 · 耗材核销功能界面原型<span class="ver-badge">V1.3</span></div>
 <div class="ver-bar">
-  版本号 <b>V1.2</b><span class="sep">｜</span>更新日期 <b>2026-10-10</b><span class="sep">｜</span>上一版本 <b>V1.1（2026-10-10 · 新增误扫退回）</b><span class="sep">｜</span>屏数 <b>5 屏</b><span class="sep">｜</span>本次变更 <b>新增可收费条目「损耗登记」：使用 = 收费 + 损耗，损耗原因下拉选择（选「其他」才手填），损耗不计患者费用、计入科室报损</b>
+  版本号 <b>V1.3</b><span class="sep">｜</span>更新日期 <b>2026-10-12</b><span class="sep">｜</span>上一版本 <b>V1.2（2026-10-10 · 新增损耗登记）</b><span class="sep">｜</span>屏数 <b>5 屏</b><span class="sep">｜</span>本次变更 <b>数量行术语调整：可收费条目「使用 / 收费 / 损耗」改为「使用 / 实际 / 损耗」，口径相应改为「使用 = 实际 + 损耗」</b>
 </div>
 
 <div class="screens">
@@ -489,7 +489,7 @@
             <div class="r2"><span>规格：24G 直型</span><span>批号：<b>20241102</b></span><span>效期：<b>2027-11</b></span></div>
             <div class="r3">
               <span class="q-block">使用 <input class="qnum" value="2"> 支</span>
-              <span class="q-block">收费 <input class="qnum" value="1"> 支</span>
+              <span class="q-block">实际 <input class="qnum" value="1"> 支</span>
               <span class="q-block loss">损耗 <input class="qnum" value="1"> 支</span>
             </div>
             <div class="loss-box">
@@ -513,7 +513,7 @@
             <div class="r2"><span>批号：<b>20240915</b></span><span>效期：<b>2026-09</b></span></div>
             <div class="r3">
               <span class="q-block">使用 <input class="qnum" value="1"> 套</span>
-              <span class="q-block">收费 <input class="qnum" value="1"> 套</span>
+              <span class="q-block">实际 <input class="qnum" value="1"> 套</span>
               <span class="q-block loss">损耗 <input class="qnum" value="0"> 套</span>
             </div>
             <div class="ms-act"><label class="ms-link" for="msheet4b">↩ 误扫退回</label></div>
@@ -733,13 +733,13 @@
   ① <span class="k">首页</span>：第 8 格「静配核对」移除，新增「耗材核销」入口，图标位、配色、卡片样式与原九宫格完全一致。<br>
   ② <span class="k">扫码页</span>：沿用「手术交接」扫码页结构（顶部蓝条 + 手机扫码插画 + 点击扫码按钮），支持扫患者腕带或耗材标签两种入口。<br>
   ③ <span class="k">患者列表页</span>：沿用「手术交接(3)」卡片版式，「申请时间」调整为「领用时间」，状态由「待转接 / 已转接」改为「待核销 / 已核销」。<br>
-  ④ <span class="k">核销详情页</span>：本次新增设计。展示患者信息与已扫耗材明细（名称 / 批号 / 效期 / 使用与收费数量），区分「可收费（关联患者计费）」与「不可收费（科室消耗登记）」，底部「确认核销」提交后回写二级库台账，形成闭环。本页新增「＋ 手动增加登记」入口：点按自下而上调起「使用登记检索界面」（屏 5），在该界面选定耗材后点「完成」即回填至本页核销清单（已预置一条「✎ 手动添加」示例项），实现两界面的数据联动。<br>
+  ④ <span class="k">核销详情页</span>：本次新增设计。展示患者信息与已扫耗材明细（名称 / 批号 / 效期 / 使用与实际数量），区分「可收费（关联患者计费）」与「不可收费（科室消耗登记）」，底部「确认核销」提交后回写二级库台账，形成闭环。本页新增「＋ 手动增加登记」入口：点按自下而上调起「使用登记检索界面」（屏 5），在该界面选定耗材后点「完成」即回填至本页核销清单（已预置一条「✎ 手动添加」示例项），实现两界面的数据联动。<br>
   ⑤ <span class="k">使用登记检索页</span>：本次新增设计。顶部检索框支持按耗材名称 / 编码查询；两个标签可在「可收费项目（关联患者计费）」与「科室消耗项目（按科室消耗登记）」之间切换，逐条「+ 加入登记」后底部「确认登记」汇总提交。覆盖需求清单中「使用登记模块」可收费 / 不可收费的分类登记口径。<br>
   ⑥ <span class="k">误扫退回（V1.1 新增）</span>：针对「已扫描但尚未核销 / 计费」的耗材，在核销详情每条耗材下方提供「↩ 误扫退回」入口，点按调起底部抽屉，按包装状态分为两种处理——①<b>包装完好 · 可退回库存</b>：撤销本条扫描记录 ＋ <b>库存回冲</b>，不计损耗；②<b>包装破损 · 无法退回库存</b>：<b>库存不予回冲</b>，登记为<b>科室损耗</b>，并须选择损耗原因（包装破损 / 漏气失效、已拆封无法复原、拆封后污染、质量故障、其他）。因退回发生在计费之前，两条路径<b>均不涉及患者费用冲销</b>；已计费耗材的冲销另走「退库 / 退费」流程。<br>
-  ⑦ <span class="k">损耗登记（V1.2 新增）</span>：解决「一个耗材只能收患者一次费用、但护士操作失误会产生损耗」的场景。每条<b>可收费</b>耗材新增「使用 / 收费 / 损耗」三个可改数量，满足 <b>使用 = 收费 + 损耗</b>；损耗部分<b>不计患者费用</b>，计入<b>科室报损</b>。当损耗 &gt; 0 时出现橙色「损耗原因」模块，<b>下拉选择</b>预设原因（穿刺 / 置管失败、针头 / 导管污染、包装破损 / 漏气失效、器械质量故障、患者拒绝 / 操作中止、误取 / 重复取用），仅选「其他（请填写）」时才展开文本框手填，减少护士输入。不可收费（科室消耗）条目本身即由科室吸收，不设损耗登记；屏内汇总栏同步显示「损耗 N 支（不计费）」。
+  ⑦ <span class="k">损耗登记（V1.2 新增）</span>：解决「一个耗材只能收患者一次费用、但护士操作失误会产生损耗」的场景。每条<b>可收费</b>耗材新增「使用 / 实际 / 损耗」三个可改数量，满足 <b>使用 = 实际 + 损耗</b>；损耗部分<b>不计患者费用</b>，计入<b>科室报损</b>。当损耗 &gt; 0 时出现橙色「损耗原因」模块，<b>下拉选择</b>预设原因（穿刺 / 置管失败、针头 / 导管污染、包装破损 / 漏气失效、器械质量故障、患者拒绝 / 操作中止、误取 / 重复取用），仅选「其他（请填写）」时才展开文本框手填，减少护士输入。不可收费（科室消耗）条目本身即由科室吸收，不设损耗登记；屏内汇总栏同步显示「损耗 N 支（不计费）」。
 </div>
 
-<div class="ver-foot">PDA 手持终端 · 耗材核销功能界面原型 <b>V1.2</b> ｜ 更新于 2026-10-10 ｜ 版本信息见页面顶部</div>
+<div class="ver-foot">PDA 手持终端 · 耗材核销功能界面原型 <b>V1.3</b> ｜ 更新于 2026-10-12 ｜ 版本信息见页面顶部</div>
 
 <script>
   /* 损耗原因下拉：仅选「其他（请填写）」时才展开文本框手填 */
